@@ -17,7 +17,7 @@ import coffer.androidjatpack.R;
 /**
  * @author：张宝全
  * @date：2019-05-04
- * @Description：
+ * @Description： 动画
  * @Reviser：
  * @RevisionTime：
  * @RevisionDescription：
