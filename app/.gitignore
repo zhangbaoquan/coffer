@@ -12,6 +12,6 @@
 .DS_Store
 /captures
 .externalNativeBuild
-
+*.ser
 bin/
 gen/
