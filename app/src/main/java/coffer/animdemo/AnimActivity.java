@@ -25,20 +25,28 @@ import coffer.androidjatpack.R;
 public class AnimActivity extends AppCompatActivity {
 
     private static final String TAG = "anim_demo";
-    private TextView textView;
+    private TextView tv1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anim_main);
-        textView = findViewById(R.id.tv1);
-        textView.setOnClickListener(new View.OnClickListener() {
+
+        initView();
+
+    }
+
+    private void initView(){
+        // 改变View的宽度大小
+        tv1 = findViewById(R.id.tv1);
+        tv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 animDemo1();
             }
         });
 
+        // View的气泡动画
     }
 
     /**
@@ -52,7 +60,7 @@ public class AnimActivity extends AppCompatActivity {
         // ValueAnimator.ofInt()内置了整型估值器,直接采用默认的.不需要设置，即默认设置了如何从初始值 过渡到 结束值
         // 关于自定义插值器我将在下节进行讲解
         // 下面看看ofInt()的源码分析 ->>关注1
-        ValueAnimator animator = ValueAnimator.ofInt(textView.getLayoutParams().width,500);
+        ValueAnimator animator = ValueAnimator.ofInt(tv1.getLayoutParams().width,500);
 
         // 步骤2：设置动画的播放各种属性
         // 设置动画运行的时长
@@ -92,10 +100,10 @@ public class AnimActivity extends AppCompatActivity {
                 Log.e(TAG,"currentValue : "+currentValue);
 
                 // 步骤4：将改变后的值赋给对象的属性值
-                textView.getLayoutParams().width = currentValue;
+                tv1.getLayoutParams().width = currentValue;
 
                 // 步骤5：刷新视图，即重新绘制，从而实现动画效果
-                textView.requestLayout();
+                tv1.requestLayout();
             }
         });
         animator.start();
@@ -105,6 +113,16 @@ public class AnimActivity extends AppCompatActivity {
      * 一个圆从一个点 移动到 另外一个点
      */
     private void animDemo2(){
+
+    }
+
+    /**
+     * 气泡动画（属性动画实现版）
+     * 1、气泡从小到大时间为0.4秒
+     * 2、气泡停留4秒
+     * 3、气泡从大到消失时间为0.6秒
+     */
+    private void animDemo3(){
 
     }
 }

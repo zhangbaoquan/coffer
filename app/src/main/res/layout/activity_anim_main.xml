@@ -8,12 +8,27 @@
 
     <TextView
         android:id="@+id/tv1"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_centerInParent="true"
         android:background="@color/design_default_color_primary"
         android:gravity="center"
-        android:text="Hello World!"
+        android:text="改变View的大小"
+        android:textColor="@color/cardview_light_background" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_below="@+id/tv1"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:background="@color/design_default_color_primary"
+        android:gravity="center"
+        android:text="View的气泡动画"
         android:textColor="@color/cardview_light_background" />
 
 </RelativeLayout>
