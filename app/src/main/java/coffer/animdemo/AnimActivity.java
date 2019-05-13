@@ -2,10 +2,14 @@ package coffer.animdemo;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -27,6 +31,9 @@ public class AnimActivity extends AppCompatActivity {
     private static final String TAG = "anim_demo";
     private TextView tv1;
     private TextView tv2;
+    private TextView tv3;
+    private TextView tv4;
+    private TextView tv5;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,17 +54,45 @@ public class AnimActivity extends AppCompatActivity {
             }
         });
 
-        // View的气泡动画
+        // View的透明度
         tv2 = findViewById(R.id.tv2);
         tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animDemo2();
+            }
+        });
+
+        // 组合动画
+        tv3 = findViewById(R.id.tv3);
+        tv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 animDemo3();
             }
         });
+
+        // ViewPropertyAnimator
+        tv4 = findViewById(R.id.tv4);
+        tv4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animDemo4();
+            }
+        });
+
+        // 组合动画2
+        tv5 = findViewById(R.id.tv5);
+        tv5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animDemo5();
+            }
+        });
     }
 
     /**
+     * 这个是ValueAnimator的Demo
      * 将TextView的宽度从150变成500的动画
      */
     private void animDemo1(){
@@ -118,10 +153,88 @@ public class AnimActivity extends AppCompatActivity {
     }
 
     /**
-     * 一个圆从一个点 移动到 另外一个点
+     * 这个是ObjectAnimator的Demo
+     * alpha
+     * rotation
+     * translationX、translationY
+     * scaleX、scaleY
+     * 设置View的透明度
      */
     private void animDemo2(){
+        ObjectAnimator animator = ObjectAnimator.ofFloat(tv2,"alpha",1f,0f,1f);
+        // 表示的是:
+        // 动画作用对象是mButton
+        // 动画作用的对象的属性是透明度alpha
+        // 动画效果是:常规 - 全透明 - 常规
+        animator.setDuration(5000);
+        animator.start();
+    }
 
+    /**
+     * 组合动画
+     * 透明、缩放、平移、旋转
+     * 这里仅实现平移和透明
+     */
+    private void animDemo3(){
+        // 平移：从当前位置向右移动300，然后再回到原来的位置。这里
+        float curTranslationX = tv3.getTranslationX();
+        ObjectAnimator translation = ObjectAnimator.ofFloat(tv3,"translationX",curTranslationX,300,curTranslationX);
+        translation.setInterpolator(new BounceInterpolator());
+        translation.setDuration(3000);
+
+        // 透明度
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(tv3,"alpha",1f,0f,1f);
+        alpha.setDuration(2000);
+
+        // 创建组合动画对象1，这里将两个动画组合，即动画的时间是由各自的动画时间相加
+        AnimatorSet animatorSet1 = new AnimatorSet();
+        animatorSet1.playSequentially(translation,alpha);
+        animatorSet1.start();
+    }
+
+    /**
+     * 组合动画2
+     * 这里的使用PropertyValuesHolder，可以将任意动画效果复合
+     * 例如：下面的例子就是将平移动画、透明动画融合在一起。即两个动画一起执行。
+     * 注意和上面的动画的区别。
+     * 组合1的效果，其实还是两个动画按照顺序执行。
+     */
+    private void animDemo5(){
+        // 将平移动画、透明动画整合
+        PropertyValuesHolder[] propertyValuesHolder = new PropertyValuesHolder[]{
+                PropertyValuesHolder.ofFloat("translationX",tv5.getTranslationX(),300,tv5.getTranslationX()) ,
+                PropertyValuesHolder.ofFloat("alpha",1f,0f,1f)
+        };
+        ObjectAnimator animator = ObjectAnimator
+                .ofPropertyValuesHolder(tv5,propertyValuesHolder)
+                .setDuration(5000);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playSequentially(animator);
+        animatorSet.start();
+    }
+
+    /**
+     * 使用ViewPropertyAnimator的动画效果，这个是属性动画的简写
+     */
+    private void animDemo4(){
+        final float x = tv4.getX();
+        final float y = tv4.getY();
+        tv4.animate().alpha(0f);
+        tv4.animate().alpha(0f).setDuration(5000).setInterpolator(new BounceInterpolator());
+        tv4.animate().alpha(0f).x(500).y(500);
+        tv4.animate().setUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                animation.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        Log.d(TAG,"animDemo4动画结束了");
+                        // 动画结束时，将位置和状态还原回去
+                        tv4.animate().x(x).y(y).alpha(1f);
+                    }
+                });
+            }
+        });
     }
 
     /**
@@ -130,7 +243,14 @@ public class AnimActivity extends AppCompatActivity {
      * 2、气泡停留4秒
      * 3、气泡从大到消失时间为0.6秒
      */
-    private void animDemo3(){
+    private void animDemo6(){
+
+    }
+
+    /**
+     * 一个圆从一个点 移动到 另外一个点
+     */
+    private void animDemo7(){
 
     }
 }
