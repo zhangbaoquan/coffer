@@ -26,6 +26,7 @@ public class AnimActivity extends AppCompatActivity {
 
     private static final String TAG = "anim_demo";
     private TextView tv1;
+    private TextView tv2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +48,13 @@ public class AnimActivity extends AppCompatActivity {
         });
 
         // View的气泡动画
+        tv2 = findViewById(R.id.tv2);
+        tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animDemo3();
+            }
+        });
     }
 
     /**
