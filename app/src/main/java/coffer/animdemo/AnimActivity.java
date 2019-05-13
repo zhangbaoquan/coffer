@@ -15,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.j2objc.annotations.Property;
+
 import coffer.androidjatpack.R;
 
 
@@ -34,6 +36,7 @@ public class AnimActivity extends AppCompatActivity {
     private TextView tv3;
     private TextView tv4;
     private TextView tv5;
+    private TextView tv6;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,6 +90,15 @@ public class AnimActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 animDemo5();
+            }
+        });
+
+        // 气泡动画
+        tv6 = findViewById(R.id.tv6);
+        tv6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animDemo6();
             }
         });
     }
@@ -244,6 +256,37 @@ public class AnimActivity extends AppCompatActivity {
      * 3、气泡从大到消失时间为0.6秒
      */
     private void animDemo6(){
+        // 看到这个描述
+        // 1、因为需要放大缩小，所以动画属性是scale动画，
+        // 2、需要放大和缩小，因此就需要View的X、Y方向上同时操作，这就需要将scaleX、scaleY 复合
+        // 3、需要放大完成后再缩小，所以需要将放大、缩小两个动画组合
+
+        // 第一阶段，将气泡从小放大
+        PropertyValuesHolder[] enlarge = new PropertyValuesHolder[]{
+             PropertyValuesHolder.ofFloat("scaleX",0f,1f),
+             PropertyValuesHolder.ofFloat("scaleY",0f,1f)
+        };
+
+        // 第二阶段，不变
+        PropertyValuesHolder[] normal = new PropertyValuesHolder[]{
+                PropertyValuesHolder.ofFloat("scaleX",1f,1f),
+                PropertyValuesHolder.ofFloat("scaleY",1f,1f)
+        };
+
+        // 第三阶段，将气泡从大变小
+        PropertyValuesHolder[] shrink = new PropertyValuesHolder[]{
+                PropertyValuesHolder.ofFloat("scaleX",1f,0f),
+                PropertyValuesHolder.ofFloat("scaleY",1f,0f)
+        };
+        ObjectAnimator step1 = ObjectAnimator.ofPropertyValuesHolder(tv6,enlarge);
+        step1.setDuration(400);
+        ObjectAnimator step2 = ObjectAnimator.ofPropertyValuesHolder(tv6,normal);
+        step2.setDuration(4000);
+        ObjectAnimator step3 = ObjectAnimator.ofPropertyValuesHolder(tv6,shrink);
+        step3.setDuration(600);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playSequentially(step1,step2,step3);
+        animatorSet.start();
 
     }
 
