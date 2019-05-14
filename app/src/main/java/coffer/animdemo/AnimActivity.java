@@ -3,6 +3,7 @@ package coffer.animdemo;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
+import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
@@ -10,13 +11,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.j2objc.annotations.Property;
-
 import coffer.androidjatpack.R;
 
 
@@ -37,6 +36,7 @@ public class AnimActivity extends AppCompatActivity {
     private TextView tv4;
     private TextView tv5;
     private TextView tv6;
+    private TextView tv7;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,6 +99,15 @@ public class AnimActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 animDemo6();
+            }
+        });
+
+        // z
+        tv7 = findViewById(R.id.tv7);
+        tv7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animDemo7();
             }
         });
     }
@@ -254,6 +263,7 @@ public class AnimActivity extends AppCompatActivity {
      * 1、气泡从小到大时间为0.4秒
      * 2、气泡停留4秒
      * 3、气泡从大到消失时间为0.6秒
+     * 这里使用了PropertyValuesHolder，PropertyValuesHolder这个类可以先将动画属性和值暂时的存储起来，后一起执行，在有些时候可以使用替换掉AnimatorSet
      */
     private void animDemo6(){
         // 看到这个描述
@@ -294,6 +304,29 @@ public class AnimActivity extends AppCompatActivity {
      * 一个圆从一个点 移动到 另外一个点
      */
     private void animDemo7(){
+        //keyframe 这里使用关键帧
+        Keyframe keyframe1 = Keyframe.ofFloat(0.0f,0);
+        Keyframe keyframe2 = Keyframe.ofFloat(0.25f,-30);
+        Keyframe keyframe3 = Keyframe.ofFloat(0.5f,0);
+        Keyframe keyframe4 = Keyframe.ofFloat(0.75f, 30);
+        Keyframe keyframe5 = Keyframe.ofFloat(1.0f,0);
+        // 这个动画就是实现View的左右两边上下抖动的效果，抖动有旋转的特征，所以这里使用的是"rotation"属性
+        // 这里分五帧实现。
+        // 第一帧是在执行的时间的内保持水平位置
+        // 第二帧是在执行的时间的1/4区间内，向上旋转30度
+        // 第三帧是在执行的时间的1/4区间内，回到水平位置
+        // 第四帧是在执行的时间的1/4区间内，向下旋转30度
+        // 第五帧是在执行的时间的1/4区间内，回到水平位置
+        PropertyValuesHolder rotation = PropertyValuesHolder.ofKeyframe("rotation", keyframe1, keyframe2, keyframe3, keyframe4,keyframe5);
+
+        PropertyValuesHolder alpha = PropertyValuesHolder.ofFloat("alpha",1.0f,0.2f,1.0f);
+        PropertyValuesHolder scaleX = PropertyValuesHolder.ofFloat("scaleX",1.0f,0.2f,1.0f);
+        PropertyValuesHolder scaleY = PropertyValuesHolder.ofFloat("scaleY",1.0f,0.2f,1.0f);
+        PropertyValuesHolder color = PropertyValuesHolder.ofInt("BackgroundColor", 0XFFFFFF00, 0XFF0000FF);
+
+        ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(tv7, alpha, scaleX, scaleY,color,rotation);
+        animator.setInterpolator(new OvershootInterpolator());
+        animator.setDuration(5000).start();
 
     }
 }
