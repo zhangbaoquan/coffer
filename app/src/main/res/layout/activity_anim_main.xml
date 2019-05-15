@@ -81,6 +81,6 @@
         android:layout_marginTop="10dp"
         android:background="@color/design_default_color_primary"
         android:gravity="center"
-        android:text="组合动画3"
+        android:text="组合动画3关键帧"
         android:textColor="@color/cardview_light_background" />
 </LinearLayout>

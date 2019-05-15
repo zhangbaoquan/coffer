@@ -301,7 +301,7 @@ public class AnimActivity extends AppCompatActivity {
     }
 
     /**
-     * 一个圆从一个点 移动到 另外一个点
+     * 使用关键帧方式
      */
     private void animDemo7(){
         //keyframe 这里使用关键帧
