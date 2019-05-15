@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import coffer.animdemo.AnimActivity;
+import coffer.reflectdemo.ReflectActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +22,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AnimActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 反射
+        findViewById(R.id.b2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ReflectActivity.class);
                 startActivity(intent);
             }
         });
