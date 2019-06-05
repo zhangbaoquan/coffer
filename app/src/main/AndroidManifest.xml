@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name="coffer.animdemo.AnimActivity"/>
-        <activity android:name="coffer.reflectdemo.ReflectActivity"/>
+        <activity android:name="coffer.javademo.reflectdemo.ReflectActivity"/>
     </application>
 
 </manifest>

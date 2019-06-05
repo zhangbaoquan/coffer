@@ -10,8 +10,11 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -37,12 +40,15 @@ public class AnimActivity extends AppCompatActivity {
     private TextView tv5;
     private TextView tv6;
     private TextView tv7;
+    private TextView tv8;
+
+    private LinearLayout mParent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anim_main);
-
+        mParent = findViewById(R.id.parent);
         initView();
 
     }
@@ -108,6 +114,21 @@ public class AnimActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 animDemo7();
+            }
+        });
+
+        tv8 = findViewById(R.id.tv8);
+        final LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setLayoutParams(new ViewGroup.LayoutParams(100,200));
+        linearLayout.setBackgroundColor(getResources().getColor(R.color.design_default_color_primary));
+
+        linearLayout.setX(100);
+        linearLayout.setY(100);
+        mParent.addView(linearLayout);
+        tv8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animDemo8(linearLayout);
             }
         });
     }
@@ -328,5 +349,20 @@ public class AnimActivity extends AppCompatActivity {
         animator.setInterpolator(new OvershootInterpolator());
         animator.setDuration(5000).start();
 
+    }
+
+    private void animDemo8(View view){
+        Log.e(TAG,"getTranslationY : "+ view.getTranslationY());
+        // 将平移动画、透明动画整合
+        PropertyValuesHolder[] propertyValuesHolder = new PropertyValuesHolder[]{
+                PropertyValuesHolder.ofFloat("translationY",0.0f,300,0.0f) ,
+                PropertyValuesHolder.ofFloat("alpha",0f,1f,0f)
+        };
+        ObjectAnimator animator = ObjectAnimator
+                .ofPropertyValuesHolder(view,propertyValuesHolder)
+                .setDuration(5000);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playSequentially(animator);
+        animatorSet.start();
     }
 }

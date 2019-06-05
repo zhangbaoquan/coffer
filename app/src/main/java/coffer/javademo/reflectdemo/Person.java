@@ -1,4 +1,4 @@
-package coffer.reflectdemo;
+package coffer.javademo.reflectdemo;
 
 import android.util.Log;
 

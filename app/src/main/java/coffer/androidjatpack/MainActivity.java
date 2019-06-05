@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import coffer.animdemo.AnimActivity;
-import coffer.reflectdemo.ReflectActivity;
+import coffer.javademo.reflectdemo.ReflectActivity;
 
 public class MainActivity extends AppCompatActivity {
 
