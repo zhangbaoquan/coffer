@@ -2,13 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="coffer.androidjatpack">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/coffer"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="main.java.coffer.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,6 +20,7 @@
         </activity>
         <activity android:name="coffer.animdemo.AnimActivity"/>
         <activity android:name="coffer.javademo.reflectdemo.ReflectActivity"/>
+        <activity android:name="main.java.coffer.filedemo.DrawActiviy"/>
     </application>
 
 </manifest>
