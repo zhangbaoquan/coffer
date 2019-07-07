@@ -27,6 +27,7 @@
         <activity android:name="main.java.coffer.filedemo.DrawActiviy"/>
         <activity android:name="coffer.auto_test.TestMainActivity1"/>
         <activity android:name="coffer.auto_test.ShowTextActivity"/>
+        <activity android:name="coffer.hook.InvokeActivity"/>
     </application>
 
 </manifest>

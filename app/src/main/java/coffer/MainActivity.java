@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import coffer.androidjatpack.R;
 import coffer.animdemo.AnimActivity;
+import coffer.hook.InvokeActivity;
 import coffer.javademo.reflectdemo.ReflectActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, main.java.coffer.filedemo.DrawActiviy.class);
+                startActivity(intent);
+            }
+        });
+
+        // 动态代理
+        findViewById(R.id.b4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, InvokeActivity.class);
                 startActivity(intent);
             }
         });

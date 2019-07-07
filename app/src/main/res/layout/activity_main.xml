@@ -30,6 +30,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="文件" />
+
+        <Button
+            android:id="@+id/b4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="动态代理" />
     </LinearLayout>
 
 </ScrollView>
