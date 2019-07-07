@@ -8,6 +8,8 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +45,8 @@ public class AnimActivity extends AppCompatActivity {
     private TextView tv8;
 
     private LinearLayout mParent;
+
+    private Handler mHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -131,6 +135,22 @@ public class AnimActivity extends AppCompatActivity {
                 animDemo8(linearLayout);
             }
         });
+
+        //TODO 模拟内存泄露
+        mHandler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+
+            }
+        };
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mHandler.sendEmptyMessage(1);
+            }
+        },10000);
     }
 
     /**

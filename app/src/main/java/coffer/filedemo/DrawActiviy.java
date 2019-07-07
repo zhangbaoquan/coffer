@@ -5,7 +5,6 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.ColorUtils;
 
 
 import coffer.androidjatpack.R;
