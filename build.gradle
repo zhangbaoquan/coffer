@@ -38,6 +38,9 @@ buildscript {
         google()
         jcenter()
     }
+    repositories.each{
+        println it.getUrl()
+    }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"

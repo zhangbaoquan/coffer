@@ -4,6 +4,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -39,17 +40,40 @@ public class InvokeActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         root.addView(button);
         button.setText("点我动态代理输出日志");
+        button.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.d("zbq-TAG", "执行了onTouch(), 动作是:"+event.getAction());
+
+                // 在 return true时，事件将会在这拦截，onClick方法将不会被执行
+                // 在 return false时，事件将不会拦截，onClick方法正常执行
+                return false;
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("zbq-TAG", "点击了Button");
                 // 下面的 hookListener 方法一旦被执行，这个方法里的逻辑就作废
                 Toast.makeText(InvokeActivity.this,"拉拉",Toast.LENGTH_SHORT).show();
             }
         });
-        hookListener(button);
+//        hookListener(button);
 
         showAppVersion();
 
+        root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("zbq-TAG", "点击了ViewGroup");
+            }
+        });
+
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
     }
 
     /**
