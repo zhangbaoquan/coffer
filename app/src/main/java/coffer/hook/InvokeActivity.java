@@ -43,7 +43,7 @@ public class InvokeActivity extends AppCompatActivity {
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.d("zbq-TAG", "执行了onTouch(), 动作是:"+event.getAction());
+                Log.d("zbq-COFFER_TAG", "执行了onTouch(), 动作是:"+event.getAction());
 
                 // 在 return true时，事件将会在这拦截，onClick方法将不会被执行
                 // 在 return false时，事件将不会拦截，onClick方法正常执行
@@ -53,7 +53,7 @@ public class InvokeActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("zbq-TAG", "点击了Button");
+                Log.d("zbq-COFFER_TAG", "点击了Button");
                 // 下面的 hookListener 方法一旦被执行，这个方法里的逻辑就作废
                 Toast.makeText(InvokeActivity.this,"拉拉",Toast.LENGTH_SHORT).show();
             }
@@ -65,7 +65,7 @@ public class InvokeActivity extends AppCompatActivity {
         root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("zbq-TAG", "点击了ViewGroup");
+                Log.d("zbq-COFFER_TAG", "点击了ViewGroup");
             }
         });
 
@@ -92,8 +92,8 @@ public class InvokeActivity extends AppCompatActivity {
         try {
             PackageInfo packageInfo = this.getPackageManager().
                     getPackageInfo(this.getPackageName(),0);
-            Log.e(CONSTANT.TAG,"version name : "+packageInfo.versionName);
-            Log.e(CONSTANT.TAG,"version code : "+packageInfo.versionCode);
+            Log.e(CONSTANT.COFFER_TAG,"version name : "+packageInfo.versionName);
+            Log.e(CONSTANT.COFFER_TAG,"version code : "+packageInfo.versionCode);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

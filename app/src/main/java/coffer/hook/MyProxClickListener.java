@@ -18,6 +18,6 @@ public class MyProxClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Log.e(CONSTANT.TAG,"我动态代理啦");
+        Log.e(CONSTANT.COFFER_TAG,"我动态代理啦");
     }
 }

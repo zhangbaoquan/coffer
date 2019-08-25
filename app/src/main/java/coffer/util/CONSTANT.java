@@ -10,5 +10,5 @@ package coffer.util;
  */
 public class CONSTANT {
 
-    public static final String TAG = "coffer_tag";
+    public static final String COFFER_TAG = "coffer_tag";
 }
