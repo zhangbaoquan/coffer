@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="绘制" />
+            android:text="自定义View" />
 
         <Button
             android:id="@+id/b4"

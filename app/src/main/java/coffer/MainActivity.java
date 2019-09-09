@@ -22,7 +22,7 @@ import java.util.List;
 
 import coffer.androidjatpack.R;
 import coffer.animdemo.AnimActivity;
-import coffer.drawViewDemo.DrawActiviy;
+import coffer.drawViewDemo.CofferViewActiviy;
 import coffer.filedemo.FileActivity;
 import coffer.hook.InvokeActivity;
 import coffer.javademo.reflectdemo.ReflectActivity;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.b3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DrawActiviy.class);
+                Intent intent = new Intent(MainActivity.this, CofferViewActiviy.class);
                 startActivity(intent);
             }
         });

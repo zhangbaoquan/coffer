@@ -25,7 +25,7 @@
         </activity>
         <activity android:name="coffer.animdemo.AnimActivity"/>
         <activity android:name="coffer.javademo.reflectdemo.ReflectActivity"/>
-        <activity android:name="coffer.drawViewDemo.DrawActiviy"/>
+        <activity android:name="coffer.drawViewDemo.CofferViewActiviy"/>
         <activity android:name="coffer.auto_test.TestMainActivity1"/>
         <activity android:name="coffer.auto_test.ShowTextActivity"/>
         <activity android:name="coffer.filedemo.FileActivity"/>
