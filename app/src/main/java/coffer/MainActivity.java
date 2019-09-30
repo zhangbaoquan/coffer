@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import coffer.androidjatpack.R;
 import coffer.animdemo.AnimActivity;
@@ -101,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        AtomicInteger mCount = new AtomicInteger();
+        Log.e("ioioioii","mCount : "+mCount.toString());
     }
 
 
