@@ -8,10 +8,24 @@
     android:orientation="vertical"
     tools:context="main.java.coffer.MainActivity">
 
-   <coffer.widget.AdTipView
-       android:layout_alignParentRight="true"
-       android:layout_width="50dp"
-       android:layout_height="50dp" />
+    <coffer.widget.AdTipView
+        android:id="@+id/close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="恢复" />
+
+    <coffer.widget.DragImageView
+        android:id="@+id/body"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/illust_73383665_20190225_223000" />
 
 
 </RelativeLayout>
