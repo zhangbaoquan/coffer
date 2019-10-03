@@ -23,13 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="coffer.animdemo.AnimActivity"/>
-        <activity android:name="coffer.javademo.reflectdemo.ReflectActivity"/>
+        <activity android:name="coffer.animDemo.AnimActivity"/>
+        <activity android:name="coffer.javaDemo.reflectdemo.ReflectActivity"/>
         <activity android:name="coffer.drawViewDemo.CofferViewActiviy"/>
         <activity android:name="coffer.auto_test.TestMainActivity1"/>
         <activity android:name="coffer.auto_test.ShowTextActivity"/>
-        <activity android:name="coffer.filedemo.FileActivity"/>
-        <activity android:name="coffer.hook.InvokeActivity"/>
+        <activity android:name="coffer.fileDemo.FileActivity"/>
+        <activity android:name="coffer.hookDemo.InvokeActivity"/>
+        <activity android:name="coffer.pluginDemo.PluginMainActivity"/>
     </application>
 
 </manifest>

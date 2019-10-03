@@ -1,4 +1,4 @@
-package coffer.animdemo;
+package coffer.animDemo;
 
 import android.animation.TypeEvaluator;
 

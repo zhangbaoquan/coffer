@@ -1,4 +1,4 @@
-package coffer.javademo.reflectdemo;
+package coffer.javaDemo.reflectdemo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -50,7 +50,7 @@ public class ReflectActivity extends AppCompatActivity {
     private void test1(){
         try {
             // 1、获取Person类的Class对象
-            Class personClass = Class.forName("coffer.javademo.reflectdemo.Person");
+            Class personClass = Class.forName("coffer.javaDemo.reflectdemo.Person");
             // 2、通过Class对象创建Person对象
             Object person = personClass.newInstance();
             // 3、通过Class对象获取Person类的name属性
@@ -72,7 +72,7 @@ public class ReflectActivity extends AppCompatActivity {
      */
     private void test2(){
         try {
-            Class personClass = Class.forName("coffer.javademo.reflectdemo.Person");
+            Class personClass = Class.forName("coffer.javaDemo.reflectdemo.Person");
             // 通过Class对象获取Constructor类对象，从而调用无参构造方法
             Object obj1 = personClass.getConstructor().newInstance();
 
@@ -89,7 +89,7 @@ public class ReflectActivity extends AppCompatActivity {
      */
     private void test3(){
         try {
-            Class personClass = Class.forName("coffer.javademo.reflectdemo.Person");
+            Class personClass = Class.forName("coffer.javaDemo.reflectdemo.Person");
             Object person = personClass.newInstance();
 
             // 调用无参方法

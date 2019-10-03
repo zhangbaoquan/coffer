@@ -1,4 +1,4 @@
-package coffer.javademo;
+package coffer.javaDemo;
 
 import android.os.Bundle;
 import android.util.Log;

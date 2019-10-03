@@ -23,11 +23,12 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import coffer.androidjatpack.R;
-import coffer.animdemo.AnimActivity;
+import coffer.animDemo.AnimActivity;
 import coffer.drawViewDemo.CofferViewActiviy;
-import coffer.filedemo.FileActivity;
-import coffer.hook.InvokeActivity;
-import coffer.javademo.reflectdemo.ReflectActivity;
+import coffer.fileDemo.FileActivity;
+import coffer.hookDemo.InvokeActivity;
+import coffer.javaDemo.reflectdemo.ReflectActivity;
+import coffer.pluginDemo.PluginMainActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -100,6 +101,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, FileActivity.class);
+                startActivity(intent);
+            }
+        });
+        // 加载SD卡上的APK
+        findViewById(R.id.b7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PluginMainActivity.class);
                 startActivity(intent);
             }
         });
