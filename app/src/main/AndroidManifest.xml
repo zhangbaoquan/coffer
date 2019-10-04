@@ -32,6 +32,8 @@
         <activity android:name="coffer.fileDemo.FileActivity"/>
         <activity android:name="coffer.hookDemo.InvokeActivity"/>
         <activity android:name="coffer.pluginDemo.PluginMainActivity"/>
+        <service android:name="coffer.okhttpDemo.JobSchedulerService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
 
 </manifest>

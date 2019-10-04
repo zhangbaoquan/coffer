@@ -4,8 +4,11 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.app.usage.NetworkStats;
 import android.app.usage.NetworkStatsManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,6 +43,8 @@ import coffer.drawViewDemo.CofferViewActiviy;
 import coffer.fileDemo.FileActivity;
 import coffer.hookDemo.InvokeActivity;
 import coffer.javaDemo.reflectdemo.ReflectActivity;
+import coffer.okhttpDemo.JobSchedulerService;
+import coffer.okhttpDemo.OkHttpEventListener;
 import coffer.pluginDemo.PluginMainActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -168,8 +173,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // 统计30s之间消耗的流量
-               long netUse = getNetStats(System.currentTimeMillis() - 30 * 1000, System.currentTimeMillis());
-               // 判断当前是前台还是后台
+                long netUse = getNetStats(System.currentTimeMillis() - 30 * 1000, System.currentTimeMillis());
+                // 判断当前是前台还是后台
             }
         }, 30, TimeUnit.SECONDS);
     }
@@ -189,6 +194,16 @@ public class MainActivity extends AppCompatActivity {
         // 发送
         long netDataTx = 0;
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    Activity#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for Activity#requestPermissions for more details.
+            return 0;
+        }
         String subId = telephonyManager.getSubscriberId();
         NetworkStatsManager manager = (NetworkStatsManager) getSystemService(Context.NETWORK_STATS_SERVICE);
         NetworkStats networkStats = null;
@@ -211,13 +226,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void startJobScheduler(){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
+            JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+            JobInfo.Builder builder = new JobInfo.Builder(1,new ComponentName(getPackageName(), JobSchedulerService.class.getName()));
+            // 环境在充电且WIFI下
+            builder.setRequiresCharging(true)
+                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED );
+            jobScheduler.schedule(builder.build());
+
+        }
+    }
+
     private void useOkHttp() {
         final Request request = new Request.Builder().
                 get().
                 url("www.baidu.com").
                 build();
-        OkHttpClient client = new OkHttpClient();
-        Call call = client.newCall(request);
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
+        // 配置自定义的拦截器、eventListener、cache等
+        client.eventListenerFactory(OkHttpEventListener.FACTORY);
+
+        OkHttpClient okHttpClient = client.build();
+        Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
