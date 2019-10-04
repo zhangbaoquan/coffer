@@ -1,13 +1,22 @@
 package main.java.coffer;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
+import android.app.usage.NetworkStats;
+import android.app.usage.NetworkStatsManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.NetworkCapabilities;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -20,6 +29,9 @@ import androidx.core.content.ContextCompat;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import coffer.androidjatpack.R;
@@ -47,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 创建一个mPermissionList，逐个判断哪些权限未授权，将未授权的权限存储到mPermissionList中
      */
-    List<String>  mPermissionList = new ArrayList<>();
+    List<String> mPermissionList = new ArrayList<>();
 
     /**
      * 权限请求码
@@ -113,11 +125,93 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         AtomicInteger mCount = new AtomicInteger();
-        Log.e("ioioioii","mCount : "+mCount.toString());
+        Log.e("ioioioii", "mCount : " + mCount.toString());
+        // 下面的这个监控方法可以写在BaseActivity 中
+        getApplication().registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+                // 在前台
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+                // 在后台
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+
+            }
+        });
+        // 创建一个定时任务
+        Executors.newScheduledThreadPool(1).schedule(new Runnable() {
+            @Override
+            public void run() {
+                // 统计30s之间消耗的流量
+               long netUse = getNetStats(System.currentTimeMillis() - 30 * 1000, System.currentTimeMillis());
+               // 判断当前是前台还是后台
+            }
+        }, 30, TimeUnit.SECONDS);
+    }
+
+    /**
+     * 获取当前的网络状态，监控流量，以WIFI为例这里面的参数，可以配置在CPS那，这样可以从服务端那配置
+     *
+     * @param startTime
+     * @param endTime
+     */
+    private long getNetStats(long startTime, long endTime) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return 0;
+        }
+        // 接收
+        long netDataRx = 0;
+        // 发送
+        long netDataTx = 0;
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        String subId = telephonyManager.getSubscriberId();
+        NetworkStatsManager manager = (NetworkStatsManager) getSystemService(Context.NETWORK_STATS_SERVICE);
+        NetworkStats networkStats = null;
+        NetworkStats.Bucket bucket = new NetworkStats.Bucket();
+        try {
+            networkStats = manager.querySummary(NetworkCapabilities.TRANSPORT_WIFI, subId, startTime, endTime);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        while (networkStats.hasNextBucket()) {
+            networkStats.getNextBucket(bucket);
+            int uid = bucket.getUid();
+            // 最好先判断下当前消耗的流量是自己APP的，可以根据UID 来判断（根据包名来获取UID），然后对比当前的UID和uid是否相同
+
+            netDataRx += bucket.getRxBytes();
+            netDataTx += bucket.getTxBytes();
+        }
+        return netDataRx + netDataTx;
+
     }
 
 
-    private void useOkHttp(){
+    private void useOkHttp() {
         final Request request = new Request.Builder().
                 get().
                 url("www.baidu.com").
@@ -138,7 +232,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     /***************   权限申请    **************/
 
     private void initPermission() {
@@ -155,13 +248,13 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, permissions, mRequestCode);
         } else {
             //权限已经都通过了，可以将程序继续打开了
-            Toast.makeText(MainActivity.this,"申请成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "申请成功", Toast.LENGTH_SHORT).show();
         }
     }
 
 
     /**
-     *  6.不再提示权限时的展示对话框
+     * 6.不再提示权限时的展示对话框
      */
     AlertDialog mPermissionDialog;
     String mPackName = "coffer.androidjatpack";
@@ -200,8 +293,9 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 5.请求权限后回调的方法
-     * @param requestCode 是我们自己定义的权限请求码
-     * @param permissions 是我们请求的权限名称数组
+     *
+     * @param requestCode  是我们自己定义的权限请求码
+     * @param permissions  是我们请求的权限名称数组
      * @param grantResults 是我们在弹出页面后是否允许权限的标识数组，数组的长度对应的是权限
      *                     名称数组的长度，数组的数据0表示允许权限，-1表示我们点击了禁止权限
      */
@@ -210,19 +304,19 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         boolean hasPermissionDismiss = false;//有权限没有通过
-        if (mRequestCode==requestCode){
-            for (int i=0;i<grantResults.length;i++){
-                if (grantResults[i]==-1){
-                    hasPermissionDismiss=true;
+        if (mRequestCode == requestCode) {
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] == -1) {
+                    hasPermissionDismiss = true;
                     break;
                 }
             }
         }
-        if (hasPermissionDismiss){//如果有没有被允许的权限
+        if (hasPermissionDismiss) {//如果有没有被允许的权限
             showPermissionDialog();
-        }else {
+        } else {
             //权限已经都通过了，可以将程序继续打开了
-            Toast.makeText(MainActivity.this,"申请成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "申请成功", Toast.LENGTH_SHORT).show();
         }
     }
 
