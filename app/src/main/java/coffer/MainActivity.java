@@ -248,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
         client.eventListenerFactory(OkHttpEventListener.FACTORY);
 
         OkHttpClient okHttpClient = client.build();
-
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
