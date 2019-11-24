@@ -8,17 +8,23 @@
     android:orientation="vertical"
     tools:context="main.java.coffer.MainActivity">
 
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="恢复" />
+
     <coffer.widget.AdTipView
         android:id="@+id/close"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true" />
 
-    <Button
-        android:id="@+id/reset"
-        android:layout_width="wrap_content"
+    <coffer.widget.BannerContentLayout
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="恢复" />
+        android:layout_below="@+id/close" />
 
     <coffer.widget.DragImageView
         android:id="@+id/body"
