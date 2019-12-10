@@ -45,6 +45,8 @@ import coffer.drawViewDemo.CofferViewActiviy;
 import coffer.fileDemo.FileActivity;
 import coffer.hookDemo.InvokeActivity;
 import coffer.javaDemo.reflectdemo.ReflectActivity;
+import coffer.messageDemo.BridgeService;
+import coffer.messageDemo.MessageTestActivity;
 import coffer.okhttpDemo.CofferCacheInterceptor;
 import coffer.okhttpDemo.JobSchedulerService;
 import coffer.okhttpDemo.OkHttpEventListener;
@@ -134,10 +136,29 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // 使用网络
         findViewById(R.id.b8).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 useOkHttp();
+            }
+        });
+
+        // 消息机制
+        findViewById(R.id.b9).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MessageTestActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 延时初始化ContentProvider
+        findViewById(R.id.b10).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, BridgeService.class);
+                startService(intent);
             }
         });
         AtomicInteger mCount = new AtomicInteger();

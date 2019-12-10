@@ -2,6 +2,7 @@ package coffer;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
@@ -11,6 +12,10 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.squareup.leakcanary.LeakCanary;
+
+import coffer.util.CONSTANT;
+
+import static coffer.util.CONSTANT.COFFER_TAG;
 
 /**
  * @author：张宝全
@@ -26,6 +31,7 @@ public class CofferApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.d(COFFER_TAG,"CofferApplication onCreate ");
         if (LeakCanary.isInAnalyzerProcess(this)){
 
             return;
@@ -38,6 +44,7 @@ public class CofferApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        Log.d(COFFER_TAG,"CofferApplication attachBaseContext ");
         MultiDex.install(this);
     }
 
