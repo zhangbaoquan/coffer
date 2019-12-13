@@ -6,12 +6,16 @@ import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
+import com.dianping.logan.Logan;
+import com.dianping.logan.LoganConfig;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.squareup.leakcanary.LeakCanary;
+
+import java.io.File;
 
 import coffer.util.CONSTANT;
 
@@ -39,6 +43,8 @@ public class CofferApplication extends Application {
         LeakCanary.install(this);
         // 缓存图片的配置，一般通用的配置
         initImageLoader(getApplicationContext());
+        // 初始化美团的Logan 日志系统
+        initLog();
     }
 
     @Override
@@ -62,6 +68,18 @@ public class CofferApplication extends Application {
                 .tasksProcessingOrder(QueueProcessingType.LIFO).build();
         // ImageLoader对象的配置
         ImageLoader.getInstance().init(configuration);
+    }
+
+    private void initLog(){
+        LoganConfig config = new LoganConfig.Builder()
+                .setCachePath(getApplicationContext().getFilesDir().getAbsolutePath())
+                .setPath(getApplicationContext().getExternalFilesDir(null).getAbsolutePath()
+                        + File.separator + "logan_v1")
+                .setEncryptKey16("0123456789012345".getBytes())
+                .setEncryptIV16("0123456789012345".getBytes())
+                .build();
+
+        Logan.init(config);
     }
 
 }

@@ -29,6 +29,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.dianping.logan.Logan;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Logan.w("onCreate",1);
         initPermission();
         // 属性动画
         findViewById(R.id.b1).setOnClickListener(new View.OnClickListener() {
