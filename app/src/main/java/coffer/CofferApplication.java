@@ -8,12 +8,12 @@ import androidx.multidex.MultiDex;
 
 import com.dianping.logan.Logan;
 import com.dianping.logan.LoganConfig;
+import com.ireader.plug.api.IreaderPlugApi;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.squareup.leakcanary.LeakCanary;
 
 import java.io.File;
 
@@ -34,13 +34,14 @@ public class CofferApplication extends Application {
 
     @Override
     public void onCreate() {
+        IreaderPlugApi.initPlugWhenAPPOncreate(this);
         super.onCreate();
         Log.d(COFFER_TAG,"CofferApplication onCreate ");
-        if (LeakCanary.isInAnalyzerProcess(this)){
-
-            return;
-        }
-        LeakCanary.install(this);
+//        if (LeakCanary.isInAnalyzerProcess(this)){
+//
+//            return;
+//        }
+//        LeakCanary.install(this);
         // 缓存图片的配置，一般通用的配置
         initImageLoader(getApplicationContext());
         // 初始化美团的Logan 日志系统
@@ -52,6 +53,7 @@ public class CofferApplication extends Application {
         super.attachBaseContext(base);
         Log.d(COFFER_TAG,"CofferApplication attachBaseContext ");
         MultiDex.install(this);
+        IreaderPlugApi.initPlugWhenAPPAttachBaseContext(this, base);
     }
 
     private void initImageLoader(Context context) {

@@ -53,6 +53,7 @@ import coffer.okhttpDemo.CofferCacheInterceptor;
 import coffer.okhttpDemo.JobSchedulerService;
 import coffer.okhttpDemo.OkHttpEventListener;
 import coffer.pluginDemo.PluginMainActivity;
+import coffer.zy.ZyMainActivity;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Call;
@@ -86,6 +87,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Logan.w("onCreate",1);
         initPermission();
+
+        // 掌阅
+        findViewById(R.id.b0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ZyMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // 属性动画
         findViewById(R.id.b1).setOnClickListener(new View.OnClickListener() {
             @Override

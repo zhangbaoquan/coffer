@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">coffer</string>
+    <string name="plug_process_name">com.chaozh.iReader.plug.sdk</string>
 </resources>

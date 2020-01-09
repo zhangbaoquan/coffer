@@ -16,5 +16,44 @@
         <item name="android:background">@null</item>
     </style>
 
+    <style name="BrowserBtnStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+
+    <style name="Theme.noTranslucent" parent="@style/Theme.Application">
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+    <style name="Theme.Application" parent="android:style/Theme.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+    <style name="Theme.windowIsTranslucent" parent="@style/Theme.AppCompat.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="IreaderTheme" parent="@android:style/Theme.Holo.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+
+        <item name="android:windowBackground">@mipmap/welcome_bg</item>
+    </style>
+
+    <style name="IreaderTheme_night" parent="@style/IreaderTheme">
+        <item name="android:windowBackground">@mipmap/welcome_bg_night</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">@color/status_bar_night_mode</item>
+    </style>
+
+    <style name="Theme.Author" parent="@android:style/Theme.Translucent">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="Theme.Common" parent="@android:style/Theme.Translucent.NoTitleBar"/>
 
 </resources>
