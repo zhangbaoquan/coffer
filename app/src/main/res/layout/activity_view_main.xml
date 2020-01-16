@@ -20,6 +20,14 @@
         android:layout_height="50dp"
         android:layout_alignParentRight="true" />
 
+    <coffer.widget.ArrowView
+        android:id="@+id/arrow"
+        android:layout_below="@+id/close"
+        android:layout_marginTop="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true" />
+
     <coffer.widget.BannerContentLayout
         android:id="@+id/banner"
         android:layout_width="match_parent"
