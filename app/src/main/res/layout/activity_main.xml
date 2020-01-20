@@ -88,6 +88,23 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="延时初始化ContentPorvider" />
+
+        <Button
+            android:id="@+id/b11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="书架Banner" />
+
+        <Button
+            android:id="@+id/b12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:textColor="@color/white"
+            android:elevation="3dp"
+            android:text="新掌阅" />
     </LinearLayout>
 
 </ScrollView>

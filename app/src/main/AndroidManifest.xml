@@ -56,6 +56,8 @@
         <activity android:name="coffer.hookDemo.InvokeActivity" />
         <activity android:name="coffer.pluginDemo.PluginMainActivity" />
         <activity android:name="coffer.messageDemo.MessageTestActivity" />
+        <activity android:name="coffer.adDemo.ViewPagerBannerActivity"/>
+        <activity android:name="coffer.zy.ZyNewMainActivity"/>
 
         <provider
             android:name="coffer.messageDemo.CofferContentProvider"

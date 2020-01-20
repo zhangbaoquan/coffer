@@ -42,6 +42,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import coffer.CofferApplication;
+import coffer.adDemo.ViewPagerBannerActivity;
 import coffer.androidjatpack.R;
 import coffer.animDemo.AnimActivity;
 import coffer.drawViewDemo.CofferViewActiviy;
@@ -55,6 +56,7 @@ import coffer.okhttpDemo.JobSchedulerService;
 import coffer.okhttpDemo.OkHttpEventListener;
 import coffer.pluginDemo.PluginMainActivity;
 import coffer.zy.ZyMainActivity;
+import coffer.zy.ZyNewMainActivity;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Call;
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         Logan.w("onCreate",1);
         initPermission();
 
-        // 掌阅
+        // 掌阅（浏览器插件4.4版本）
         findViewById(R.id.b0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +175,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BridgeService.class);
                 startService(intent);
+            }
+        });
+
+        // Banner 广告
+        findViewById(R.id.b11).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ViewPagerBannerActivity.class);
+                startService(intent);
+            }
+        });
+
+        // 掌阅（基于7.15多进程版）
+        findViewById(R.id.b12).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ZyNewMainActivity.class);
+                startActivity(intent);
             }
         });
         AtomicInteger mCount = new AtomicInteger();
