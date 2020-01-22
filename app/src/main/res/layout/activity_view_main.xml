@@ -28,6 +28,13 @@
         android:layout_height="50dp"
         android:layout_alignParentRight="true" />
 
+    <coffer.widget.RoundAngleImageView
+        android:layout_width="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/arrow"
+        android:src="@drawable/coffer"
+        android:layout_height="50dp"/>
+
     <coffer.widget.BannerContentLayout
         android:id="@+id/banner"
         android:layout_width="match_parent"
