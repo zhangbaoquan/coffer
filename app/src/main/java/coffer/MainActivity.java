@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BridgeService.class);
-                startService(intent);
+                startActivity(intent);
             }
         });
 
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ViewPagerBannerActivity.class);
-                startService(intent);
+                startActivity(intent);
             }
         });
 

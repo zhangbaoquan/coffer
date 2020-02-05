@@ -12,5 +12,6 @@ public class AdData {
 
     public String title;
     public String content;
+    public boolean haveAd;
 
 }
