@@ -57,7 +57,14 @@
         <activity android:name="coffer.pluginDemo.PluginMainActivity" />
         <activity android:name="coffer.messageDemo.MessageTestActivity" />
         <activity android:name="coffer.adDemo.ViewPagerBannerActivity"/>
-        <activity android:name="coffer.zy.ZyNewMainActivity"/>
+        <activity android:name="coffer.zy.VivoAdBannerMainActivity"/>
+        <activity android:name="coffer.drawViewDemo.CofferViewActiviy2"/>
+
+        <activity
+            android:name="com.vivo.mobilead.web.VivoADSDKWebView"
+            android:configChanges="orientation|keyboardHidden|screenSize"> </activity>
+
+        <meta-data android:name="vivo_ad_version_code" android:value="3201"/>
 
         <provider
             android:name="coffer.messageDemo.CofferContentProvider"

@@ -8,27 +8,35 @@
     android:orientation="vertical"
     tools:context="main.java.coffer.MainActivity">
 
-    <TextView
-        android:id="@+id/tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@color/design_default_color_primary"
-        android:gravity="center"
-        android:text="改变View的大小"
-        android:textColor="@color/cardview_light_background" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv2"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@color/design_default_color_primary"
-        android:gravity="center"
-        android:text="alpha动画"
-        android:textColor="@color/cardview_light_background" />
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@color/design_default_color_primary"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:text="改变View的大小"
+            android:textColor="@color/cardview_light_background" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@color/design_default_color_primary"
+            android:gravity="center"
+            android:text="alpha动画"
+            android:textColor="@color/cardview_light_background" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv3"

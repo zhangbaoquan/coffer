@@ -22,7 +22,6 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,16 +35,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import coffer.CofferApplication;
 import coffer.adDemo.ViewPagerBannerActivity;
 import coffer.androidjatpack.R;
 import coffer.animDemo.AnimActivity;
 import coffer.drawViewDemo.CofferViewActiviy;
+import coffer.drawViewDemo.CofferViewActiviy2;
 import coffer.fileDemo.FileActivity;
 import coffer.hookDemo.InvokeActivity;
 import coffer.javaDemo.reflectdemo.ReflectActivity;
@@ -56,7 +54,7 @@ import coffer.okhttpDemo.JobSchedulerService;
 import coffer.okhttpDemo.OkHttpEventListener;
 import coffer.pluginDemo.PluginMainActivity;
 import coffer.zy.ZyMainActivity;
-import coffer.zy.ZyNewMainActivity;
+import coffer.zy.VivoAdBannerMainActivity;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Call;
@@ -191,7 +189,16 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.b12).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ZyNewMainActivity.class);
+                Intent intent = new Intent(MainActivity.this, VivoAdBannerMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 自定义View3
+        findViewById(R.id.b13).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CofferViewActiviy2.class);
                 startActivity(intent);
             }
         });
