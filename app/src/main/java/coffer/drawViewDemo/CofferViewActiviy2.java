@@ -1,9 +1,14 @@
 package coffer.drawViewDemo;
 
+import android.annotation.SuppressLint;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,22 +35,25 @@ import coffer.widget.DragImageView;
 public class CofferViewActiviy2 extends AppCompatActivity {
 
     private BannerContentLayout mBanner;
+    private Button mReset;
+    WindowManager wm;
+    WindowManager.LayoutParams layoutParams;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_main);
 //        mClose = findViewById(R.id.close);
-//        mReset = findViewById(R.id.reset);
+        mReset = findViewById(R.id.reset);
 //        mBody = findViewById(R.id.body);
         mBanner = findViewById(R.id.banner);
 
-//        mReset.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                open();
-//            }
-//        });
+        mReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open();
+            }
+        });
 //
 //        mClose.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -58,7 +66,35 @@ public class CofferViewActiviy2 extends AppCompatActivity {
     }
 
     private void open(){
+        wm = ((WindowManager) getSystemService(WINDOW_SERVICE));
+        layoutParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT,
+                        WindowManager.LayoutParams.WRAP_CONTENT,0,0, PixelFormat.TRANSPARENT);
+//        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
+////                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+//                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
+        layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
 
+        final Button button = new Button(this);
+        button.setText("小浮窗");
+        button.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int rawX = (int) event.getRawX();
+                int rawY = (int) event.getRawY();
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_MOVE: {
+                        layoutParams.x = rawX;
+                        layoutParams.y = rawY;
+                        wm.updateViewLayout(button, layoutParams);
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
+        wm.addView(button,layoutParams);
     }
 
     private void close(){

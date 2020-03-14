@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.os.Build;
@@ -22,6 +23,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -82,12 +84,15 @@ public class MainActivity extends AppCompatActivity {
      */
     private final int mRequestCode = 100;
 
+    private LinearLayout linearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Logan.w("onCreate",1);
         initPermission();
+        linearLayout = findViewById(R.id.parent);
 
         // 掌阅（浏览器插件4.4版本）
         findViewById(R.id.b0).setOnClickListener(new View.OnClickListener() {
@@ -367,8 +372,33 @@ public class MainActivity extends AppCompatActivity {
             //权限已经都通过了，可以将程序继续打开了
             Toast.makeText(MainActivity.this, "申请成功", Toast.LENGTH_SHORT).show();
         }
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivityForResult(intent, 1);
+            } else {
+                //TODO do something you need
+            }
+        }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        linearLayout.setBackgroundColor(Color.WHITE);
+    }
+
+    @Override
+    protected void onPause() {
+        linearLayout.setBackgroundColor(Color.BLUE);
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 
     /**
      * 6.不再提示权限时的展示对话框
