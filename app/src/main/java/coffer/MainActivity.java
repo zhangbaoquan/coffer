@@ -391,13 +391,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        linearLayout.setBackgroundColor(Color.BLUE);
         super.onPause();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        linearLayout.setBackgroundColor(Color.BLUE);
     }
 
     /**
