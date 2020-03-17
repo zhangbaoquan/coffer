@@ -62,42 +62,44 @@ public class ScrollerView extends AppCompatButton {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-//        int x = (int) event.getRawX();
-//        int y = (int) event.getRawY();
-//        switch (event.getAction()){
-//            case MotionEvent.ACTION_DOWN:
-//                mLastX = x;
-//                mLastY = y;
-//                mx = getLeft();
-//                my = getTop();
-//                if (!mScroller.isFinished()){
-//                    mScroller.abortAnimation();
-//                }
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                int deltax = x - mLastX;
-//                int deltay = y - mLastY;
-//                if (x > 800 || y > 800){
-//                    return false;
-//                }
-//                ((View)getParent()).scrollBy(-deltax,-deltay);
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                smoothScrollTo(mx,my,1500);
-//                break;
-//            default:
-//                break;
-//        }
-//        mLastX = x;
-//        mLastY = y;
+        int x = (int) event.getRawX();
+        int y = (int) event.getRawY();
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                mLastX = x;
+                mLastY = y;
+                mx = getLeft();
+                my = getTop();
+                if (!mScroller.isFinished()){
+                    mScroller.abortAnimation();
+                }
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int deltax = x - mLastX;
+                int deltay = y - mLastY;
+                if (x > 800 || y > 800){
+                    return false;
+                }
+                ((View)getParent()).scrollBy(-deltax,-deltay);
+                break;
+            case MotionEvent.ACTION_UP:
+                smoothScrollTo(mx,my,1500);
+                break;
+            default:
+                break;
+        }
+        mLastX = x;
+        mLastY = y;
         return super.onTouchEvent(event);
     }
 
     @Override
     public void computeScroll() {
+        // 根据源码，时间流逝的百分比来计算scrollX和Y，改变的百分比值和，这个过程相当于动画的插值器的概念
         if (mScroller.computeScrollOffset()){
             // scrollTo方法滑动的是内容，因此要调用当前View的父View的scrollTo方法才行。子View相对父View是内容。
             ((View)getParent()).scrollTo(mScroller.getCurrX(),mScroller.getCurrY());
+            // 二次重新绘制
             postInvalidate();
         }
     }
