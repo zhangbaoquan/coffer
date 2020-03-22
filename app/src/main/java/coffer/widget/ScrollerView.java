@@ -77,9 +77,10 @@ public class ScrollerView extends AppCompatButton {
             case MotionEvent.ACTION_MOVE:
                 int deltax = x - mLastX;
                 int deltay = y - mLastY;
-                if (x > 800 || y > 800){
-                    return false;
-                }
+                // 设置滑动边界
+//                if (x > 800 || y > 800){
+//                    return false;
+//                }
                 ((View)getParent()).scrollBy(-deltax,-deltay);
                 break;
             case MotionEvent.ACTION_UP:

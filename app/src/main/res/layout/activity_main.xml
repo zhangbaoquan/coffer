@@ -116,6 +116,16 @@
             android:textColor="@color/white"
             android:elevation="3dp"
             android:text="自定义View2" />
+
+        <Button
+            android:id="@+id/b14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:textColor="@color/white"
+            android:elevation="3dp"
+            android:text="自定义View3" />
     </LinearLayout>
 
 </ScrollView>

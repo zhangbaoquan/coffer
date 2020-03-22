@@ -2,14 +2,16 @@ package coffer.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.Scroller;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
-import androidx.customview.widget.ViewDragHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @author：张宝全
@@ -19,93 +21,111 @@ import androidx.customview.widget.ViewDragHelper;
  * @RevisionTime：
  * @RevisionDescription：
  */
-public class ScollerContainer extends FrameLayout {
+public class ScollerContainer extends RelativeLayout {
+    private static final String TAG = "ScollerContainer_tag";
 
-    private ViewDragHelper mViewDragHelper;
-    private View mMenuView,mMainView;
-    private int mWidth;
+    private RecyclerView mRecyclerView;
+    private Scroller mScroller;
 
     public ScollerContainer(@NonNull Context context) {
         super(context);
-        initView();
+        init(context);
     }
 
     public ScollerContainer(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initView();
+        init(context);
+    }
+
+    private void init(Context context){
+        mScroller = new Scroller(context);
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mMenuView = getChildAt(0);
-        mMainView = getChildAt(1);
     }
 
-    private void initView(){
-        mViewDragHelper = ViewDragHelper.create(this,callback);
+    public void setRecyclerView(RecyclerView recyclerView) {
+        this.mRecyclerView = recyclerView;
     }
 
-    private ViewDragHelper.Callback callback = new ViewDragHelper.Callback(){
-
-        // 开始检测触摸事件
-        @Override
-        public boolean tryCaptureView(@NonNull View child, int pointerId) {
-            return mMainView == child;
-        }
-
-        // 处理水平方向滑动
-        @Override
-        public int clampViewPositionHorizontal(@NonNull View child, int left, int dx) {
-
-            return left;
-        }
-
-        // 处理竖直方向滑动
-        @Override
-        public int clampViewPositionVertical(@NonNull View child, int top, int dy) {
-            return 0;
-        }
-
-        // 拖到结束后调用
-        @Override
-        public void onViewReleased(@NonNull View releasedChild, float xvel, float yvel) {
-            super.onViewReleased(releasedChild, xvel, yvel);
-            // 手指抬起后缓慢移动到指定的位置
-            if (mMainView.getLeft() < 500){
-                // 关闭菜单，相当于Scroller调用startScroll
-                mViewDragHelper.smoothSlideViewTo(mMainView,0,0);
-                ViewCompat.postInvalidateOnAnimation(ScollerContainer.this);
-            }else {
-                // 打开菜单
-                mViewDragHelper.smoothSlideViewTo(mMainView,300,0);
-                ViewCompat.postInvalidateOnAnimation(ScollerContainer.this);
-            }
-        }
-    };
-
-    @Override
-    public void computeScroll() {
-        if (mViewDragHelper.continueSettling(true)){
-            ViewCompat.postInvalidateOnAnimation(this);
-        }
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        mWidth = mMainView.getMeasuredWidth();
-    }
+    int mInterceptLastY;
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return mViewDragHelper.shouldInterceptTouchEvent(ev);
+        boolean intercept = false;
+        if (mRecyclerView == null) {
+            return false;
+        }
+        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
+        View view = linearLayoutManager.findViewByPosition(0);
+        if (view == null){
+            return false;
+        }
+        int top = view.getTop();
+        int y = (int)ev. getY();
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mInterceptLastY = y;
+                intercept = false;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (top == 0 && y - mInterceptLastY > 0){
+                    intercept = true;
+                }else {
+                    intercept = false;
+                }
+                break;
+            default:
+                break;
+        }
+        return intercept;
+    }
+
+    int mLastX;
+    int mLastY;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        int x = (int) e.getX();
+        int y = (int) e.getY();
+        switch (e.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (!mScroller.isFinished()){
+                    mScroller.isFinished();
+                }
+                mLastX = x;
+                mLastY = y;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int deltay = y - mLastY;
+                Log.i(TAG,"deltay : "+deltay);
+                if (deltay > 0){
+                    scrollBy(0, -deltay);
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                smoothScroller(0, 0);
+                break;
+            default:
+                break;
+        }
+        mLastY = y;
+        return false;
+    }
+
+    private void smoothScroller(int dx,int dy){
+        mScroller.startScroll(0,0,dx,dy,500);
+        invalidate();
+
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        // 将触摸事件传递给mViewDragHelper
-        mViewDragHelper.processTouchEvent(event);
-        return true;
+    public void computeScroll() {
+        if (mScroller.computeScrollOffset()){
+            scrollTo(mScroller.getCurrX(),mScroller.getCurrY());
+            postInvalidate();
+        }
     }
 }

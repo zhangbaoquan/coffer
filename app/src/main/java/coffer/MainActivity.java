@@ -38,6 +38,7 @@ import coffer.androidjatpack.R;
 import coffer.animDemo.AnimActivity;
 import coffer.drawViewDemo.CofferViewActiviy;
 import coffer.drawViewDemo.CofferViewActiviy2;
+import coffer.drawViewDemo.CofferViewActiviy3;
 import coffer.fileDemo.FileActivity;
 import coffer.hookDemo.InvokeActivity;
 import coffer.javaDemo.reflectdemo.ReflectActivity;
@@ -171,11 +172,20 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        // 自定义View3
+        // 自定义View2
         findViewById(R.id.b13).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CofferViewActiviy2.class);
+                startActivity(intent);
+            }
+        });
+
+        // 自定义View3
+        findViewById(R.id.b14).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CofferViewActiviy3.class);
                 startActivity(intent);
             }
         });
