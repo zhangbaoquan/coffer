@@ -1,7 +1,8 @@
 package coffer.drawViewDemo;
 
 import android.os.Bundle;
-import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import coffer.androidjatpack.R;
-import coffer.widget.ScollerContainer;
-import coffer.widget.ScrollerView;
 import coffer.widget.StretchRecycleView;
 
 /**
@@ -26,7 +25,6 @@ import coffer.widget.StretchRecycleView;
 public class CofferViewActiviy3 extends AppCompatActivity {
 
     private StretchRecycleView mRecycleVie;
-    private ScollerContainer mScollerContainer;
     private List<String> mList = new ArrayList<>();
 
     @Override
@@ -34,7 +32,7 @@ public class CofferViewActiviy3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_main3);
         mRecycleVie = findViewById(R.id.rc);
-        mScollerContainer = findViewById(R.id.parent);
+//        mScollerContainer = findViewById(R.id.parent);
         initData();
         initView();
     }
@@ -77,7 +75,19 @@ public class CofferViewActiviy3 extends AppCompatActivity {
         mRecycleVie.setLayoutManager(new LinearLayoutManager(this));
         mRecycleVie.setHasFixedSize(true);
         mRecycleVie.setAdapter(adapter);
-        mScollerContainer.setRecyclerView(mRecycleVie);
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus && mRecycleVie != null){
+            int h1 = mRecycleVie.getHeight();
+            int h2 = ((ViewGroup)mRecycleVie.getParent()).getHeight();
+            if (h1 != h2){
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mRecycleVie.getLayoutParams();
+                layoutParams.height = h2;
+                mRecycleVie.setLayoutParams(layoutParams);
+            }
+        }
+    }
 }

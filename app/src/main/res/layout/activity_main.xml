@@ -115,7 +115,7 @@
             android:background="@color/blue"
             android:textColor="@color/white"
             android:elevation="3dp"
-            android:text="自定义View2" />
+            android:text="View的滑动和绘制" />
 
         <Button
             android:id="@+id/b14"
@@ -125,7 +125,7 @@
             android:background="@color/blue"
             android:textColor="@color/white"
             android:elevation="3dp"
-            android:text="自定义View3" />
+            android:text="弹性RecycleView实现" />
     </LinearLayout>
 
 </ScrollView>

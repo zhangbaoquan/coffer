@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * @author：张宝全
  * @date：2020-03-22
- * @Description： 弹性的RecycleView
+ * @Description：实现内部Item的滑动缩放
  * @Reviser：
  * @RevisionTime：
  * @RevisionDescription：

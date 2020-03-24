@@ -3,7 +3,6 @@ package main.java.coffer;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
-import android.app.Dialog;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.app.usage.NetworkStats;
@@ -172,7 +171,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        // 自定义View2
+        // 自定义View的滑动和绘制
         findViewById(R.id.b13).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,7 +180,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        // 自定义View3
+        // 弹性RecycleView 的实现
         findViewById(R.id.b14).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

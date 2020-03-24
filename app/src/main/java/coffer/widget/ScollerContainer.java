@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * @author：张宝全
  * @date：2020-03-14
- * @Description：实现QQ侧滑
+ * @Description：实现RecycleView弹性拖拽第一版
  * @Reviser：
  * @RevisionTime：
  * @RevisionDescription：
