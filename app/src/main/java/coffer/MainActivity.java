@@ -65,7 +65,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Logan.w("onCreate",1);
-        Logan.w("onCreate",2);
         wm = getWindowManager();
         // 掌阅（浏览器插件4.4版本）
         findViewById(R.id.b0).setOnClickListener(new View.OnClickListener() {
