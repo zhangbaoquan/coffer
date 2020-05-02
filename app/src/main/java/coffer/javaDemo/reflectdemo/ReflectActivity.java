@@ -28,7 +28,7 @@ public class ReflectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anim_main);
+        setContentView(R.layout.activity_reflect_main);
 
         // 1、获取 目标类型的Class对象
         // 2、通过 Class 对象分别获取Constructor类对象、Method类对象 & Field 类对象

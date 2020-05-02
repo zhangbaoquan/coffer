@@ -98,7 +98,7 @@ public class BannerContentLayout extends FrameLayout {
         mIndicatorRadius = Util.dipToPixel(context.getResources(), 3);
         mSelectedIndicatorRadius = mIndicatorRadius;
         mIndicatorPadding = Util.dipToPixel(context.getResources(), 4);
-        mIndicatorBottom = Util.dipToPixel(context, 4.33f);
+        mIndicatorBottom = Util.dipToPixel(context, 4);
 
         mIndicatorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mAnimationDuration = ANIMATION_DURATION;

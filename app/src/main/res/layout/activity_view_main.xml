@@ -20,31 +20,31 @@
         android:layout_height="50dp"
         android:layout_alignParentRight="true" />
 
-    <coffer.widget.ArrowView
-        android:id="@+id/arrow"
-        android:layout_below="@+id/close"
-        android:layout_marginTop="10dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true" />
-
-    <coffer.widget.RoundAngleImageView
-        android:layout_width="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/arrow"
-        android:src="@drawable/coffer"
-        android:layout_height="50dp"/>
-
     <coffer.widget.BannerContentLayout
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/close" />
 
+
+    <coffer.widget.DrawGraphView
+        android:id="@+id/drawView"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_below="@+id/banner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_gradient" />
+
+    <coffer.widget.PieView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
     <coffer.widget.DragImageView
         android:id="@+id/body"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="170dp"
         android:layout_alignParentBottom="true"
         android:src="@drawable/illust_73383665_20190225_223000" />
 

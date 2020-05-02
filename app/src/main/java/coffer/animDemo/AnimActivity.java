@@ -1,20 +1,10 @@
 package coffer.animDemo;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.Keyframe;
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
-import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,7 +18,7 @@ import coffer.util.AnimUtils;
 /**
  * @author：张宝全
  * @date：2019-05-04
- * @Description： 动画
+ * @Description： 平移动画
  * @Reviser：
  * @RevisionTime：
  * @RevisionDescription：
@@ -53,7 +43,7 @@ public class AnimActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anim_main);
+        setContentView(R.layout.activity_translate_main);
         mParent = findViewById(R.id.parent);
         initView();
 

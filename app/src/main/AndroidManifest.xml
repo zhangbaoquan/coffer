@@ -61,6 +61,8 @@
         <activity android:name="coffer.zy.VivoAdBannerMainActivity"/>
         <activity android:name="coffer.drawViewDemo.CofferViewActiviy2"/>
         <activity android:name="coffer.drawViewDemo.CofferViewActiviy3"/>
+        <activity android:name="coffer.animDemo.AnimDemoMainActivity"/>
+        <activity android:name="coffer.customViewDemo.CustomViewMainActivity"/>
 
         <activity
             android:name="com.vivo.mobilead.web.VivoADSDKWebView"

@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.net.NetworkCapabilities;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -22,7 +23,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import com.dianping.logan.Logan;
 
 import java.io.File;
@@ -35,12 +35,12 @@ import coffer.BaseActivity;
 import coffer.adDemo.ViewPagerBannerActivity;
 import coffer.androidjatpack.R;
 import coffer.animDemo.AnimActivity;
-import coffer.drawViewDemo.CofferViewActiviy;
-import coffer.drawViewDemo.CofferViewActiviy2;
-import coffer.drawViewDemo.CofferViewActiviy3;
+import coffer.animDemo.AnimDemoMainActivity;
+import coffer.customViewDemo.CustomViewMainActivity;
 import coffer.fileDemo.FileActivity;
 import coffer.hookDemo.InvokeActivity;
 import coffer.javaDemo.reflectdemo.ReflectActivity;
+import coffer.jetpackDemo.JetpackMainDemo;
 import coffer.messageDemo.BridgeService;
 import coffer.messageDemo.MessageTestActivity;
 import coffer.okhttpDemo.CofferCacheInterceptor;
@@ -56,6 +56,8 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static android.content.Intent.ACTION_DEFAULT;
 
 public class MainActivity extends BaseActivity {
 
@@ -77,11 +79,11 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        // 属性动画
+        // 动画练习系列
         findViewById(R.id.b1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AnimActivity.class);
+                Intent intent = new Intent(MainActivity.this, AnimDemoMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -95,11 +97,11 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        // 自定义View 绘制
+        // 自定义View 系列
         findViewById(R.id.b3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CofferViewActiviy.class);
+                Intent intent = new Intent(MainActivity.this, CustomViewMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -155,11 +157,11 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        // Banner 广告
+        // Jetpack 组件练习
         findViewById(R.id.b11).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ViewPagerBannerActivity.class);
+                Intent intent = new Intent(MainActivity.this, JetpackMainDemo.class);
                 startActivity(intent);
             }
         });
@@ -173,23 +175,17 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        // 自定义View的滑动和绘制
-        findViewById(R.id.b13).setOnClickListener(new View.OnClickListener() {
+        // deeplink 跳转
+        findViewById(R.id.b15).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CofferViewActiviy2.class);
+                String url = "iqiyi://mobile/player?aid=239741901&tvid=14152064500&ftype=27&subtype=vivoqd_2843";
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(ACTION_DEFAULT, uri);
                 startActivity(intent);
             }
         });
 
-        // 弹性RecycleView 的实现
-        findViewById(R.id.b14).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CofferViewActiviy3.class);
-                startActivity(intent);
-            }
-        });
         AtomicInteger mCount = new AtomicInteger();
         Log.e("ioioioii", "mCount : " + mCount.toString());
         // 下面的这个监控方法可以写在BaseActivity 中

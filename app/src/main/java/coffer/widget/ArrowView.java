@@ -68,7 +68,7 @@ public class ArrowView extends View {
             mHeight = heighSize;
         } else {
             if (heighMode == MeasureSpec.AT_MOST) {
-                mHeight = 550;
+                mHeight = 50;
             }
 
         }

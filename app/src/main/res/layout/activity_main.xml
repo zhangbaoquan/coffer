@@ -28,7 +28,7 @@
             android:layout_marginTop="5dp"
             android:background="@color/white"
             android:elevation="3dp"
-            android:text="属性动画" />
+            android:text="动画系列" />
 
         <Button
             android:id="@+id/b2"
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="自定义View" />
+            android:text="自定义View系列" />
 
         <Button
             android:id="@+id/b4"
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="书架Banner" />
+            android:text="Jetpack 组件练习" />
 
         <Button
             android:id="@+id/b12"
@@ -107,25 +107,16 @@
             android:elevation="3dp"
             android:text="新掌阅" />
 
-        <Button
-            android:id="@+id/b13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@color/blue"
-            android:textColor="@color/white"
-            android:elevation="3dp"
-            android:text="View的滑动和绘制" />
 
         <Button
-            android:id="@+id/b14"
+            android:id="@+id/b15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@color/blue"
             android:textColor="@color/white"
             android:elevation="3dp"
-            android:text="弹性RecycleView实现" />
+            android:text="deeplink" />
     </LinearLayout>
 
 </ScrollView>

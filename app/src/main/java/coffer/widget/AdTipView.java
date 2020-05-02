@@ -62,7 +62,7 @@ public class AdTipView extends View {
             mWidth = widthSize;
         } else {
             if (widthMode == MeasureSpec.AT_MOST) {
-                mWidth = 150;
+                mWidth = 100;
             }
         }
 
@@ -73,7 +73,7 @@ public class AdTipView extends View {
             mHeight = heighSize;
         } else {
             if (heighMode == MeasureSpec.AT_MOST) {
-                mHeight = 150;
+                mHeight = 100;
             }
 
         }
