@@ -1,8 +1,7 @@
-package coffer.drawViewDemo;
+package coffer.customViewDemo;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -27,7 +26,7 @@ import coffer.widget.DrawGraphView;
  * @RevisionTime：
  * @RevisionDescription：
  */
-public class CofferViewActiviy extends AppCompatActivity {
+public class DrawViewActiviy extends AppCompatActivity {
     private DrawGraphView mDrawGraphView;
 
     private BannerContentLayout mBanner;
@@ -35,7 +34,7 @@ public class CofferViewActiviy extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_main);
+        setContentView(R.layout.activity_draw_view_main);
         mBanner = findViewById(R.id.banner);
         mDrawGraphView = findViewById(R.id.drawView);
         createBannerContentView();
@@ -58,7 +57,7 @@ public class CofferViewActiviy extends AppCompatActivity {
     }
 
     private View getView(int i){
-        View adView = LayoutInflater.from(CofferViewActiviy.this).inflate(R.layout.activity_view_item, null);
+        View adView = LayoutInflater.from(DrawViewActiviy.this).inflate(R.layout.activity_view_item, null);
         adView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         View body = adView.findViewById(R.id.body);
@@ -70,7 +69,7 @@ public class CofferViewActiviy extends AppCompatActivity {
         body.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CofferViewActiviy.this,"点啦",Toast.LENGTH_SHORT).show();
+                Toast.makeText(DrawViewActiviy.this,"点啦",Toast.LENGTH_SHORT).show();
             }
         });
 

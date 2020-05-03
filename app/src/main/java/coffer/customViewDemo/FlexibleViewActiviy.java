@@ -1,4 +1,4 @@
-package coffer.drawViewDemo;
+package coffer.customViewDemo;
 
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -22,7 +22,7 @@ import coffer.widget.StretchRecycleView;
  * @RevisionTime：
  * @RevisionDescription：
  */
-public class CofferViewActiviy3 extends AppCompatActivity {
+public class FlexibleViewActiviy extends AppCompatActivity {
 
     private StretchRecycleView mRecycleVie;
     private List<String> mList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class CofferViewActiviy3 extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_main3);
+        setContentView(R.layout.activity_flexible_view_main);
         mRecycleVie = findViewById(R.id.rc);
 //        mScollerContainer = findViewById(R.id.parent);
         initData();

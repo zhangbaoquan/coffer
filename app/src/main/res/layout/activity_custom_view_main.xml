@@ -38,6 +38,17 @@
             android:elevation="3dp"
             android:text="弹性RecycleView实现" />
 
+        <TextView
+            android:id="@+id/b4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_gradient"
+            android:textColor="@color/white"
+            android:elevation="3dp"
+            android:text="自定义ViewGroup" />
+
     </LinearLayout>
 
 </ScrollView>

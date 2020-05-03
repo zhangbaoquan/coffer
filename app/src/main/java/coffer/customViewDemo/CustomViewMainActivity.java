@@ -8,9 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import coffer.androidjatpack.R;
-import coffer.drawViewDemo.CofferViewActiviy;
-import coffer.drawViewDemo.CofferViewActiviy2;
-import coffer.drawViewDemo.CofferViewActiviy3;
 
 /**
  * @author：张宝全
@@ -31,7 +28,7 @@ public class CustomViewMainActivity extends AppCompatActivity {
         findViewById(R.id.b1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomViewMainActivity.this, CofferViewActiviy.class);
+                Intent intent = new Intent(CustomViewMainActivity.this, DrawViewActiviy.class);
                 startActivity(intent);
             }
         });
@@ -40,7 +37,7 @@ public class CustomViewMainActivity extends AppCompatActivity {
         findViewById(R.id.b2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomViewMainActivity.this, CofferViewActiviy2.class);
+                Intent intent = new Intent(CustomViewMainActivity.this, ScrollActiviy2.class);
                 startActivity(intent);
             }
         });
@@ -49,7 +46,16 @@ public class CustomViewMainActivity extends AppCompatActivity {
         findViewById(R.id.b3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomViewMainActivity.this, CofferViewActiviy3.class);
+                Intent intent = new Intent(CustomViewMainActivity.this, FlexibleViewActiviy.class);
+                startActivity(intent);
+            }
+        });
+
+        // 自定义ViewGroup 的实现
+        findViewById(R.id.b4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomViewMainActivity.this, ArrangeViewActivity.class);
                 startActivity(intent);
             }
         });

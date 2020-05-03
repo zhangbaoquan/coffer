@@ -50,7 +50,7 @@
         </activity>
         <activity android:name="coffer.animDemo.AnimActivity" />
         <activity android:name="coffer.javaDemo.reflectdemo.ReflectActivity" />
-        <activity android:name="coffer.drawViewDemo.CofferViewActiviy" />
+        <activity android:name="coffer.customViewDemo.DrawViewActiviy" />
         <activity android:name="coffer.auto_test.TestMainActivity1" />
         <activity android:name="coffer.auto_test.ShowTextActivity" />
         <activity android:name="coffer.fileDemo.FileActivity" />
@@ -59,10 +59,12 @@
         <activity android:name="coffer.messageDemo.MessageTestActivity" />
         <activity android:name="coffer.adDemo.ViewPagerBannerActivity"/>
         <activity android:name="coffer.zy.VivoAdBannerMainActivity"/>
-        <activity android:name="coffer.drawViewDemo.CofferViewActiviy2"/>
-        <activity android:name="coffer.drawViewDemo.CofferViewActiviy3"/>
+        <activity android:name="coffer.customViewDemo.ScrollActiviy2"/>
+        <activity android:name="coffer.customViewDemo.FlexibleViewActiviy"/>
         <activity android:name="coffer.animDemo.AnimDemoMainActivity"/>
         <activity android:name="coffer.customViewDemo.CustomViewMainActivity"/>
+        <activity android:name="coffer.customViewDemo.ArrangeViewActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name="com.vivo.mobilead.web.VivoADSDKWebView"

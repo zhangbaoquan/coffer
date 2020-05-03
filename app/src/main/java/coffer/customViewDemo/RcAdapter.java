@@ -1,4 +1,4 @@
-package coffer.drawViewDemo;
+package coffer.customViewDemo;
 
 import android.content.Context;
 import android.view.LayoutInflater;
