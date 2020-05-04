@@ -3,11 +3,14 @@ package coffer.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import coffer.androidjatpack.R;
 import coffer.model.ViewPosData;
 import coffer.util.Util;
 
@@ -23,7 +26,11 @@ public class CofferFlowLayout extends ViewGroup {
 
     private static final String TAG = "CofferFlowLayout_tag";
 
+    /**
+     * 在wrap_content下 View的最大值
+     */
     private int mMaxSize;
+    private Context mContext;
     /**
      * 这个集合存放所有子View的位置信息，方便后面布局用
      */
@@ -40,6 +47,7 @@ public class CofferFlowLayout extends ViewGroup {
     }
 
     private void init(Context context){
+        mContext = context;
         mPosHelper = new ArrayList<>();
         mMaxSize = Util.dipToPixel(context,300);
     }
@@ -70,7 +78,6 @@ public class CofferFlowLayout extends ViewGroup {
         // 2、测量子View的大小
         int childCount = getChildCount();
         mPosHelper.clear();
-        Log.i(TAG,"mPosHelper.clear");
         for (int i = 0; i < childCount; i++) {
             View child = getChildAt(i);
             if (child != null && child.getVisibility() != GONE){
@@ -92,9 +99,8 @@ public class CofferFlowLayout extends ViewGroup {
                 int childHeight = topMargin + bottomMargin + child.getMeasuredHeight();
                 // 2.2.1换行
                 if (childWidth + lineWidth + paddingLeft + paddingRight > maxWidth) {
-                    Log.i(TAG,"换行");
                     // 2.2.2 设置当前的行宽、高
-                    lineWidth = 0;
+                    lineWidth = childWidth;
                     realHeight = lineHeight;
                     lineHeight += childHeight;
                     // 2.2.3 计算子View的位置
@@ -120,7 +126,7 @@ public class CofferFlowLayout extends ViewGroup {
         }
         // 设置最终的宽、高
         realWidth = maxWidth;
-        realHeight = Math.max(lineHeight + paddingBottom + paddingTop,maxHeight);
+        realHeight = Math.min(lineHeight + paddingBottom + paddingTop,maxHeight);
         setMeasuredDimension(realWidth,realHeight);
     }
 
@@ -134,5 +140,59 @@ public class CofferFlowLayout extends ViewGroup {
                 child.layout(data.left,data.top,data.right,data.bottom);
             }
         }
+    }
+
+    /***********  以下是在父容器内创建子View   ************/
+    private View createTagView(String title){
+        View view = LayoutInflater.from(mContext).inflate(R.layout.activity_arrage_item,
+                this, false);
+        TextView textView = view.findViewById(R.id.text);
+        textView.setText(title);
+        return view;
+    }
+
+    private ArrayList<String> mTitle;
+    private ItemClickListener mListener;
+
+    public void setTag(ArrayList<String> title, final ItemClickListener listener){
+        mTitle = title;
+        mListener = listener;
+        int count = title.size();
+        for (int i = 0; i < count; i++) {
+            View chid = createTagView(title.get(i));
+            final int finalI = i;
+            chid.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(TAG,"onClick : "+finalI);
+                    mListener.onClick(finalI);
+                }
+            });
+            chid.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Log.i(TAG,"onLongClick : "+finalI);
+                    mListener.onLongClick(finalI);
+                    return true;
+                }
+            });
+            addView(chid);
+        }
+    }
+
+    public interface ItemClickListener{
+        void onClick(int position);
+        void onLongClick(int position);
+    }
+
+    public void removeView(int position){
+        View child = getChildAt(position);
+        removeView(child);
+        updata();
+    }
+
+    private void updata(){
+        removeAllViews();
+        setTag(mTitle,mListener);
     }
 }
