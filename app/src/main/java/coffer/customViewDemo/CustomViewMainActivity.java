@@ -60,5 +60,25 @@ public class CustomViewMainActivity extends AppCompatActivity {
             }
         });
 
+        // 自定义ViewGroup 的实现
+        findViewById(R.id.b4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomViewMainActivity.this, ArrangeViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 画廊 的实现
+        findViewById(R.id.b5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomViewMainActivity.this, GalleryActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
+
 }

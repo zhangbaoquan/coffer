@@ -41,14 +41,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="main.java.coffer.MainActivity">
+        <activity android:name="main.java.coffer.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="coffer.animDemo.AnimActivity" />
+        <activity android:name="coffer.animDemo.AnimActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name="coffer.javaDemo.reflectdemo.ReflectActivity" />
         <activity android:name="coffer.customViewDemo.DrawViewActiviy" />
         <activity android:name="coffer.auto_test.TestMainActivity1" />
@@ -62,8 +64,16 @@
         <activity android:name="coffer.customViewDemo.ScrollActiviy2"/>
         <activity android:name="coffer.customViewDemo.FlexibleViewActiviy"/>
         <activity android:name="coffer.animDemo.AnimDemoMainActivity"/>
-        <activity android:name="coffer.customViewDemo.CustomViewMainActivity"/>
+        <activity android:name="coffer.customViewDemo.CustomViewMainActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name="coffer.customViewDemo.ArrangeViewActivity"
+            android:screenOrientation="fullSensor"/>
+        <activity android:name="coffer.jetpackDemo.JetpackMainDemo"/>
+        <activity android:name="coffer.jetpackDemo.ViewPager2Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="coffer.jetpackDemo.MvvmActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="coffer.customViewDemo.GalleryActivity"
             android:screenOrientation="portrait"/>
 
         <activity

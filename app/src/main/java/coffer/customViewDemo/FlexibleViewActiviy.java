@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import coffer.androidjatpack.R;
+import coffer.customViewDemo.adapter.RcAdapter;
 import coffer.widget.StretchRecycleView;
 
 /**

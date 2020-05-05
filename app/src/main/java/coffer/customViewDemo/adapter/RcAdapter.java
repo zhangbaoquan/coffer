@@ -1,4 +1,4 @@
-package coffer.customViewDemo;
+package coffer.customViewDemo.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -27,7 +27,7 @@ public class RcAdapter extends RecyclerView.Adapter<RcAdapter.RcViewHolder> {
     private Context mContext;
     private List<String> mList = new ArrayList<>();
 
-    RcAdapter(Context context,List<String> list){
+    public RcAdapter(Context context, List<String> list){
         this.mContext = context;
         this.mList = list;
     }
