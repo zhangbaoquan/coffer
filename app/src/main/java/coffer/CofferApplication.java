@@ -8,6 +8,7 @@ import androidx.multidex.MultiDex;
 
 import com.dianping.logan.Logan;
 import com.dianping.logan.LoganConfig;
+import com.didichuxing.doraemonkit.DoraemonKit;
 import com.ireader.plug.api.IreaderPlugApi;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -35,8 +36,9 @@ public class CofferApplication extends Application {
 
     @Override
     public void onCreate() {
-        IreaderPlugApi.initPlugWhenAPPOncreate(this);
         super.onCreate();
+        DoraemonKit.install(this);
+        IreaderPlugApi.initPlugWhenAPPOncreate(this);
         Log.d(COFFER_TAG,"CofferApplication onCreate ");
 //        if (LeakCanary.isInAnalyzerProcess(this)){
 //
