@@ -76,6 +76,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="coffer.customViewDemo.GalleryActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="coffer.customViewDemo.DampViewActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name="com.vivo.mobilead.web.VivoADSDKWebView"

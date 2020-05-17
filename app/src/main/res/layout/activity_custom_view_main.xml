@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="main.java.coffer.MainActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/parent"
@@ -59,6 +58,17 @@
             android:textColor="@color/white"
             android:elevation="3dp"
             android:text="画廊效果" />
+
+        <TextView
+            android:id="@+id/b6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_gradient"
+            android:textColor="@color/white"
+            android:elevation="3dp"
+            android:text="左右弹性阻尼的View" />
 
     </LinearLayout>
 

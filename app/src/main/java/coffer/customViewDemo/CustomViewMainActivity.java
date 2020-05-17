@@ -78,6 +78,14 @@ public class CustomViewMainActivity extends AppCompatActivity {
             }
         });
 
+        // 左右弹性阻尼的View 的实现
+        findViewById(R.id.b6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomViewMainActivity.this, DampViewActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
