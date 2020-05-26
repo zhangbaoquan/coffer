@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coffer.widget.NestScrollerContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue"
+    tools:context="main.java.coffer.MainActivity">
+
+    <ListView
+        android:id="@+id/rc"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</coffer.widget.NestScrollerContainer>

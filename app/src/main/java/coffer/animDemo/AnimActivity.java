@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import coffer.androidjatpack.R;
 import coffer.util.AnimUtils;
+import coffer.util.Util;
 
 
 /**
@@ -65,6 +66,7 @@ public class AnimActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AnimUtils.animDemo2(tv2);
+                Util.setNavVisibility(false,AnimActivity.this);
             }
         });
 
@@ -74,6 +76,7 @@ public class AnimActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AnimUtils.animDemo3(tv3);
+                Util.setNavVisibility(true,AnimActivity.this);
             }
         });
 

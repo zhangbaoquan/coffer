@@ -86,6 +86,16 @@ public class CustomViewMainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //
+        findViewById(R.id.b7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomViewMainActivity.this, ListViewActiviy.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
