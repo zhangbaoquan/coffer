@@ -60,11 +60,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         for (int i = 0; i < permissions.length; i++) {
             if (ContextCompat.checkSelfPermission(this, permissions[i]) !=
                     PackageManager.PERMISSION_GRANTED) {
-                mPermissionList.add(permissions[i]);//添加还未授予的权限到mPermissionList中
+                //添加还未授予的权限到mPermissionList中
+                mPermissionList.add(permissions[i]);
             }
         }
         //申请权限
-        if (mPermissionList.size() > 0) {//有权限没有通过，需要申请
+        if (mPermissionList.size() > 0) {
+            //有权限没有通过，需要申请
             ActivityCompat.requestPermissions(this, permissions, mRequestCode);
         } else {
             //权限已经都通过了，可以将程序继续打开了
@@ -131,7 +133,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        boolean hasPermissionDismiss = false;//有权限没有通过
+        boolean hasPermissionDismiss = false;
+        //有权限没有通过
         if (mRequestCode == requestCode) {
             for (int i = 0; i < grantResults.length; i++) {
                 if (grantResults[i] == -1) {
@@ -140,7 +143,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
             }
         }
-        if (hasPermissionDismiss) {//如果有没有被允许的权限
+        if (hasPermissionDismiss) {
+            //如果有没有被允许的权限
             showPermissionDialog();
         } else {
             //权限已经都通过了，可以将程序继续打开了

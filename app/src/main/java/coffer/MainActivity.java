@@ -32,9 +32,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import coffer.BaseActivity;
-import coffer.adDemo.ViewPagerBannerActivity;
 import coffer.androidjatpack.R;
-import coffer.animDemo.AnimActivity;
 import coffer.animDemo.AnimDemoMainActivity;
 import coffer.customViewDemo.CustomViewMainActivity;
 import coffer.fileDemo.FileActivity;
@@ -179,7 +177,8 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.b15).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "iqiyi://mobile/player?aid=239741901&tvid=14152064500&ftype=27&subtype=vivoqd_2843";
+//                String url = "iqiyi://mobile/player?aid=239741901&tvid=14152064500&ftype=27&subtype=vivoqd_2843";
+                String url = "ireader://com.chaozh.iReader/readbook?bookid=11591589";
                 Uri uri = Uri.parse(url);
                 Intent intent = new Intent(ACTION_DEFAULT, uri);
                 startActivity(intent);

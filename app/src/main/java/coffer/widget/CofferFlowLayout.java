@@ -155,6 +155,7 @@ public class CofferFlowLayout extends ViewGroup {
     private ItemClickListener mListener;
 
     public void setTag(ArrayList<String> title, final ItemClickListener listener){
+        removeAllViews();
         mTitle = title;
         mListener = listener;
         int count = title.size();
@@ -192,7 +193,6 @@ public class CofferFlowLayout extends ViewGroup {
     }
 
     private void updata(){
-        removeAllViews();
         setTag(mTitle,mListener);
     }
 }

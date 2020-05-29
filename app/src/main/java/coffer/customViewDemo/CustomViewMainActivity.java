@@ -87,11 +87,20 @@ public class CustomViewMainActivity extends AppCompatActivity {
             }
         });
 
-        //
+        // ListView
         findViewById(R.id.b7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CustomViewMainActivity.this, ListViewActiviy.class);
+                startActivity(intent);
+            }
+        });
+
+        // 多布局样式
+        findViewById(R.id.b8).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomViewMainActivity.this, MutiTypeActivity.class);
                 startActivity(intent);
             }
         });
