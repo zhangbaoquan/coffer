@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import coffer.androidjatpack.R;
+import coffer.customViewDemo.recycleView.SuperRecycleView;
 import coffer.util.Util;
 
 /**
@@ -36,6 +37,8 @@ public class DampLayout extends FrameLayout {
 
     private static final int LEFT = 1;
     private static final int RIGHT = 1 << 1;
+
+    private SuperRecycleView mSuperRecycleView;
     /**
      * 当前默认的滑动方向 RIGHT = 1 << 1 == 2,
      * LEFT | RIGHT == 3
@@ -179,6 +182,7 @@ public class DampLayout extends FrameLayout {
         int y = (int) ev.getY();
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                setRecycleViewScrollStatus(false);
                 mPoint.set(x,y);
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -195,7 +199,7 @@ public class DampLayout extends FrameLayout {
                         mTipArrowContainer.setTranslationX(-scrollX);
                         mTip.setTranslationX(mTranslationX-scrollX);
                         mContentView.setTranslationX(-scrollX);
-
+                        setRecycleViewScrollStatus(false);
                         return true;
                     }else if (moveX < 0 && enableRightScroll()){
                         // 右滑 ,滑动值取正
@@ -205,10 +209,12 @@ public class DampLayout extends FrameLayout {
                         mTipArrowContainer.setTranslationX(-scrollX);
                         mTip.setTranslationX(mTranslationX-scrollX);
                         mContentView.setTranslationX(-scrollX);
+                        setRecycleViewScrollStatus(false);
                         return true;
                     }
+                }else {
+                    setRecycleViewScrollStatus(true);
                 }
-
                 break;
             case MotionEvent.ACTION_UP:
                 int scrollX = (int) mContentView.getTranslationX();
@@ -250,6 +256,7 @@ public class DampLayout extends FrameLayout {
                     });
 
                 }
+                setRecycleViewScrollStatus(true);
                 break;
             default:
                 break;
@@ -273,6 +280,16 @@ public class DampLayout extends FrameLayout {
         super.addView(child, index, params);
         if (child != null && child != mTip && child != mTipArrowContainer) {
             mContentView = child;
+        }
+    }
+
+    public void setSuperRecycleView(SuperRecycleView recycleView){
+        this.mSuperRecycleView = recycleView;
+    }
+
+    private void setRecycleViewScrollStatus(boolean status){
+        if (mSuperRecycleView != null){
+            mSuperRecycleView.setCanScrollVertically(status);
         }
     }
 

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import coffer.Const;
+import coffer.customViewDemo.CofferLayoutManager;
 import coffer.util.Util;
 
 /**
@@ -812,6 +813,12 @@ public class SuperRecycleView extends RecyclerView {
             getItemAnimator().endAnimations();
         }
         valueAnimator.start();
+    }
+
+    public void setCanScrollVertically(boolean canScrollVertically){
+        if (getLayoutManager() != null && getLayoutManager() instanceof CofferLayoutManager){
+            ((CofferLayoutManager)getLayoutManager()).setCanScroll(canScrollVertically);
+        }
     }
 
 }

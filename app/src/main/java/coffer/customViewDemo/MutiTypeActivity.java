@@ -70,7 +70,7 @@ public class MutiTypeActivity extends BaseDefaultActivity implements SuperRecycl
         // 设置加载更多的监听
         mSuperRecycleView.setLoadMoreListener(this);
         // 设置布局方向
-        mSuperRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        mSuperRecycleView.setLayoutManager(new CofferLayoutManager(this));
         // 设置尾部View
 //        mSuperRecycleView.addFooterView(getLoadingLayout());
 
@@ -114,6 +114,7 @@ public class MutiTypeActivity extends BaseDefaultActivity implements SuperRecycl
         ivfl.gravity = Gravity.CENTER;
         imageView.setImageDrawable(getResources().getDrawable(R.drawable.coffer));
         dampLayout.addView(imageView,ivfl);
+        dampLayout.setSuperRecycleView(mSuperRecycleView);
 
         return parent;
     }
