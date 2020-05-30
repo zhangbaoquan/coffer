@@ -30,8 +30,8 @@ public class CreateDataUtils {
                 MutiTypeData.Baby baby = new MutiTypeData.Baby();
                 baby.url = "http://book.img.ireader.com/idc_1/f_webp/d6395c13/group61/M00/9E/4C/" +
                         "CmQUOF4fz5iEOabgAAAAAOIsmL0128642244.jpg?v=5GEDyHpb&t=CmQUOF4fz5g";
-                baby.title = "head 标题";
-                baby.desc = "head 描述";
+                baby.title = "";
+                baby.desc = "";
                 babyList.add(baby);
                 data.baby = babyList;
             }else if (i == 1){

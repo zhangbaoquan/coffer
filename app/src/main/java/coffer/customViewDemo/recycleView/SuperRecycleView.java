@@ -64,25 +64,59 @@ public class SuperRecycleView extends RecyclerView {
      * 布局类型
      */
     enum ELayoutManagerType {
-        LayoutManager_List,//list
-        LayoutManager_Grid,//grid
-        LayoutManager_Staggered//瀑布流
+        //list
+        LayoutManager_List,
+        //grid
+        LayoutManager_Grid,
+        //瀑布流
+        LayoutManager_Staggered
     }
 
-    private ELayoutManagerType mLayoutManagerType = ELayoutManagerType.LayoutManager_List;//默认
+    /**
+     * 默认
+     */
+    private ELayoutManagerType mLayoutManagerType = ELayoutManagerType.LayoutManager_List;
 
-    private boolean mIsHeaderEnable = true;//是否显示头部
-    private boolean mIsFooterEnable = true;//是否允许加载更多
+    /**
+     * 是否显示头部
+     */
+    private boolean mIsHeaderEnable = true;
+    /**
+     * 是否允许加载更多
+     */
+    private boolean mIsFooterEnable = true;
 
-    private int mHeaderCount = 0;//头部view数量
-    private int mFooterCount = 0;//尾部view数量
+    /**
+     * 头部view数量
+     */
+    private int mHeaderCount = 0;
+    /**
+     * 尾部view数量
+     */
+    private int mFooterCount = 0;
 
-    private List<View> mHeaderList = new ArrayList<>();//头部views
-    private List<View> mFooterList = new ArrayList<>();//尾部views
-    private List<Integer> mSpecialPositions;//特殊view的positions
+    /**
+     * 头部views
+     */
+    private List<View> mHeaderList = new ArrayList<>();
+    /**
+     * 尾部views
+     */
+    private List<View> mFooterList = new ArrayList<>();
+    /**
+     * 特殊view的positions
+     */
+    private List<Integer> mSpecialPositions;
 
-    private LinearLayout headerLayout;//尾部view
-    private LinearLayout footerLayout;//头部view
+    /**
+     * 尾部view
+     */
+    private LinearLayout headerLayout;
+
+    /**
+     * 头部view
+     */
+    private LinearLayout footerLayout;
 
     /**
      * 自定义实现了头部和底部的adapter
@@ -94,7 +128,10 @@ public class SuperRecycleView extends RecyclerView {
      * 标记是否正在加载更多，防止再次调用加载更多接口
      */
     private boolean mIsLoadingMore;
-    private boolean mIsNoMoreData;//数据已经全部加载完
+    /**
+     * 数据已经全部加载完
+     */
+    private boolean mIsNoMoreData;
     private int[] mLastPositionArray;
     /**
      * 标记加载更多的position
@@ -117,10 +154,7 @@ public class SuperRecycleView extends RecyclerView {
      */
     public static final int DEFAULT_PRELOAD_COUNT = 5;
 
-    private Paint mPaint;                           // 解决少数据透过去
-
-
-
+    private Paint mPaint;
 
     public SuperRecycleView(Context context) {
         super(context);
@@ -136,7 +170,6 @@ public class SuperRecycleView extends RecyclerView {
         super(context, attrs, defStyle);
         init();
     }
-
 
     /**
      * 初始化-添加滚动监听
@@ -188,8 +221,6 @@ public class SuperRecycleView extends RecyclerView {
             }
         });
     }
-
-
 
     /**
      * 解决缺少数据透过去的情况
@@ -280,8 +311,9 @@ public class SuperRecycleView extends RecyclerView {
     public boolean isSpecialItem(int position) {
         if (mSpecialPositions != null) {
             for (int p : mSpecialPositions) {
-                if (p == position)
+                if (p == position) {
                     return true;
+                }
             }
         }
         return false;
@@ -297,8 +329,9 @@ public class SuperRecycleView extends RecyclerView {
             headerLayout.setOrientation(LinearLayout.VERTICAL);
         } else {
             //避免设置了网格布局后layoutparams变化
-            if (type == ELayoutManagerType.LayoutManager_Staggered && !(headerLayout.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams))
+            if (type == ELayoutManagerType.LayoutManager_Staggered && !(headerLayout.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams)) {
                 headerLayout.setLayoutParams(new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            }
         }
         return headerLayout;
     }
@@ -312,8 +345,9 @@ public class SuperRecycleView extends RecyclerView {
             footerLayout.setLayoutParams(new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             footerLayout.setOrientation(LinearLayout.VERTICAL);
         } else {
-            if (type == ELayoutManagerType.LayoutManager_Staggered && !(footerLayout.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams))
+            if (type == ELayoutManagerType.LayoutManager_Staggered && !(footerLayout.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams)) {
                 footerLayout.setLayoutParams(new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            }
         }
         return footerLayout;
     }
@@ -374,8 +408,9 @@ public class SuperRecycleView extends RecyclerView {
         int firstVisiblePosition = getFirstVisiblePosition();
         setLayoutManager(layoutManager);
         //瀑布流不滚动到上一可见位置，避免滑动到头部后item重新排列
-        if (!(layoutManager instanceof StaggeredGridLayoutManager))
+        if (!(layoutManager instanceof StaggeredGridLayoutManager)) {
             getLayoutManager().scrollToPosition(firstVisiblePosition);
+        }
     }
 
     /**
@@ -476,7 +511,8 @@ public class SuperRecycleView extends RecyclerView {
         if (mLoadMorePosition == 0) {
             getAdapter().notifyDataSetChanged();
         } else {
-            getAdapter().notifyItemInserted(mLoadMorePosition + DEFAULT_PRELOAD_COUNT + 1); //getAdapter().getItemCount());
+            getAdapter().notifyItemInserted(mLoadMorePosition + DEFAULT_PRELOAD_COUNT + 1);
+            //getAdapter().getItemCount());
         }
     }
 
@@ -487,7 +523,7 @@ public class SuperRecycleView extends RecyclerView {
 
         private int mSpanSize;
 
-        public BaseSpanSizeLookup(int size) {
+        BaseSpanSizeLookup(int size) {
             mSpanSize = size;
         }
 
@@ -513,11 +549,11 @@ public class SuperRecycleView extends RecyclerView {
         private HeaderViewHolder headerHolder;
         private FooterViewHolder footerHolder;
 
-        public AutoLoadAdapter(Adapter adapter) {
+        AutoLoadAdapter(Adapter adapter) {
             mInternalAdapter = adapter;
         }
 
-        public void setHeaderEnable(boolean enable) {
+        void setHeaderEnable(boolean enable) {
             mIsHeaderEnable = enable;
         }
 
@@ -527,8 +563,12 @@ public class SuperRecycleView extends RecyclerView {
         @Override
         public int getItemCount() {
             int count = mInternalAdapter.getItemCount();
-            if (mIsHeaderEnable) count += mHeaderCount;
-            if (mIsFooterEnable) count += mFooterCount;
+            if (mIsHeaderEnable) {
+                count += mHeaderCount;
+            }
+            if (mIsFooterEnable) {
+                count += mFooterCount;
+            }
             return count;
         }
 
@@ -538,9 +578,9 @@ public class SuperRecycleView extends RecyclerView {
                 return Const.ITEM_TYPE_HEADER;
             }
             if (position >= mHeaderCount && position < mHeaderCount + mInternalAdapter.getItemCount()) {
-                if (isSpecialItem(position - mHeaderCount))
+                if (isSpecialItem(position - mHeaderCount)) {
                     return Const.ITEM_TYPE_SPECIAL;
-                else {
+                } else {
                     return mInternalAdapter.getItemViewType(position - mHeaderCount);
                 }
             } else {
@@ -550,12 +590,13 @@ public class SuperRecycleView extends RecyclerView {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            if (viewType == Const.ITEM_TYPE_HEADER)
+            if (viewType == Const.ITEM_TYPE_HEADER) {
                 return new HeaderViewHolder(getHeaderLayout(mLayoutManagerType));
-            else if (viewType == Const.ITEM_TYPE_FOOTER)
+            } else if (viewType == Const.ITEM_TYPE_FOOTER) {
                 return new FooterViewHolder(getFooterLayout(mLayoutManagerType));
-            else
+            } else {
                 return mInternalAdapter.onCreateViewHolder(parent, viewType);
+            }
         }
 
         @Override
@@ -563,8 +604,9 @@ public class SuperRecycleView extends RecyclerView {
             if (holder instanceof HeaderViewHolder) {
                 headerHolder = (HeaderViewHolder) holder;
                 if (mLayoutManagerType == ELayoutManagerType.LayoutManager_Staggered) {
-                    if (!(headerHolder.contentLayout.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams))
+                    if (!(headerHolder.contentLayout.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams)) {
                         headerHolder.contentLayout.setLayoutParams(new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    }
                     ((StaggeredGridLayoutManager.LayoutParams) headerHolder.itemView.getLayoutParams()).setFullSpan(true);
                 }
                 if (headerHolder.contentLayout.findViewWithTag(position) == null) {
@@ -576,8 +618,9 @@ public class SuperRecycleView extends RecyclerView {
             } else if (holder instanceof FooterViewHolder) {
                 footerHolder = (FooterViewHolder) holder;
                 if (mLayoutManagerType == ELayoutManagerType.LayoutManager_Staggered) {
-                    if (!(footerHolder.contentLayout.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams))
+                    if (!(footerHolder.contentLayout.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams)) {
                         footerHolder.contentLayout.setLayoutParams(new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    }
                     ((StaggeredGridLayoutManager.LayoutParams) footerHolder.itemView.getLayoutParams()).setFullSpan(true);
                 }
                 int footPosition = position - mInternalAdapter.getItemCount() - mHeaderCount;
@@ -588,12 +631,14 @@ public class SuperRecycleView extends RecyclerView {
                     }
                 }
             } else {
-                if (mLayoutManagerType == ELayoutManagerType.LayoutManager_Staggered)
+                if (mLayoutManagerType == ELayoutManagerType.LayoutManager_Staggered) {
                     if (isSpecialItem(position - mHeaderCount)) {
-                        if (!(holder.itemView.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams))
+                        if (!(holder.itemView.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams)) {
                             holder.itemView.setLayoutParams(new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, holder.itemView.getHeight()));
+                        }
                         ((StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams()).setFullSpan(true);
                     }
+                }
                 mInternalAdapter.onBindViewHolder(holder, position - mHeaderCount);
             }
         }
@@ -611,11 +656,11 @@ public class SuperRecycleView extends RecyclerView {
             }
         }
 
-        public class FooterViewHolder extends ViewHolder {
+        class FooterViewHolder extends ViewHolder {
 
             private LinearLayout contentLayout;
 
-            public FooterViewHolder(View itemView) {
+            FooterViewHolder(View itemView) {
                 super(itemView);
                 contentLayout = (LinearLayout) itemView;
             }
@@ -629,7 +674,7 @@ public class SuperRecycleView extends RecyclerView {
             }
         }
 
-        public class HeaderViewHolder extends ViewHolder {
+        class HeaderViewHolder extends ViewHolder {
 
             private LinearLayout contentLayout;
 
@@ -638,7 +683,6 @@ public class SuperRecycleView extends RecyclerView {
                 contentLayout = (LinearLayout) itemView;
             }
         }
-
     }
 
     /**
@@ -662,14 +706,16 @@ public class SuperRecycleView extends RecyclerView {
 
         @Override
         public void onClick(View view) {
-            if (listener != null)
+            if (listener != null) {
                 listener.onClickListener(position);
+            }
         }
 
         @Override
         public boolean onLongClick(View v) {
-            if (listener != null)
+            if (listener != null) {
                 listener.onLongClickListener(position);
+            }
             return true;
         }
     }
@@ -767,6 +813,5 @@ public class SuperRecycleView extends RecyclerView {
         }
         valueAnimator.start();
     }
-
 
 }

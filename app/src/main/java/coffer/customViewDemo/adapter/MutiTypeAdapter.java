@@ -20,11 +20,11 @@ import coffer.customViewDemo.holder.ViewHolderFactory;
  * @RevisionTime：
  * @RevisionDescription：
  */
-public class ChannelAdapter extends AbsAdapter<MutiTypeData.Data>{
+public class MutiTypeAdapter extends AbsAdapter<MutiTypeData.Data>{
 
     private ViewHolderFactory mFactory;
 
-    public ChannelAdapter(Context context){
+    public MutiTypeAdapter(Context context){
         mFactory = new ViewHolderFactory(context,null);
     }
 

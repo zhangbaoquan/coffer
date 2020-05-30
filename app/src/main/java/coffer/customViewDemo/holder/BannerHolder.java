@@ -1,6 +1,7 @@
 package coffer.customViewDemo.holder;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,7 +43,13 @@ public class BannerHolder extends BaseHolder {
         final ArrayList<MutiTypeData.Baby> items = bean.baby;
         final int adCount = items == null ? 0 : items.size();
         for (int i = 0; i < adCount; i++) {
-            textView.setText(items.get(i).title);
+            String content = items.get(i).title;
+            if (TextUtils.isEmpty(content)){
+                textView.setVisibility(View.GONE);
+            }else {
+                textView.setVisibility(View.VISIBLE);
+                textView.setText(content);
+            }
             ImageLoader.getInstance().displayImage(items.get(i).url,imageView);
         }
     }
