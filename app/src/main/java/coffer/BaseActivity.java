@@ -49,7 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initPermission();
+//        initPermission();
     }
 
     /***************   权限申请    **************/

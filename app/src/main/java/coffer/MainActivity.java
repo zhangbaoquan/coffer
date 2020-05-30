@@ -18,11 +18,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import com.dianping.logan.Logan;
 
 import java.io.File;
@@ -32,6 +36,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import coffer.BaseActivity;
+import coffer.Const;
 import coffer.androidjatpack.R;
 import coffer.animDemo.AnimDemoMainActivity;
 import coffer.customViewDemo.CustomViewMainActivity;
@@ -60,130 +65,163 @@ import static android.content.Intent.ACTION_DEFAULT;
 public class MainActivity extends BaseActivity {
 
     private WindowManager wm;
+
+    private EditText editText;
+    private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        editText = findViewById(R.id.et);
+        button = findViewById(R.id.bt);
         Logan.w("onCreate",1);
         Logan.w("onCreate",1);
         Logan.w("onCreate",1);
         wm = getWindowManager();
-        // 掌阅（浏览器插件4.4版本）
-        findViewById(R.id.b0).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ZyMainActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        // 动画练习系列
-        findViewById(R.id.b1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AnimDemoMainActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        // 反射
-        findViewById(R.id.b2).setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ReflectActivity.class);
-                startActivity(intent);
-            }
-        });
+                try {
+                    String content = editText.getText().toString();
+                    if (TextUtils.isEmpty(content)){
+                        Toast.makeText(MainActivity.this,"地址空了",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Uri uri = Uri.parse(content);
+                    Intent intent = new Intent(ACTION_DEFAULT, uri);
+                    startActivity(intent);
+                }catch (Exception e){
+                    Toast.makeText(MainActivity.this,"要跳转的应用没有安装",Toast.LENGTH_SHORT).show();
+                }
 
-        // 自定义View 系列
-        findViewById(R.id.b3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CustomViewMainActivity.class);
-                startActivity(intent);
             }
         });
-
-        // 动态代理
-        findViewById(R.id.b4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, InvokeActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 文件操作
-        findViewById(R.id.b6).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FileActivity.class);
-                startActivity(intent);
-            }
-        });
-        // 加载SD卡上的APK
-        findViewById(R.id.b7).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PluginMainActivity.class);
-                startActivity(intent);
-            }
-        });
-        // 使用网络
-        findViewById(R.id.b8).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                useOkHttp();
-            }
-        });
-
-        // 消息机制
-        findViewById(R.id.b9).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MessageTestActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 延时初始化ContentProvider
-        findViewById(R.id.b10).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BridgeService.class);
-                startActivity(intent);
-            }
-        });
-
-        // Jetpack 组件练习
-        findViewById(R.id.b11).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, JetpackMainDemo.class);
-                startActivity(intent);
-            }
-        });
-
-        // 掌阅（基于7.15多进程版）
-        findViewById(R.id.b12).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, VivoAdBannerMainActivity.class);
-                startActivity(intent);
-            }
-        });
-
+//        // 掌阅（浏览器插件4.4版本）
+//        findViewById(R.id.b0).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, ZyMainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        // 动画练习系列
+//        findViewById(R.id.b1).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, AnimDemoMainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        // 反射
+//        findViewById(R.id.b2).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, ReflectActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        // 自定义View 系列
+//        findViewById(R.id.b3).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, CustomViewMainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        // 动态代理
+//        findViewById(R.id.b4).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, InvokeActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        // 文件操作
+//        findViewById(R.id.b6).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, FileActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        // 加载SD卡上的APK
+//        findViewById(R.id.b7).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, PluginMainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        // 使用网络
+//        findViewById(R.id.b8).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                useOkHttp();
+//            }
+//        });
+//
+//        // 消息机制
+//        findViewById(R.id.b9).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, MessageTestActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        // 延时初始化ContentProvider
+//        findViewById(R.id.b10).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, BridgeService.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        // Jetpack 组件练习
+//        findViewById(R.id.b11).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, JetpackMainDemo.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        // 掌阅（基于7.15多进程版）
+//        findViewById(R.id.b12).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, VivoAdBannerMainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
         // deeplink 跳转
-        findViewById(R.id.b15).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                String url = "iqiyi://mobile/player?aid=239741901&tvid=14152064500&ftype=27&subtype=vivoqd_2843";
-                String url = "ireader://com.chaozh.iReader/readbook?bookid=11591589";
-                Uri uri = Uri.parse(url);
-                Intent intent = new Intent(ACTION_DEFAULT, uri);
-                startActivity(intent);
-            }
-        });
+//        findViewById(R.id.b15).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Uri uri = Uri.parse(Const.DEEP_LINK);
+//                Intent intent = new Intent(ACTION_DEFAULT, uri);
+//                startActivity(intent);
+//            }
+//        });
+
+//        // deeplink 跳转
+//        findViewById(R.id.b16).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Uri uri = Uri.parse(Const.DEEP_LINK2);
+//                Intent intent = new Intent(ACTION_DEFAULT, uri);
+//                startActivity(intent);
+//            }
+//        });
 
         AtomicInteger mCount = new AtomicInteger();
         Log.e("ioioioii", "mCount : " + mCount.toString());
@@ -343,15 +381,15 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        addWindow();
+//        addWindow();
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus){
-            addWindow();
-        }
+//        if (hasFocus){
+//            addWindow();
+//        }
     }
 
     /**
