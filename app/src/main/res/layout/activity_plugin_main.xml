@@ -2,43 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
-    <TextView
-        android:layout_gravity="center_horizontal"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/main_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="类信息!" />
-
+    android:orientation="vertical">
 
     <Button
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:text="测试加载类"
-        android:textSize="20sp"
+        android:id="@+id/zy_old"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dk_dp_10"
+        android:layout_marginTop="@dimen/dk_dp_10"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_gradient"
+        android:text="4.4版本掌阅插件" />
+
+    <Button
         android:id="@+id/test"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_gravity="center_horizontal"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/main_res"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="资源信息" />
-
+        android:layout_marginLeft="@dimen/dk_dp_10"
+        android:layout_marginTop="@dimen/dk_dp_10"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_gradient"
+        android:text="自定义加载插件" />
 
     <Button
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:text="测试加载资源"
-        android:textSize="20sp"
-        android:id="@+id/test_res"
+        android:id="@+id/zy_new"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dk_dp_10"
+        android:layout_marginTop="@dimen/dk_dp_10"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_gradient"
+        android:text="7.15版本多进程掌阅插件" />
+
 </LinearLayout>

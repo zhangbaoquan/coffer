@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -21,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import coffer.androidjatpack.R;
-import coffer.customViewDemo.recycleView.SuperRecycleView;
+import coffer.androidDemo.customViewDemo.recycleView.SuperRecycleView;
 import coffer.util.Util;
 
 /**

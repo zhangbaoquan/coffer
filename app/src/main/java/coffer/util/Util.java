@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import coffer.CofferApplication;
-import coffer.customViewDemo.recycleView.PauseOnScrollListener;
+import coffer.androidDemo.customViewDemo.recycleView.PauseOnScrollListener;
 
 
 /**

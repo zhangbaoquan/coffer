@@ -29,16 +29,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import coffer.BaseActivity;
+import coffer.androidDemo.AndroidMainActivity;
 import coffer.androidjatpack.R;
-import coffer.animDemo.AnimDemoMainActivity;
-import coffer.customViewDemo.CustomViewMainActivity;
 import coffer.javaDemo.JavaMainActivity;
 import coffer.jetpackDemo.JetpackMainDemo;
-import coffer.messageDemo.BridgeService;
-import coffer.messageDemo.MessageTestActivity;
 import coffer.pluginDemo.PluginMainActivity;
-import coffer.zy.ZyMainActivity;
-import coffer.zy.VivoAdBannerMainActivity;
+import coffer.zy.NewTestMainActivity;
 import networkDemo.NetWorkActivity;
 import networkDemo.okhttpDemo.JobSchedulerService;
 
@@ -52,23 +48,12 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Logan.w("onCreate",1);
-        Logan.w("onCreate",1);
-        Logan.w("onCreate",1);
         wm = getWindowManager();
-        // 掌阅（浏览器插件4.4版本）
+        // 插件
         findViewById(R.id.b0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ZyMainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 动画练习系列
-        findViewById(R.id.b1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AnimDemoMainActivity.class);
+                Intent intent = new Intent(MainActivity.this, PluginMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -82,20 +67,11 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        // 自定义View 系列
-        findViewById(R.id.b3).setOnClickListener(new View.OnClickListener() {
+        // android 综合
+        findViewById(R.id.b5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CustomViewMainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 加载SD卡上的APK
-        findViewById(R.id.b7).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PluginMainActivity.class);
+                Intent intent = new Intent(MainActivity.this, AndroidMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -105,15 +81,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NetWorkActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 消息机制
-        findViewById(R.id.b9).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MessageTestActivity.class);
                 startActivity(intent);
             }
         });
@@ -131,7 +98,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.b12).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, VivoAdBannerMainActivity.class);
+                Intent intent = new Intent(MainActivity.this, NewTestMainActivity.class);
                 startActivity(intent);
             }
         });

@@ -3,7 +3,7 @@ package coffer.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import coffer.customViewDemo.bean.MutiTypeData;
+import coffer.androidDemo.customViewDemo.bean.MutiTypeData;
 
 /**
  * @author：张宝全
