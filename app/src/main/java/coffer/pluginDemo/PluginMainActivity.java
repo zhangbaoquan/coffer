@@ -27,6 +27,7 @@ public class PluginMainActivity extends BaseDefaultActivity {
                 startActivity(intent);
             }
         });
+        // 掌阅4.4 插件的接入和新版7.15有资源合并冲突，不能同时存在，因此关于新插件的接入，在zy_plugin_7.15分支
         findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

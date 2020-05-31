@@ -100,6 +100,8 @@ dependencies {
     debugImplementation "com.didichuxing.doraemonkit:doraemonkit:3.1.5"
     releaseImplementation "com.didichuxing.doraemonkit:doraemonkit-no-op:3.1.5"
 
+//    implementation (name: 'ireader', ext: 'aar')
+
 //    debugApi 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 //    releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
