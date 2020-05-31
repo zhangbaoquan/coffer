@@ -1,12 +1,12 @@
-package coffer.okhttpDemo;
+package networkDemo.okhttpDemo;
+
+import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 import okhttp3.Call;
 import okhttp3.Connection;
@@ -18,7 +18,7 @@ import okhttp3.Response;
 
 /**
  * @author：张宝全
- * @date：2019-10-04
+ * @date：2020/5/31
  * @Description：
  * @Reviser：
  * @RevisionTime：
@@ -113,7 +113,6 @@ public class OkHttpEventListener extends EventListener {
         // byteCount 网络请求返回值的大小，掌阅的OOM中经常出现返回的数据过大而OOM，这里可以监控
         // 也可统计流量消耗
         okhttpEvent.byteCount = byteCount;
-
     }
 
     @Override
@@ -146,3 +145,4 @@ public class OkHttpEventListener extends EventListener {
         super.callFailed(call, ioe);
     }
 }
+

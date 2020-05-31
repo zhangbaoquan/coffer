@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import coffer.androidjatpack.R;
+import coffer.animDemo.AnimActivity;
 
 /**
  * @author：张宝全

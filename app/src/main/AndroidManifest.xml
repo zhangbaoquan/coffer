@@ -83,6 +83,18 @@
         <activity android:name="coffer.customViewDemo.MutiTypeActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name="networkDemo.NetWorkActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="networkDemo.OkHttpActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="networkDemo.RetrofitActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="coffer.javaDemo.JavaMainActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name="com.vivo.mobilead.web.VivoADSDKWebView"
             android:configChanges="orientation|keyboardHidden|screenSize"> </activity>
@@ -94,7 +106,7 @@
             android:process=":coffer"
             android:authorities="${applicationId}.provider" />
         <service
-            android:name="coffer.okhttpDemo.JobSchedulerService"
+            android:name="networkDemo.okhttpDemo.JobSchedulerService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <service

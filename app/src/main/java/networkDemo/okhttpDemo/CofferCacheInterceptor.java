@@ -1,4 +1,4 @@
-package coffer.okhttpDemo;
+package networkDemo.okhttpDemo;
 
 import java.io.IOException;
 
@@ -8,8 +8,8 @@ import okhttp3.Response;
 
 /**
  * @author：张宝全
- * @date：2019-10-27
- * @Description： 自定义缓存拦截器
+ * @date：2020/5/31
+ * @Description：
  * @Reviser：
  * @RevisionTime：
  * @RevisionDescription：

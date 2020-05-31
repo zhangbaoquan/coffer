@@ -1,4 +1,4 @@
-package coffer.okhttpDemo;
+package networkDemo.okhttpDemo;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
@@ -8,7 +8,7 @@ import androidx.annotation.RequiresApi;
 
 /**
  * @author：张宝全
- * @date：2019-10-04
+ * @date：2020/5/31
  * @Description：
  * @Reviser：
  * @RevisionTime：
