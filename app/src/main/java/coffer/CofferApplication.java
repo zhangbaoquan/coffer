@@ -2,6 +2,7 @@ package coffer;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.multidex.MultiDex;
@@ -19,6 +20,7 @@ import com.vivo.mobilead.manager.VivoAdManager;
 
 import java.io.File;
 
+import coffer.crashDemo.LogService;
 import coffer.util.CONSTANT;
 
 import static coffer.util.CONSTANT.COFFER_TAG;
@@ -61,6 +63,9 @@ public class CofferApplication extends Application {
         super.attachBaseContext(base);
         instance = this;
         Log.d(COFFER_TAG,"CofferApplication attachBaseContext ");
+        Intent intent = new Intent(instance, LogService.class);
+        intent.putExtra("pid", android.os.Process.myPid());
+        instance.startService(intent);
         MultiDex.install(this);
         IreaderPlugApi.initPlugWhenAPPAttachBaseContext(this, base);
     }

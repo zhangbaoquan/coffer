@@ -88,4 +88,26 @@ public class Util {
         view.addOnScrollListener(pauseOnScrollListener);
     }
 
+    /**
+     * 将颜色的十进制转换成RGB 数组
+     * @return
+     */
+    public static int[] colorsConvertToRgb(int color){
+        int rgb[] = new int[3];
+
+        int b = color & 0xff;
+
+        int g = (color >> 8) & 0xff;
+
+        int r = (color >> 16) & 0xff;
+
+        rgb[0] = r;
+
+        rgb[1] = g;
+
+        rgb[2] = b;
+
+        return rgb;
+    }
+
 }

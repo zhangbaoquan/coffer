@@ -1,4 +1,4 @@
-package coffer.hookDemo;
+package coffer.javaDemo.hookDemo;
 
 import android.view.View;
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 轮播文字的属性-->
+    <declare-styleable name="TextBannerView">
+        <attr name="banner_text_color" format="integer"/>
+        <attr name="play_duration" format="integer"/>
+        <attr name="pause_duration" format="integer"/>
+    </declare-styleable>
+</resources>

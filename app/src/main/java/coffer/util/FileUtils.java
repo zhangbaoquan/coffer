@@ -72,6 +72,16 @@ public class FileUtils {
     }
 
     /**
+     * 崩溃日志路径
+     * @return 路径
+     */
+    public static String getCrashPath(){
+        String path = getSDCardDir() + "/coffer/crash/";
+        Log.i(CONSTANT.COFFER_TAG,"getCrashPath : "+path);
+        return path;
+    }
+
+    /**
      * 创建文件，如果文件已经存在不操作直接返回
      *
      * @param path 路径

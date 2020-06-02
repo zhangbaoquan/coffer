@@ -31,9 +31,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import coffer.BaseActivity;
 import coffer.androidDemo.AndroidMainActivity;
 import coffer.androidjatpack.R;
+import coffer.crashDemo.CrashCollectActivity;
 import coffer.javaDemo.JavaMainActivity;
 import coffer.jetpackDemo.JetpackMainDemo;
 import coffer.pluginDemo.PluginMainActivity;
+import coffer.util.CONSTANT;
 import coffer.zy.NewTestMainActivity;
 import networkDemo.NetWorkActivity;
 import networkDemo.okhttpDemo.JobSchedulerService;
@@ -48,6 +50,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Logan.w("onCreate",1);
+        Log.i(CONSTANT.COFFER_TAG,"getFilesDir: "+getFilesDir());
         wm = getWindowManager();
         // 插件
         findViewById(R.id.b0).setOnClickListener(new View.OnClickListener() {
@@ -76,7 +79,16 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        // 使用网络
+        // 崩溃日志抓取
+        findViewById(R.id.b6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CrashCollectActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 网络框架学习
         findViewById(R.id.b8).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +106,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        // 掌阅（基于7.15多进程版）
+        // 新功能测试
         findViewById(R.id.b12).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +128,7 @@ public class MainActivity extends BaseActivity {
         });
 
         AtomicInteger mCount = new AtomicInteger();
-        Log.e("ioioioii", "mCount : " + mCount.toString());
+        Log.e(CONSTANT.COFFER_TAG, "mCount : " + mCount.toString());
         // 下面的这个监控方法可以写在BaseActivity 中
         getApplication().registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override

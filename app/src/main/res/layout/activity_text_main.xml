@@ -9,6 +9,8 @@
     <Button
         android:id="@+id/btn"
         android:text="加载广告"
+        android:background="#001622"
+        android:textColor="#204353"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

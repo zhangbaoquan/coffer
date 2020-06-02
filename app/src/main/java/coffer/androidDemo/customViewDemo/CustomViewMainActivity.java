@@ -105,6 +105,15 @@ public class CustomViewMainActivity extends AppCompatActivity {
             }
         });
 
+        // Banner 系列
+        findViewById(R.id.b9).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomViewMainActivity.this, BannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

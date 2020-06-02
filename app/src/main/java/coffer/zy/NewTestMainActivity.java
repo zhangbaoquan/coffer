@@ -1,7 +1,9 @@
 package coffer.zy;
 
+
 import coffer.BaseDefaultActivity;
 import coffer.androidjatpack.R;
+import coffer.util.Util;
 
 /**
  * @author：张宝全
@@ -20,6 +22,8 @@ public class NewTestMainActivity extends BaseDefaultActivity {
 
     @Override
     public void initData() {
+        int bg[] = Util.colorsConvertToRgb(-16771550);
+        int text[] = Util.colorsConvertToRgb(-14662829);
 
     }
 

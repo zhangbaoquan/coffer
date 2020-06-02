@@ -5,8 +5,8 @@ import android.view.View;
 
 import coffer.BaseDefaultActivity;
 import coffer.androidjatpack.R;
-import coffer.fileDemo.FileActivity;
-import coffer.hookDemo.InvokeActivity;
+import coffer.javaDemo.fileDemo.FileActivity;
+import coffer.javaDemo.hookDemo.InvokeActivity;
 import coffer.javaDemo.reflectdemo.ReflectActivity;
 
 /**
