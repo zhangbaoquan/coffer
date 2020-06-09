@@ -120,10 +120,18 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 //                String url = "iqiyi://mobile/player?aid=239741901&tvid=14152064500&ftype=27&subtype=vivoqd_2843";
-                String url = "ireader://com.chaozh.iReader/readbook?bookid=11591589";
+//                String url = "ireader://com.chaozh.iReader/readbook?bookid=11591589";
+//                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%" +
+//                        "2Fzybook3%2Fapp%2Fapp.php%3Fca%3DChannel.Index%26pk%3Dqd%26key%3Dch_free%26a0%3Dbanner_oppo_sd_mfpd";
+                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%2Fzyvr%2Frender%" +
+                        "3Fid%3D10608%26a0%3Dpush_oppo_sd_wbhs&fromname=应用商店&flags=4&from=com.oppo.market";
                 Uri uri = Uri.parse(url);
                 Intent intent = new Intent(ACTION_DEFAULT, uri);
-                startActivity(intent);
+                try {
+                    startActivity(intent);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 
