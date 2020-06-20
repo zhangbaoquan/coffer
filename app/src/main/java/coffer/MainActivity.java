@@ -16,6 +16,8 @@ import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -24,6 +26,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import com.dianping.logan.Logan;
+
+import java.lang.ref.WeakReference;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -52,6 +56,35 @@ public class MainActivity extends BaseActivity {
         Logan.w("onCreate",1);
         Log.i(CONSTANT.COFFER_TAG,"getFilesDir: "+getFilesDir());
         wm = getWindowManager();
+        initView();
+
+        // deeplink 跳转
+        findViewById(R.id.b15).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                String url = "iqiyi://mobile/player?aid=239741901&tvid=14152064500&ftype=27&subtype=vivoqd_2843";
+//                String url = "ireader://com.chaozh.iReader/readbook?bookid=11591589";
+//                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%" +
+//                        "2Fzybook3%2Fapp%2Fapp.php%3Fca%3DChannel.Index%26pk%3Dqd%26key%3Dch_free%26a0%3Dbanner_oppo_sd_mfpd";
+//                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%" +
+//                        "2Fzyvr%2Frender%3Fid%3D10608%26a0%3Dpush_oppo_sd_wbhs&fromname=应用商店&flags=4&from=com.oppo.market";
+                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%2Fzybook3%2Fapp%2" +
+                        "Fapp.php%3Fca%3DChannel.Index%26pk%3Dqd%26key%3Dch_feature%26a0%3Dtoufang01s&fromname=浏览器&flags=4&" +
+                        "from=com.heytap.browser";
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(ACTION_DEFAULT, uri);
+                try {
+                    startActivity(intent);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        registerLifecycleCallbacks();
+    }
+
+    private void initView(){
         // 插件
         findViewById(R.id.b0).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,27 +147,9 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
 
-        // deeplink 跳转
-        findViewById(R.id.b15).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                String url = "iqiyi://mobile/player?aid=239741901&tvid=14152064500&ftype=27&subtype=vivoqd_2843";
-//                String url = "ireader://com.chaozh.iReader/readbook?bookid=11591589";
-//                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%" +
-//                        "2Fzybook3%2Fapp%2Fapp.php%3Fca%3DChannel.Index%26pk%3Dqd%26key%3Dch_free%26a0%3Dbanner_oppo_sd_mfpd";
-                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%2Fzyvr%2Frender%" +
-                        "3Fid%3D10608%26a0%3Dpush_oppo_sd_wbhs&fromname=应用商店&flags=4&from=com.oppo.market";
-                Uri uri = Uri.parse(url);
-                Intent intent = new Intent(ACTION_DEFAULT, uri);
-                try {
-                    startActivity(intent);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
-
+    private void registerLifecycleCallbacks(){
         AtomicInteger mCount = new AtomicInteger();
         Log.e(CONSTANT.COFFER_TAG, "mCount : " + mCount.toString());
         // 下面的这个监控方法可以写在BaseActivity 中

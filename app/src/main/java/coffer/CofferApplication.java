@@ -22,6 +22,7 @@ import java.io.File;
 
 import coffer.crashDemo.LogService;
 import coffer.util.CONSTANT;
+import xcrash.XCrash;
 
 import static coffer.util.CONSTANT.COFFER_TAG;
 
@@ -52,6 +53,8 @@ public class CofferApplication extends Application {
         // 初始化美团的Logan 日志系统
         initLog();
         VivoAdManager.getInstance().init(this,"619d45fa3d654b5d9222743873eea72d");
+
+        XCrash.init(this);
     }
 
     public static CofferApplication getInstance() {
