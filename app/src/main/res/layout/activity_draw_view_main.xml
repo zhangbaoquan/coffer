@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/illust_73383665_20190225_223000" />
+        android:src="@drawable/bilibili" />
 
 
 </RelativeLayout>
