@@ -22,6 +22,7 @@ import java.io.File;
 
 import coffer.crashDemo.LogService;
 import coffer.util.CONSTANT;
+import coffer.util.Util;
 import xcrash.XCrash;
 
 import static coffer.util.CONSTANT.COFFER_TAG;
@@ -65,7 +66,7 @@ public class CofferApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         instance = this;
-        Log.d(COFFER_TAG,"CofferApplication attachBaseContext ");
+        Log.d(COFFER_TAG,"CofferApplication attachBaseContext processName : "+ Util.getCurProcessName(base));
         Intent intent = new Intent(instance, LogService.class);
         intent.putExtra("pid", android.os.Process.myPid());
         instance.startService(intent);
