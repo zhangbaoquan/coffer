@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+}
+
+uploadArchives { //新增 ，因为Android Studio gradle 支持maven插件，所以可以添加此task
+    configuration = configurations.archives
+    repositories {
+        mavenDeployer {
+            repository(url: 'https://maven.columbus.heytapmobi.com/repository/ClientBrowser/') {
+                authentication(userName: 'cbuser', password: '88527e7341a54d89a7e7d4b52796c4aa')
+            }
+            pom.project {
+                version '1.1.0' //版本名称
+                artifactId 'test maven'  //和前面网站上填写的一样
+                groupId 'com.coffer.app'  //和前面网站上填写的一样
+                packaging 'aar' //填写aar
+                description 'Test' //更新描述
+            }
+        }
+    }
+}
