@@ -11,23 +11,17 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.PixelFormat;
 import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.RemoteException;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
+
 import com.dianping.logan.Logan;
 
-import java.lang.ref.WeakReference;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -39,6 +33,7 @@ import coffer.crashDemo.CrashCollectActivity;
 import coffer.javaDemo.JavaMainActivity;
 import coffer.jetpackDemo.JetpackMainDemo;
 import coffer.pluginDemo.PluginMainActivity;
+import coffer.util.APP;
 import coffer.util.CONSTANT;
 import coffer.zy.NewTestMainActivity;
 import networkDemo.NetWorkActivity;
@@ -48,44 +43,12 @@ import static android.content.Intent.ACTION_DEFAULT;
 
 public class MainActivity extends BaseActivity {
 
-    private WindowManager wm;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initView(){
         setContentView(R.layout.activity_main);
         Logan.w("onCreate",1);
         Log.i(CONSTANT.COFFER_TAG,"getFilesDir: "+getFilesDir());
-        wm = getWindowManager();
-        initView();
-
-        // deeplink 跳转
-        findViewById(R.id.b15).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                String url = "iqiyi://mobile/player?aid=239741901&tvid=14152064500&ftype=27&subtype=vivoqd_2843";
-//                String url = "ireader://com.chaozh.iReader/readbook?bookid=11591589";
-//                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%" +
-//                        "2Fzybook3%2Fapp%2Fapp.php%3Fca%3DChannel.Index%26pk%3Dqd%26key%3Dch_free%26a0%3Dbanner_oppo_sd_mfpd";
-//                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%" +
-//                        "2Fzyvr%2Frender%3Fid%3D10608%26a0%3Dpush_oppo_sd_wbhs&fromname=应用商店&flags=4&from=com.oppo.market";
-//                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%2Fzybook3%2Fapp%2" +
-//                        "Fapp.php%3Fca%3DChannel.Index%26pk%3Dqd%26key%3Dch_feature%26a0%3Dtoufang01s&fromname=浏览器&flags=4&" +
-//                        "from=com.heytap.browser";
-                String url = "ireaderplugin://com.coloros.browser/readbook?bookid=11006182";
-                Uri uri = Uri.parse(url);
-                Intent intent = new Intent(ACTION_DEFAULT, uri);
-                try {
-                    startActivity(intent);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        registerLifecycleCallbacks();
-    }
-
-    private void initView(){
         // 插件
         findViewById(R.id.b0).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +111,35 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void initData() {
+        // deeplink 跳转
+        findViewById(R.id.b15).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                String url = "iqiyi://mobile/player?aid=239741901&tvid=14152064500&ftype=27&subtype=vivoqd_2843";
+//                String url = "ireader://com.chaozh.iReader/readbook?bookid=11591589";
+//                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%" +
+//                        "2Fzybook3%2Fapp%2Fapp.php%3Fca%3DChannel.Index%26pk%3Dqd%26key%3Dch_free%26a0%3Dbanner_oppo_sd_mfpd";
+//                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%" +
+//                        "2Fzyvr%2Frender%3Fid%3D10608%26a0%3Dpush_oppo_sd_wbhs&fromname=应用商店&flags=4&from=com.oppo.market";
+//                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%2Fzybook3%2Fapp%2" +
+//                        "Fapp.php%3Fca%3DChannel.Index%26pk%3Dqd%26key%3Dch_feature%26a0%3Dtoufang01s&fromname=浏览器&flags=4&" +
+//                        "from=com.heytap.browser";
+                String url = "ireaderplugin://com.coloros.browser/readbook?bookid=11006182";
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(ACTION_DEFAULT, uri);
+                try {
+                    startActivity(intent);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        registerLifecycleCallbacks();
+//        addGlobalFloating();
     }
 
     private void registerLifecycleCallbacks(){
@@ -274,40 +266,12 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        addWindow();
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus){
-            addWindow();
-        }
     }
 
-    /**
-     * 新增一个Window，注意添加时机，必须要等activity的生命周期函数全部执行完毕之后，需要依附的View加载完成了才可以。
-     */
-    private void addWindow(){
-        Button btn_click= new Button(this);
-        btn_click .setText("浮窗");
-        WindowManager.LayoutParams mParams = new WindowManager.LayoutParams();
-        mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        mParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        mParams.format = PixelFormat.TRANSLUCENT;
-        mParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        //Flag参数表示window的属性，通过这些选项控制Window的显示特性：
-        //1.FLAG_NOT_FOCUSABLE:表示窗口不需要获取焦点，也不需要接收各种事件，这属性会同时启动FLAG_NOT_TOUCH_MODAL，最终事件会传递给下层的具体焦点的window
-        //2.FLAG_NOT_TOUCH_MODAL:系统会将当前window区域以外的单击事件传递给底层的Window，当前的Window区域以内的单机事件自己处理，这个标记很重要，一般来说都需要开启，否则其他windows无法接受到点击事件。
-        mParams.gravity = Gravity.CENTER;
-        mParams.token = getWindow().getDecorView().getWindowToken();
-        // 仅在当前Activity上显示
-        mParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_PANEL;
-        //emm..这个是Type参数。
-        mParams.x = 0;
-        mParams.y = 0;
-        wm.addView(btn_click, mParams);
 
-    }
 }

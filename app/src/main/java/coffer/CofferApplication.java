@@ -1,6 +1,8 @@
 package coffer;
 
+import android.app.ActivityManager;
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -19,6 +21,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.vivo.mobilead.manager.VivoAdManager;
 
 import java.io.File;
+import java.util.List;
 
 import coffer.crashDemo.LogService;
 import coffer.util.CONSTANT;
@@ -100,6 +103,23 @@ public class CofferApplication extends Application {
                 .build();
 
         Logan.init(config);
+    }
+
+    /**
+     * 应用是否进入后台
+     * @param context
+     * @return
+     */
+    public static boolean isAppGoToBackground(Context context) {
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+        if (!tasks.isEmpty()) {
+            ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

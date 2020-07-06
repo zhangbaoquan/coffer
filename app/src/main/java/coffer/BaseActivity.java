@@ -28,7 +28,7 @@ import java.util.List;
  * @RevisionTime：
  * @RevisionDescription：
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends BaseDefaultActivity {
 
     /**
      * 权限请求码
@@ -150,5 +150,31 @@ public abstract class BaseActivity extends AppCompatActivity {
             //权限已经都通过了，可以将程序继续打开了
             Toast.makeText(BaseActivity.this, "申请成功", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * 新增一个Window，注意添加时机，必须要等activity的生命周期函数全部执行完毕之后，需要依附的View加载完成了才可以。
+     */
+    private void addWindow(){
+//        Button btn_click= new Button(this);
+//        btn_click .setText("浮窗");
+//        WindowManager.LayoutParams mParams = new WindowManager.LayoutParams();
+//        mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//        mParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+//        mParams.format = PixelFormat.TRANSLUCENT;
+//        mParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+//                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+//        //Flag参数表示window的属性，通过这些选项控制Window的显示特性：
+//        //1.FLAG_NOT_FOCUSABLE:表示窗口不需要获取焦点，也不需要接收各种事件，这属性会同时启动FLAG_NOT_TOUCH_MODAL，最终事件会传递给下层的具体焦点的window
+//        //2.FLAG_NOT_TOUCH_MODAL:系统会将当前window区域以外的单击事件传递给底层的Window，当前的Window区域以内的单机事件自己处理，这个标记很重要，一般来说都需要开启，否则其他windows无法接受到点击事件。
+//        mParams.gravity = Gravity.CENTER;
+//        mParams.token = getWindow().getDecorView().getWindowToken();
+//        // 仅在当前Activity上显示
+//        mParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_PANEL;
+//        //emm..这个是Type参数。
+//        mParams.x = 0;
+//        mParams.y = 0;
+//        wm.addView(btn_click, mParams);
+
     }
 }

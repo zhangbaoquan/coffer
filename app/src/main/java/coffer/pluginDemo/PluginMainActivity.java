@@ -5,6 +5,7 @@ import android.view.View;
 
 import coffer.BaseDefaultActivity;
 import coffer.androidjatpack.R;
+import coffer.util.APP;
 
 /**
  * @author：张宝全
@@ -15,6 +16,7 @@ import coffer.androidjatpack.R;
  * @RevisionDescription：
  */
 public class PluginMainActivity extends BaseDefaultActivity {
+
 
     @Override
     public void initView() {
