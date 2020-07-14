@@ -1,14 +1,22 @@
 package coffer;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import coffer.util.APP;
 import coffer.util.global.ContactWindowUtil;
+import coffer.widget.GrayFrameLayout;
 
 /**
  * @author：张宝全
@@ -30,13 +38,49 @@ public abstract class BaseDefaultActivity extends AppCompatActivity {
         contactWindowUtil.setDialogListener(new ContactWindowUtil.ContactWindowListener() {
             @Override
             public void onDataCallBack(String str) {
-                Toast.makeText(BaseDefaultActivity.this,"啦啦",Toast.LENGTH_SHORT).show();
+                Toast.makeText(BaseDefaultActivity.this, "啦啦", Toast.LENGTH_SHORT).show();
             }
         });
         contactWindowUtil.showContactView();
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+        try {
+//            // 方案一：设置黑白模式
+//            if ("FrameLayout".equals(name)) {
+//                int count = attrs.getAttributeCount();
+//                for (int i = 0; i < count; i++) {
+//                    String attributeName = attrs.getAttributeName(i);
+//                    String attributeValue = attrs.getAttributeValue(i);
+//                    if (attributeName.equals("id")) {
+//                        int id = Integer.parseInt(attributeValue.substring(1));
+//                        String idVal = getResources().getResourceName(id);
+//                        if ("android:id/content".equals(idVal)) {
+//                            GrayFrameLayout grayFrameLayout = new GrayFrameLayout(context, attrs);
+////                            grayFrameLayout.setWindow(getWindow());
+//                            return grayFrameLayout;
+//                        }
+//                    }
+//                }
+//            }
+            // 方案二，直接设置DecorView的背景色
+            Paint paint = new Paint();
+            ColorMatrix colorMatrix = new ColorMatrix();
+            colorMatrix.setSaturation(0);
+            paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+            getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, paint);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return super.onCreateView(name, context, attrs);
+    }
+
     public abstract void initView();
+
     public abstract void initData();
 
     @Override

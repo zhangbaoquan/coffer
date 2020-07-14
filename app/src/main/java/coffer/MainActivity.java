@@ -128,7 +128,8 @@ public class MainActivity extends BaseActivity {
 //                String url = "ireader://com.oppo.reader/openurl?url=https%3A%2F%2Fah2.zhangyue.com%2Fzybook3%2Fapp%2" +
 //                        "Fapp.php%3Fca%3DChannel.Index%26pk%3Dqd%26key%3Dch_feature%26a0%3Dtoufang01s&fromname=浏览器&flags=4&" +
 //                        "from=com.heytap.browser";
-                String url = "ireaderplugin://com.coloros.browser/readbook?bookid=11006182";
+//                String url = "ireaderplugin://com.coloros.browser/readbook?bookid=11006182";
+                String url = "ireaderplugin://com.coloros.browser/maintab?nightmode=100&tabindex=1";
                 Uri uri = Uri.parse(url);
                 Intent intent = new Intent(ACTION_DEFAULT, uri);
                 try {
