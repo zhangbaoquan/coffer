@@ -65,12 +65,12 @@ public abstract class BaseDefaultActivity extends AppCompatActivity {
 //                    }
 //                }
 //            }
-            // 方案二，直接设置DecorView的背景色
-            Paint paint = new Paint();
-            ColorMatrix colorMatrix = new ColorMatrix();
-            colorMatrix.setSaturation(0);
-            paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
-            getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, paint);
+//            // 方案二，直接设置DecorView的背景色
+//            Paint paint = new Paint();
+//            ColorMatrix colorMatrix = new ColorMatrix();
+//            colorMatrix.setSaturation(0);
+//            paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+//            getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, paint);
 
 
         } catch (Exception e) {
