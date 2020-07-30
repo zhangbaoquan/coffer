@@ -1,6 +1,5 @@
-package coffer.animDemo;
+package coffer.androidDemo.animdemo;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -9,11 +8,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import coffer.BaseDefaultActivity;
 import coffer.androidjatpack.R;
 import coffer.util.AnimUtils;
-import coffer.util.Util;
 
 
 /**
@@ -24,7 +21,7 @@ import coffer.util.Util;
  * @RevisionTime：
  * @RevisionDescription：
  */
-public class AnimActivity extends AppCompatActivity {
+public class PropertyAnimActivity extends BaseDefaultActivity {
 
     private static final String TAG = "anim_demo";
     private TextView tv1;
@@ -42,15 +39,9 @@ public class AnimActivity extends AppCompatActivity {
     private Handler mHandler;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initView(){
         setContentView(R.layout.activity_translate_main);
         mParent = findViewById(R.id.parent);
-        initView();
-
-    }
-
-    private void initView(){
         // 改变View的宽度大小
         tv1 = findViewById(R.id.tv1);
         tv1.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +57,7 @@ public class AnimActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AnimUtils.animDemo2(tv2);
-                Util.setNavVisibility(false,AnimActivity.this);
+//                Util.setNavVisibility(false,AnimActivity.this);
             }
         });
 
@@ -76,7 +67,7 @@ public class AnimActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AnimUtils.animDemo3(tv3);
-                Util.setNavVisibility(true,AnimActivity.this);
+//                Util.setNavVisibility(true,AnimActivity.this);
             }
         });
 
@@ -158,7 +149,19 @@ public class AnimActivity extends AppCompatActivity {
     }
 
     @Override
+    public void initData() {
+
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    /**
+     * 从左侧显示一个弹窗
+     */
+    private void showLeftSideAnim(){
+
     }
 }

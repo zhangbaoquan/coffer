@@ -51,9 +51,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="coffer.animDemo.AnimActivity"
-            tools:ignore="LockedOrientationActivity"
-            android:screenOrientation="portrait"/>
         <activity android:name="coffer.javaDemo.reflectdemo.ReflectActivity" />
         <activity android:name="coffer.androidDemo.customViewDemo.DrawViewActiviy" />
         <activity android:name="coffer.javaDemo.fileDemo.FileActivity" />
@@ -94,6 +91,9 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name="networkDemo.OkHttpActivity"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="coffer.androidDemo.animdemo.FrameAnimActivity"
             tools:ignore="LockedOrientationActivity"
             android:screenOrientation="portrait"/>
 
@@ -140,6 +140,14 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity android:name="coffer.crashDemo.CrashCollectActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity android:name="coffer.androidDemo.animdemo.TweenAnimActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity android:name="coffer.androidDemo.animdemo.PropertyAnimActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 

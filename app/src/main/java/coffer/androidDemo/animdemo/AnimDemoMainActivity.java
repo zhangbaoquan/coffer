@@ -7,6 +7,9 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import coffer.androidDemo.animdemo.FrameAnimActivity;
+import coffer.androidDemo.animdemo.PropertyAnimActivity;
+import coffer.androidDemo.animdemo.TweenAnimActivity;
 import coffer.androidjatpack.R;
 
 /**
@@ -24,11 +27,29 @@ public class AnimDemoMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anim_main);
 
-        // 平移练习
+        // 属性动画
         findViewById(R.id.b1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AnimDemoMainActivity.this, coffer.animDemo.AnimActivity.class);
+                Intent intent = new Intent(AnimDemoMainActivity.this, PropertyAnimActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 逐帧动画
+        findViewById(R.id.b2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AnimDemoMainActivity.this, FrameAnimActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 补间动画
+        findViewById(R.id.b3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AnimDemoMainActivity.this, TweenAnimActivity.class);
                 startActivity(intent);
             }
         });
