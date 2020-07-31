@@ -1,167 +1,148 @@
 package coffer.androidDemo.animdemo;
 
-import android.os.Handler;
-import android.os.Message;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.view.animation.AnimationSet;
+import android.widget.ImageView;
 
 import coffer.BaseDefaultActivity;
 import coffer.androidjatpack.R;
-import coffer.util.AnimUtils;
-
+import coffer.util.CofferLog;
+import coffer.util.Util;
 
 /**
  * @author：张宝全
- * @date：2019-05-04
- * @Description： 平移动画
+ * @date：2020/7/31
+ * @Description： 属性动画 ，包含插值器的使用
  * @Reviser：
  * @RevisionTime：
  * @RevisionDescription：
  */
+
 public class PropertyAnimActivity extends BaseDefaultActivity {
+    private static final String TAG = "PropertyAnimActivity_tag";
 
-    private static final String TAG = "anim_demo";
-    private TextView tv1;
-    private TextView tv2;
-    private TextView tv3;
-    private TextView tv4;
-    private TextView tv5;
-    private TextView tv6;
-    private TextView tv7;
-    private TextView tv8;
-    private TextView tv9;
-
-    private LinearLayout mParent;
-
-    private Handler mHandler;
+    private ImageView mIv;
 
     @Override
-    public void initView(){
-        setContentView(R.layout.activity_translate_main);
-        mParent = findViewById(R.id.parent);
-        // 改变View的宽度大小
-        tv1 = findViewById(R.id.tv1);
-        tv1.setOnClickListener(new View.OnClickListener() {
+    public void initView() {
+        setContentView(R.layout.activity_property_anim_main);
+        mIv = findViewById(R.id.iv);
+        findViewById(R.id.bt1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimUtils.animDemo1(tv1);
+                changeHeight();
             }
         });
 
-        // View的透明度
-        tv2 = findViewById(R.id.tv2);
-        tv2.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.bt2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimUtils.animDemo2(tv2);
-//                Util.setNavVisibility(false,AnimActivity.this);
+                moveLeftSide();
             }
         });
 
-        // 组合动画
-        tv3 = findViewById(R.id.tv3);
-        tv3.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.bt3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimUtils.animDemo3(tv3);
-//                Util.setNavVisibility(true,AnimActivity.this);
+                animatorGroup();
             }
         });
 
-        // ViewPropertyAnimator
-        tv4 = findViewById(R.id.tv4);
-        tv4.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.bt4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimUtils.animDemo4(tv4);
+                useFastAnim();
             }
         });
-
-        // 组合动画2
-        tv5 = findViewById(R.id.tv5);
-        tv5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AnimUtils.animDemo5(tv5);
-            }
-        });
-
-        // 气泡动画
-        tv6 = findViewById(R.id.tv6);
-        tv6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AnimUtils.animDemo6(tv6);
-            }
-        });
-
-        // z
-        tv7 = findViewById(R.id.tv7);
-        tv7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AnimUtils.animDemo7(tv7);
-            }
-        });
-
-        tv8 = findViewById(R.id.tv8);
-        final Button linearLayout = new Button(this);
-        linearLayout.setText("锚点测试");
-        linearLayout.setLayoutParams(new ViewGroup.LayoutParams(200,100));
-        linearLayout.setBackgroundColor(getResources().getColor(R.color.blue));
-
-        linearLayout.setX(100);
-        linearLayout.setY(100);
-        mParent.addView(linearLayout);
-        tv8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AnimUtils.animDemo8(linearLayout);
-            }
-        });
-
-        tv9 = findViewById(R.id.tv9);
-        tv9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AnimUtils.fadeOut(tv9);
-            }
-        });
-
-        //TODO 模拟内存泄露
-        mHandler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-
-            }
-        };
-
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mHandler.sendEmptyMessage(1);
-            }
-        },10000);
-    }
-
-    @Override
-    public void initData() {
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     /**
-     * 从左侧显示一个弹窗
+     * 改变View 的高度
      */
-    private void showLeftSideAnim(){
+    private void changeHeight(){
+        // 方式一： 使用ValueAnimator
+
+        // 初始高度为0，结束高度为100dp，ofFloat 内置了Float型估值器
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(0,
+                Util.dipToPixel(this,100));
+        valueAnimator.setDuration(2000);
+        valueAnimator.setInterpolator(new DecelerateAccelerateInterpolator());
+        // 将属性值手动赋值给对象的属性
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int currentValue = (int) animation.getAnimatedValue();
+                // 每次值变化，手动赋值给View的属性
+                mIv.getLayoutParams().height = currentValue;
+                mIv.requestLayout();
+            }
+        });
+        valueAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                // 仅监听动画的开始
+            }
+        });
+        valueAnimator.start();
+    }
+
+    /**
+     * 从左侧飞入
+     */
+    private void moveLeftSide(){
+        // 方式二，使用
+        mIv.setX(-Util.dipToPixel(this,100));
+        CofferLog.D(TAG,"getTranslationX ： "+mIv.getTranslationX());
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mIv,"translationX",
+                mIv.getTranslationX(),Util.dipToPixel(this,100));
+        objectAnimator.setDuration(3000);
+        objectAnimator.start();
+    }
+
+    /**
+     * 组合动画
+     */
+    private void animatorGroup(){
+        AnimatorSet animationSet = new AnimatorSet();
+
+//        ObjectAnimator alpha = ObjectAnimator.ofFloat(mIv,"alpha",0,1);
+//        ObjectAnimator rotate = ObjectAnimator.ofFloat(mIv,"rotation",0,360);
+//        ObjectAnimator translate = ObjectAnimator.ofFloat(mIv,"translationX",mIv.getTranslationX(),500);
+        //  这一句设置的意思是动画先执行透明，再执行旋转
+//        animationSet.playSequentially(alpha,rotate);
+
+        // 下面透明、旋转、平移一起执行
+//        animationSet.play(alpha).with(rotate).with(translate);
+        // 一起执行还有一种办法
+        PropertyValuesHolder[] propertyValuesHolder = new PropertyValuesHolder[]{
+                PropertyValuesHolder.ofFloat("alpha",0f,1f),
+                PropertyValuesHolder.ofFloat("rotation",0,360),
+                PropertyValuesHolder.ofFloat("translationX",mIv.getTranslationX(),500)
+        };
+        ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(mIv,propertyValuesHolder);
+        animationSet.play(objectAnimator);
+
+        animationSet.setDuration(3000);
+        animationSet.start();
+    }
+
+    /**
+     * 使用快捷方式写动画
+     */
+    private void useFastAnim(){
+        mIv.animate().setDuration(100).translationX(-Util.dipToPixel(this,100)).start();
+    }
+
+
+    @Override
+    public void initData() {
 
     }
 }

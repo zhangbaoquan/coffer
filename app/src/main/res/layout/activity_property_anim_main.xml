@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_above="@+id/v"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/haruhi" />
+
+    <LinearLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_gradient"
+            android:text="动画1"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/bt2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_gradient"
+            android:text="动画2"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/bt3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_gradient"
+            android:text="动画3"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/bt4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_gradient"
+            android:text="动画4"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+</RelativeLayout>

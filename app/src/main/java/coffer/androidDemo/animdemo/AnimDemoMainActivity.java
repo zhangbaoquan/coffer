@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import coffer.androidDemo.animdemo.FrameAnimActivity;
+import coffer.androidDemo.animdemo.AnimTestActivity;
 import coffer.androidDemo.animdemo.PropertyAnimActivity;
 import coffer.androidDemo.animdemo.TweenAnimActivity;
 import coffer.androidjatpack.R;
@@ -50,6 +51,15 @@ public class AnimDemoMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AnimDemoMainActivity.this, TweenAnimActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 动画demo
+        findViewById(R.id.b3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AnimDemoMainActivity.this, AnimTestActivity.class);
                 startActivity(intent);
             }
         });
