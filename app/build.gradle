@@ -109,6 +109,7 @@ dependencies {
     implementation 'com.dianping.android.sdk:logan:1.2.2'
 
     implementation 'com.iqiyi.xcrash:xcrash-android-lib:2.4.9'
+    implementation 'com.blankj:utilcodex:1.28.4'
 
 }
 

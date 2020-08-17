@@ -21,6 +21,8 @@ public class APP {
     @SuppressLint("StaticFieldLeak")
     private static Activity mCurrActivity = null;
 
+    private static boolean mIsCanScrollToRight = true;
+
     /**
      * 设置当前activity和handler
      */
@@ -36,6 +38,14 @@ public class APP {
      */
     public static Activity getCurrActivity() {
         return mCurrActivity;
+    }
+
+    public static void setEnableScrollToRight(boolean enable) {
+        mIsCanScrollToRight = enable;
+    }
+
+    public static boolean getEnableScrollToRigh() {
+        return mIsCanScrollToRight;
     }
 
 }

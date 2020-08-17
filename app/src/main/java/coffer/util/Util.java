@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
@@ -128,6 +129,32 @@ public class Util {
             }
         }
         return null;
+    }
+
+    /**
+     * 计算两个点之间的距离
+     *
+     * @param startPoint
+     * @param endPoint
+     * @return
+     */
+    public static int calculateA2B(Point startPoint, Point endPoint) {
+        int xDist = startPoint.x - endPoint.x;
+        int yDist = startPoint.y - endPoint.y;
+        return (int) Math.sqrt(xDist * xDist + yDist * yDist);
+    }
+
+    /**
+     * 计算两个点相对于屏幕坐标的夹角
+     *
+     * @param startPoint
+     * @param endPoint
+     * @return
+     */
+    public static float calculateGradient(Point startPoint, Point endPoint) {
+        int xDist = startPoint.x - endPoint.x;
+        int yDist = startPoint.y - endPoint.y;
+        return (float) xDist / (float) yDist;
     }
 
 }

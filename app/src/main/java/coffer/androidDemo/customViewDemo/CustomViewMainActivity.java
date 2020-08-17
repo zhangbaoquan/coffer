@@ -123,6 +123,15 @@ public class CustomViewMainActivity extends AppCompatActivity {
             }
         });
 
+        // 滑动事件练习
+        findViewById(R.id.b11).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomViewMainActivity.this, ScrollContainerActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
