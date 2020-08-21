@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="schemes">
+        <item>书架</item>
+        <item>书斋 </item>
+        <item>圈子 </item>
+        <item>漫画 </item>
+        <item>书籍详情页</item>
+        <item>书籍阅读页</item>
+        <item>指定搜索</item>
+        <item>个人主页</item>
+        <item>书城指定频道</item>
+    </string-array>
+</resources>
