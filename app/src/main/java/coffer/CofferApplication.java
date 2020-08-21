@@ -18,6 +18,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.tencent.mmkv.MMKV;
 import com.vivo.mobilead.manager.VivoAdManager;
 
 import java.io.File;
@@ -59,6 +60,7 @@ public class CofferApplication extends Application {
         VivoAdManager.getInstance().init(this,"619d45fa3d654b5d9222743873eea72d");
 
         XCrash.init(this);
+        MMKV.initialize(this);
     }
 
     public static CofferApplication getInstance() {

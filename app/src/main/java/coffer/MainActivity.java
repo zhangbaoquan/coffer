@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.dianping.logan.Logan;
+import com.tencent.mmkv.MMKV;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -35,6 +36,7 @@ import coffer.jetpackDemo.JetpackMainDemo;
 import coffer.pluginDemo.PluginMainActivity;
 import coffer.util.APP;
 import coffer.util.CONSTANT;
+import coffer.util.CofferLog;
 import coffer.zy.NewTestMainActivity;
 import networkDemo.NetWorkActivity;
 import networkDemo.okhttpDemo.JobSchedulerService;
@@ -140,6 +142,7 @@ public class MainActivity extends BaseActivity {
             }
         });
         registerLifecycleCallbacks();
+        useMkv();
 //        addGlobalFloating();
     }
 
@@ -275,4 +278,23 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    /**
+     *  使用MKV 存储小数据，替换SharedPreferences
+     */
+    private void useMkv(){
+        MMKV mmkv = MMKV.defaultMMKV();
+        // 不用再如SharedPreferences一样调用apply或commit：非常方便
+        mmkv.encode("bool",true);
+        mmkv.encode("int",1);
+
+        CofferLog.I("lalal","info: "+mmkv.decodeBool("bool"));
+        CofferLog.I("lalal","info: "+mmkv.decodeInt("int"));
+
+        // 删除数据
+        mmkv.clear();
+
+        // 查询数据是否存在
+        boolean hasBool = mmkv.containsKey("bool");
+
+    }
 }
