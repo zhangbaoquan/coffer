@@ -14,12 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.blankj.utilcode.util.ScreenUtils;
+
 import java.util.ArrayList;
 
 import coffer.androidjatpack.R;
 import coffer.common.ComRecycleViewAdapter;
 import coffer.common.ComRecycleViewHolder;
 import coffer.util.CofferLog;
+import coffer.util.Util;
 
 /**
  * @author：张宝全
@@ -64,7 +67,8 @@ public class ContainerView1 extends RelativeLayout {
     }
 
     private void initView(Context context) {
-        mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+//        mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+        mTouchSlop = ScreenUtils.getAppScreenWidth() / 3;
         setBackground(context.getResources().getDrawable(R.drawable.bg1));
         initData();
         mRecyclerView = new RecyclerView(context);
@@ -142,12 +146,20 @@ public class ContainerView1 extends RelativeLayout {
                 int x = (int) event.getRawX();
                 int deltaX = x - mLastX;
                 CofferLog.I("col", "deltaX : " + deltaX);
-                if (deltaX > mTouchSlop && deltaX > 0) {
+                if (deltaX >= 0) {
                     setTranslationX(deltaX);
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                hide();
+                int x1 = (int) event.getRawX();
+                int deltaX1 = x1 - mLastX;
+                // 滑动距离超过屏幕宽度的一半，则hide
+                if (deltaX1 > mTouchSlop){
+                    hide();
+                }else {
+                    rebound();
+                }
+
                 break;
             default:
                 break;
@@ -174,6 +186,25 @@ public class ContainerView1 extends RelativeLayout {
         if (scrollX != 0) {
             ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this,
                     "translationX", scrollX, 1080);
+            objectAnimator.setDuration(200);
+            objectAnimator.start();
+            objectAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                }
+            });
+        }
+    }
+
+    /**
+     * 滑动距离小于设置的最小距离，则回弹
+     */
+    private void rebound(){
+        int scrollX = (int) getTranslationX();
+        if (scrollX != 0) {
+            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this,
+                    "translationX", scrollX, 0);
             objectAnimator.setDuration(200);
             objectAnimator.start();
             objectAnimator.addListener(new AnimatorListenerAdapter() {

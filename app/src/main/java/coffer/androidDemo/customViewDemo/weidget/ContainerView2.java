@@ -13,24 +13,12 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
-import android.widget.TextView;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
-
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
 import coffer.androidjatpack.R;
-import coffer.common.ComRecycleViewAdapter;
-import coffer.common.ComRecycleViewHolder;
-import coffer.jetpackDemo.adapter.ViewPagerFragmentStateAdapter;
 import coffer.util.APP;
 import coffer.util.CofferLog;
 import coffer.util.Util;
@@ -53,10 +41,6 @@ public class ContainerView2 extends RelativeLayout {
     protected static final int TOUCH_STATE_SCROLLING = 1;
     protected int mTouchState;
 
-
-    private int mInterceptLastX;
-    private int mInterceptLastY;
-
     private int mLastX;
 
     /**
@@ -73,7 +57,6 @@ public class ContainerView2 extends RelativeLayout {
     private Point mMovePoint;
 
     private boolean mHLock = false;
-    private boolean mVLock = false;
 
     public ContainerView2(Context context) {
         super(context);
@@ -223,7 +206,6 @@ public class ContainerView2 extends RelativeLayout {
         int y = (int) ev.getY();
         if(ev.getAction() == MotionEvent.ACTION_DOWN){
             mHLock = false;
-            mVLock = false;
             mStartPoint.x = x;
             mStartPoint.y = y;
             mLastX = x;
@@ -278,7 +260,6 @@ public class ContainerView2 extends RelativeLayout {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             mHLock = false;
-            mVLock = false;
         }
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:

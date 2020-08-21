@@ -29,7 +29,10 @@ public class ScrollContainerActivity extends AppCompatActivity {
         final FrameLayout frameLayout = findViewById(R.id.body);
         final ContainerView1 containerView1 = new ContainerView1(ScrollContainerActivity.this);
         containerView1.setX(1080);
+//        final ContainerView2 containerView2 = new ContainerView2(ScrollContainerActivity.this);
+//        containerView2.setX(1080);
         frameLayout.addView(containerView1);
+//        frameLayout.addView(containerView2);
         findViewById(R.id.bt1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +42,7 @@ public class ScrollContainerActivity extends AppCompatActivity {
         findViewById(R.id.bt2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                containerView2.show();
                 frameLayout.addView(new ContainerView2(ScrollContainerActivity.this));
             }
         });
