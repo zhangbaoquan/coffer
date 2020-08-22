@@ -26,6 +26,7 @@ import java.util.List;
 
 import coffer.crashDemo.LogService;
 import coffer.util.CONSTANT;
+import coffer.util.HookUtils;
 import coffer.util.Util;
 import xcrash.XCrash;
 
@@ -61,6 +62,7 @@ public class CofferApplication extends Application {
 
         XCrash.init(this);
         MMKV.initialize(this);
+        HookUtils.hookInstrumentation();
     }
 
     public static CofferApplication getInstance() {
