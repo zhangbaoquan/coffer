@@ -9,6 +9,7 @@ import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.animation.AnimationSet;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import coffer.BaseDefaultActivity;
 import coffer.androidjatpack.R;
@@ -40,6 +41,13 @@ public class PropertyAnimActivity extends BaseDefaultActivity {
             }
         });
 
+        mIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(PropertyAnimActivity.this,"啦啦",Toast.LENGTH_SHORT).show();
+            }
+        });
+
         findViewById(R.id.bt2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +66,13 @@ public class PropertyAnimActivity extends BaseDefaultActivity {
             @Override
             public void onClick(View v) {
                 useFastAnim();
+            }
+        });
+
+        findViewById(R.id.bt5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeScale();
             }
         });
     }
@@ -91,6 +106,18 @@ public class PropertyAnimActivity extends BaseDefaultActivity {
             }
         });
         valueAnimator.start();
+    }
+
+    /**
+     * 改变View 缩放
+     */
+    private void changeScale(){
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mIv,"scaleX",
+                1,0.7f);
+        mIv.setPivotX(0);
+        mIv.setPivotY(0);
+        objectAnimator.setDuration(3000);
+        objectAnimator.start();
     }
 
     /**

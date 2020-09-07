@@ -56,7 +56,7 @@ public class AnimDemoMainActivity extends AppCompatActivity {
         });
 
         // 动画demo
-        findViewById(R.id.b3).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.b4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AnimDemoMainActivity.this, AnimTestActivity.class);
