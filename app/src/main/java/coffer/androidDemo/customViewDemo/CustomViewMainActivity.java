@@ -132,6 +132,14 @@ public class CustomViewMainActivity extends AppCompatActivity {
             }
         });
 
+        // 绘制练习2
+        findViewById(R.id.b12).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomViewMainActivity.this, DrawViewActiviy.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
