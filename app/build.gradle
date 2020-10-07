@@ -115,10 +115,9 @@ dependencies {
 }
 
 task printTest{
-    def name = 'coffer'
-    println "my name : ${name}"
-    println "工程名 ： "+project.name
-    println "工程路径 ： "+name.getClass().name
+//    def name = 'coffer'
+//    println "my name : ${name}"
+//    println "工程名 ： "+project.name
 
 //    def map = ['width':'1080','height':'1920']
 //    println map['width']
