@@ -7,7 +7,7 @@ import coffer.androidjatpack.BuildConfig;
 /**
  * @author：张宝全
  * @date：2020/6/2
- * @Description：
+ * @Description：日志
  * @Reviser：
  * @RevisionTime：
  * @RevisionDescription：
