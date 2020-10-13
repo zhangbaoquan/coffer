@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import coffer.androidDemo.customViewDemo.weidget.AirXfermodeCircleView;
 import coffer.androidjatpack.R;
 import coffer.widget.BannerContentLayout;
 import coffer.widget.DrawGraphView;
@@ -21,7 +22,7 @@ import coffer.widget.DrawGraphView;
 /**
  * @author：张宝全
  * @date：2019-06-08
- * @Description： 仿头条评论动画
+ * @Description：
  * @Reviser：
  * @RevisionTime：
  * @RevisionDescription：
@@ -31,12 +32,16 @@ public class DrawViewActiviy extends AppCompatActivity {
 
     private BannerContentLayout mBanner;
 
+    AirXfermodeCircleView view;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw_view_main);
         mBanner = findViewById(R.id.banner);
         mDrawGraphView = findViewById(R.id.drawView);
+        view = findViewById(R.id.circleView);
+        view.setImageDrawable(getResources().getDrawable(R.drawable.haruhi));
         createBannerContentView();
 
 
@@ -64,7 +69,6 @@ public class DrawViewActiviy extends AppCompatActivity {
         ImageView ivAd = adView.findViewById(R.id.iv_ad);
         TextView tvTitle = adView.findViewById(R.id.tv_title);
         TextView tvDesc = adView.findViewById(R.id.tv_desc);
-        TextView tvBtn = adView.findViewById(R.id.tv_btn);
 
         body.setOnClickListener(new View.OnClickListener() {
             @Override
