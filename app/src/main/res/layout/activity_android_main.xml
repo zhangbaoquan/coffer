@@ -44,6 +44,16 @@
             android:text="消息机制"
             android:textColor="@color/white" />
 
+        <Button
+            android:id="@+id/b4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dk_dp_10"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_gradient"
+            android:text="View学习1"
+            android:textColor="@color/white" />
+
     </LinearLayout>
 
 </ScrollView>

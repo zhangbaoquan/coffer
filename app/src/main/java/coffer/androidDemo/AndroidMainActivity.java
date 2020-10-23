@@ -6,6 +6,7 @@ import android.view.View;
 import coffer.BaseDefaultActivity;
 import coffer.androidDemo.customViewDemo.CustomViewMainActivity;
 import coffer.androidDemo.messageDemo.MessageTestActivity;
+import coffer.androidDemo.viewDemo.ViewDemoActivity;
 import coffer.androidjatpack.R;
 
 /**
@@ -44,6 +45,15 @@ public class AndroidMainActivity extends BaseDefaultActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AndroidMainActivity.this, MessageTestActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 消息机制
+        findViewById(R.id.b4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AndroidMainActivity.this, ViewDemoActivity.class);
                 startActivity(intent);
             }
         });

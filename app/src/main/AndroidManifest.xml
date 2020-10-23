@@ -178,6 +178,13 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
+        <activity android:name="coffer.androidDemo.customViewDemo.DrawViewActiviy2"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity android:name="coffer.androidDemo.viewDemo.ViewDemoActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
 
 
 

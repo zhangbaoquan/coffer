@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
@@ -40,6 +43,11 @@ public class Util {
                 r.getDisplayMetrics()) + 1);
     }
 
+    public static int spToPixel(Context context, int sp) {
+        return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp,
+                context.getResources().getDisplayMetrics()) + 0.5f);
+    }
+
     public static void setNavVisibility(final boolean visible, Activity activity) {
         int newVis = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -56,7 +64,7 @@ public class Util {
 //                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY; //View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                     | 4096; //View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             activity.getWindow().getDecorView().setSystemUiVisibility(newVis);
-        }else{
+        } else {
             activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
             activity.getWindow().getDecorView().setSystemUiVisibility(newVis);
         }
@@ -92,9 +100,10 @@ public class Util {
 
     /**
      * 将颜色的十进制转换成RGB 数组
+     *
      * @return
      */
-    public static int[] colorsConvertToRgb(int color){
+    public static int[] colorsConvertToRgb(int color) {
         int rgb[] = new int[3];
 
         int b = color & 0xff;
@@ -157,4 +166,8 @@ public class Util {
         return (float) xDist / (float) yDist;
     }
 
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        BitmapDrawable bd = (BitmapDrawable) drawable;
+        return bd.getBitmap();
+    }
 }

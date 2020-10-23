@@ -136,7 +136,7 @@ public class CustomViewMainActivity extends AppCompatActivity {
         findViewById(R.id.b12).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomViewMainActivity.this, DrawViewActiviy.class);
+                Intent intent = new Intent(CustomViewMainActivity.this, DrawViewActiviy2.class);
                 startActivity(intent);
             }
         });

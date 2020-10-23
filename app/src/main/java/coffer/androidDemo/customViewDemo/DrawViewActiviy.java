@@ -40,8 +40,6 @@ public class DrawViewActiviy extends AppCompatActivity {
         setContentView(R.layout.activity_draw_view_main);
         mBanner = findViewById(R.id.banner);
         mDrawGraphView = findViewById(R.id.drawView);
-        view = findViewById(R.id.circleView);
-        view.setImageDrawable(getResources().getDrawable(R.drawable.haruhi));
         createBannerContentView();
 
 
