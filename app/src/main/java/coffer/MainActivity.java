@@ -140,142 +140,8 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
-        registerLifecycleCallbacks();
         useMkv();
-//        addGlobalFloating();
     }
-
-    private void registerLifecycleCallbacks(){
-        AtomicInteger mCount = new AtomicInteger();
-        Log.e(CONSTANT.COFFER_TAG, "mCount : " + mCount.toString());
-        // 下面的这个监控方法可以写在BaseActivity 中
-        getApplication().registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-            @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-
-            }
-
-            @Override
-            public void onActivityStarted(Activity activity) {
-
-            }
-
-            @Override
-            public void onActivityResumed(Activity activity) {
-                // 在前台
-            }
-
-            @Override
-            public void onActivityPaused(Activity activity) {
-                // 在后台
-            }
-
-            @Override
-            public void onActivityStopped(Activity activity) {
-
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-
-            }
-
-            @Override
-            public void onActivityDestroyed(Activity activity) {
-
-            }
-        });
-        // 创建一个定时任务
-        Executors.newScheduledThreadPool(1).schedule(new Runnable() {
-            @Override
-            public void run() {
-                // 统计30s之间消耗的流量
-                long netUse = getNetStats(System.currentTimeMillis() - 30 * 1000, System.currentTimeMillis());
-                // 判断当前是前台还是后台
-            }
-        }, 30, TimeUnit.SECONDS);
-    }
-
-    /**
-     * 获取当前的网络状态，监控流量，以WIFI为例这里面的参数，可以配置在CPS那，这样可以从服务端那配置
-     *
-     * @param startTime
-     * @param endTime
-     */
-    private long getNetStats(long startTime, long endTime) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return 0;
-        }
-        // 接收
-        long netDataRx = 0;
-        // 发送
-        long netDataTx = 0;
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    Activity#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for Activity#requestPermissions for more details.
-            return 0;
-        }
-        String subId = telephonyManager.getSubscriberId();
-        NetworkStatsManager manager = (NetworkStatsManager) getSystemService(Context.NETWORK_STATS_SERVICE);
-        NetworkStats networkStats = null;
-        NetworkStats.Bucket bucket = new NetworkStats.Bucket();
-        try {
-            networkStats = manager.querySummary(NetworkCapabilities.TRANSPORT_WIFI, subId, startTime, endTime);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        while (networkStats.hasNextBucket()) {
-            networkStats.getNextBucket(bucket);
-            int uid = bucket.getUid();
-            // 最好先判断下当前消耗的流量是自己APP的，可以根据UID 来判断（根据包名来获取UID），然后对比当前的UID和uid是否相同
-
-            netDataRx += bucket.getRxBytes();
-            netDataTx += bucket.getTxBytes();
-        }
-        return netDataRx + netDataTx;
-
-    }
-
-    private void startJobScheduler(){
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
-            JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
-            JobInfo.Builder builder = new JobInfo.Builder(1,new ComponentName(getPackageName(),
-                    JobSchedulerService.class.getName()));
-            // 环境在充电且WIFI下
-            builder.setRequiresCharging(true)
-                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED );
-            jobScheduler.schedule(builder.build());
-
-        }
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-    }
-
 
     /**
      *  使用MKV 存储小数据，替换SharedPreferences
@@ -285,15 +151,11 @@ public class MainActivity extends BaseActivity {
         // 不用再如SharedPreferences一样调用apply或commit：非常方便
         mmkv.encode("bool",true);
         mmkv.encode("int",1);
-
         CofferLog.I("lalal","info: "+mmkv.decodeBool("bool"));
         CofferLog.I("lalal","info: "+mmkv.decodeInt("int"));
-
         // 删除数据
         mmkv.clear();
-
         // 查询数据是否存在
         boolean hasBool = mmkv.containsKey("bool");
-
     }
 }
