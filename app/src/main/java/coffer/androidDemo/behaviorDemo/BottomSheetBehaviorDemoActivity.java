@@ -1,4 +1,4 @@
-package coffer.androidDemo.viewDemo;
+package coffer.androidDemo.behaviorDemo;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -30,7 +30,7 @@ import coffer.util.Util;
  * @RevisionTime：
  * @RevisionDescription：
  */
-public class ViewDemoActivity extends BaseDefaultActivity {
+public class BottomSheetBehaviorDemoActivity extends BaseDefaultActivity {
 
     private static final String TAG = "ViewDemoActivity_tag";
     SimpleStringRecyclerViewAdapter simpleStringRecyclerViewAdapter = new SimpleStringRecyclerViewAdapter(this);
@@ -94,7 +94,7 @@ public class ViewDemoActivity extends BaseDefaultActivity {
             @Override
             public void onItemClick(int pos) {
                 behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                Toast.makeText(ViewDemoActivity.this, "pos--->" + pos, Toast.LENGTH_LONG).show();
+                Toast.makeText(BottomSheetBehaviorDemoActivity.this, "pos--->" + pos, Toast.LENGTH_LONG).show();
             }
         });
         recyclerView.setAdapter(simpleStringRecyclerViewAdapter);
@@ -159,7 +159,7 @@ public class ViewDemoActivity extends BaseDefaultActivity {
             @Override
             public void onItemClick(int pos) {
                 dialog.dismiss();
-                Toast.makeText(ViewDemoActivity.this, "pos--->" + pos, Toast.LENGTH_LONG).show();
+                Toast.makeText(BottomSheetBehaviorDemoActivity.this, "pos--->" + pos, Toast.LENGTH_LONG).show();
             }
         });
         recyclerView.setAdapter(adapter);

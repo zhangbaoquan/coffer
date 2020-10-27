@@ -51,7 +51,7 @@
             android:layout_marginLeft="@dimen/dk_dp_10"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_gradient"
-            android:text="View学习1"
+            android:text="Bottom_Sheet_Behavior"
             android:textColor="@color/white" />
 
     </LinearLayout>

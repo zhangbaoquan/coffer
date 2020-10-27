@@ -1,4 +1,4 @@
-package coffer.androidDemo;
+package coffer.androidDemo.behavior;
 
 import android.content.Intent;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.view.View;
 import coffer.BaseDefaultActivity;
 import coffer.androidDemo.customViewDemo.CustomViewMainActivity;
 import coffer.androidDemo.messageDemo.MessageTestActivity;
-import coffer.androidDemo.viewDemo.ViewDemoActivity;
+import coffer.androidDemo.behaviorDemo.BottomSheetBehaviorDemoActivity;
 import coffer.androidjatpack.R;
 
 /**
@@ -49,11 +49,11 @@ public class AndroidMainActivity extends BaseDefaultActivity {
             }
         });
 
-        // 消息机制
+        // BottomSheetBehavior
         findViewById(R.id.b4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AndroidMainActivity.this, ViewDemoActivity.class);
+                Intent intent = new Intent(AndroidMainActivity.this, BottomSheetBehaviorDemoActivity.class);
                 startActivity(intent);
             }
         });

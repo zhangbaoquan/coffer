@@ -28,13 +28,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import coffer.BaseActivity;
-import coffer.androidDemo.AndroidMainActivity;
+import coffer.androidDemo.behavior.AndroidMainActivity;
 import coffer.androidjatpack.R;
 import coffer.crashDemo.CrashCollectActivity;
 import coffer.javaDemo.JavaMainActivity;
 import coffer.jetpackDemo.JetpackMainDemo;
 import coffer.pluginDemo.PluginMainActivity;
-import coffer.util.APP;
 import coffer.util.CONSTANT;
 import coffer.util.CofferLog;
 import coffer.zy.NewTestMainActivity;
