@@ -13,6 +13,7 @@ import coffer.androidjatpack.BuildConfig;
 import coffer.androidjatpack.R;
 import coffer.provider.FileShareProvider;
 import coffer.util.CONSTANT;
+import xcrash.XCrash;
 
 /**
  * @author：张宝全
@@ -68,5 +69,61 @@ public class CrashCollectActivity extends BaseDefaultActivity {
     @Override
     public void initData() {
 
+    }
+
+    public void testNativeCrashInMainThread_onClick(View view) {
+        XCrash.testNativeCrash(false);
+    }
+
+    public void testNativeCrashInAnotherJavaThread_onClick(View view) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                XCrash.testNativeCrash(false);
+            }
+        }, "java_thread_with_a_very_long_name").start();
+    }
+
+    public void testNativeCrashInAnotherNativeThread_onClick(View view) {
+        XCrash.testNativeCrash(true);
+    }
+
+    public void testNativeCrashInAnotherActivity_onClick(View view) {
+        startActivity(new Intent(this, TestCrashActivity.class)
+                .putExtra("type", "native"));
+    }
+
+    public void testNativeCrashInAnotherProcess_onClick(View view) {
+        startService(new Intent(this, TestService.class)
+                .putExtra("type", "native"));
+    }
+
+    public void testJavaCrashInMainThread_onClick(View view) {
+//        XCrash.testJavaCrash(false);
+        TextView textView = null;
+        textView.setText("lala");
+
+    }
+
+    public void testJavaCrashInAnotherThread_onClick(View view) {
+        XCrash.testJavaCrash(true);
+    }
+
+    public void testJavaCrashInAnotherActivity_onClick(View view) {
+        startActivity(new Intent(this,
+                TestCrashActivity.class).putExtra("type", "java"));
+    }
+
+    public void testJavaCrashInAnotherProcess_onClick(View view) {
+        startService(new Intent(this,
+                TestService.class).putExtra("type", "java"));
+    }
+    public void testAnrInput_onClick(View view) {
+        while (true) {
+            try {
+                Thread.sleep(1000);
+            } catch (Exception ignored) {
+            }
+        }
     }
 }

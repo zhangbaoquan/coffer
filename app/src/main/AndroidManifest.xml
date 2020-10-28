@@ -185,8 +185,12 @@
         <activity android:name="coffer.androidDemo.behaviorDemo.BottomSheetBehaviorDemoActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+        
+        <activity android:name="coffer.crashDemo.TestCrashActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
 
-
+        <service android:name="coffer.crashDemo.TestService"/>
 
 
 

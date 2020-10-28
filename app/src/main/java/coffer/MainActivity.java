@@ -1,32 +1,11 @@
 package main.java.coffer;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.Application;
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.app.usage.NetworkStats;
-import android.app.usage.NetworkStatsManager;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.NetworkCapabilities;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.RemoteException;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
-
 import com.dianping.logan.Logan;
 import com.tencent.mmkv.MMKV;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import coffer.BaseActivity;
 import coffer.androidDemo.behavior.AndroidMainActivity;
 import coffer.androidjatpack.R;
@@ -38,12 +17,9 @@ import coffer.util.CONSTANT;
 import coffer.util.CofferLog;
 import coffer.zy.NewTestMainActivity;
 import networkDemo.NetWorkActivity;
-import networkDemo.okhttpDemo.JobSchedulerService;
-
 import static android.content.Intent.ACTION_DEFAULT;
 
 public class MainActivity extends BaseActivity {
-
 
     @Override
     public void initView(){
