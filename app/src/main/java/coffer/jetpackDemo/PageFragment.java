@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,9 @@ public class PageFragment extends Fragment {
 
     private static final String COLORS = "colors";
     private static final String POSITION = "position";
+
+    private final String url = "http://book.img.ireader.com/idc_1/f_webp/7088d8ce/group61/M00/7E/2D/" +
+            "CmQUOF-hQziEV4ZOAAAAAGYSrdQ837047424.jpg?v=uX13TMi3&t=CmQUOF-hQzg.";
 
     public static PageFragment newInstance(List<Integer> colors,int position){
 
@@ -62,7 +68,10 @@ public class PageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         RelativeLayout container = view.findViewById(R.id.container);
         TextView tvTitle = view.findViewById(R.id.tvTitle);
+        ImageView iv = view.findViewById(R.id.iv);
         container.setBackgroundResource(mColors.get(mPosition));
         tvTitle.setText("Item " + mPosition);
+        Glide.with(this).load(url).into(iv);
+//        Glide.with()
     }
 }

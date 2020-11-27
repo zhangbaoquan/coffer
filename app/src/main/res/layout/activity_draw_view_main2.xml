@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/status_bar_night_mode"
     tools:context="main.java.coffer.MainActivity">
 
     <coffer.androidDemo.customViewDemo.weidget.XmodeView
@@ -27,6 +28,16 @@
         android:layout_below="@+id/circleView"
         android:layout_centerHorizontal="true"
         />
+
+    <coffer.androidDemo.customViewDemo.weidget.NoRequestLayoutSeekBar
+        android:layout_below="@+id/circle_iv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:thumb="@null"
+        android:background="@drawable/audio_seek_bar_background"
+        android:progressDrawable="@drawable/audio_play_control_seek_style"
+        android:layout_height="wrap_content"/>
 
 <!--    <coffer.androidDemo.customViewDemo.weidget.PorterDuffXfermodeView-->
 <!--        android:id="@+id/pr1"-->
