@@ -25,6 +25,15 @@ public class CustomViewMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_custom_view_main);
 
         // 绘制练习
+        findViewById(R.id.b0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomViewMainActivity.this, DrawActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 绘制练习
         findViewById(R.id.b1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
