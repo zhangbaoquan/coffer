@@ -8,11 +8,14 @@ import android.widget.TextView;
 
 import androidx.core.content.FileProvider;
 
+import java.io.File;
+
 import coffer.BaseDefaultActivity;
 import coffer.androidjatpack.BuildConfig;
 import coffer.androidjatpack.R;
 import coffer.provider.FileShareProvider;
 import coffer.util.CONSTANT;
+import coffer.util.CofferLog;
 import xcrash.XCrash;
 
 /**
@@ -64,6 +67,30 @@ public class CrashCollectActivity extends BaseDefaultActivity {
 
             }
         });
+
+        findViewById(R.id.anr).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 读取崩溃日志
+                try {
+                    Thread.sleep(1000000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        CofferLog.D("crash_coffer","目录："+this.getFilesDir());
+        File file = new File(this.getFilesDir()+"/tombstones");
+        if (file.exists()){
+            CofferLog.D("crash_coffer","存在：");
+            File[] files=file.listFiles();
+            CofferLog.D("crash_coffer","个数："+files.length);
+            for (int i = 0; i < files.length; i++) {
+                CofferLog.D("crash_coffer","文件："+files[i].getAbsolutePath());
+            }
+        }else {
+            CofferLog.D("crash_coffer","不存在：");
+        }
     }
 
     @Override

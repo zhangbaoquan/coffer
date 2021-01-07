@@ -108,25 +108,37 @@ public class CofferApplication extends Application {
             }
         };
 
-        XCrash.init(this,new XCrash.InitParameters()
-                .setAppVersion("1.2.3-beta456-patch789")
-                .setJavaRethrow(true)
-                .setJavaLogCountMax(10)
-                .setJavaDumpAllThreadsWhiteList(new String[]{"^main$", "^Binder:.*", ".*Finalizer.*"})
-                .setJavaDumpAllThreadsCountMax(10)
-                .setJavaCallback(callback)
-                .setNativeRethrow(true)
-                .setNativeLogCountMax(10)
-                .setNativeDumpAllThreadsWhiteList(new String[]{"^xcrash\\.sample$", "^Signal Catcher$", "^Jit thread pool$", ".*(R|r)ender.*", ".*Chrome.*"})
-                .setNativeDumpAllThreadsCountMax(10)
-                .setNativeCallback(callback)
-                .setAnrRethrow(true)
-                .setAnrLogCountMax(10)
-                .setAnrCallback(callback)
-                .setPlaceholderCountMax(3)
-                .setPlaceholderSizeKb(512)
-                .setLogFileMaintainDelayMs(1000)
-        );
+//        XCrash.init(this,new XCrash.InitParameters()
+//                .setAppVersion("1.2.3-beta456-patch789")
+//                .setJavaRethrow(true)
+//                .setJavaLogCountMax(10)
+//                .setJavaDumpAllThreadsWhiteList(new String[]{"^main$", "^Binder:.*", ".*Finalizer.*"})
+//                .setJavaDumpAllThreadsCountMax(10)
+//                .setJavaCallback(callback)
+//                .setNativeRethrow(true)
+//                .setNativeLogCountMax(10)
+//                .setNativeDumpAllThreadsWhiteList(new String[]{"^xcrash\\.sample$", "^Signal Catcher$", "^Jit thread pool$", ".*(R|r)ender.*", ".*Chrome.*"})
+//                .setNativeDumpAllThreadsCountMax(10)
+//                .setNativeCallback(callback)
+//                .setAnrRethrow(true)
+//                .setAnrLogCountMax(10)
+//                .setAnrCallback(callback)
+//                .setPlaceholderCountMax(3)
+//                .setPlaceholderSizeKb(512)
+//                .setLogFileMaintainDelayMs(1000)
+//        );
+        XCrash.init(this, new XCrash.InitParameters()
+                .enableAnrCrashHandler()        // 开启ANR异常捕获；捕获disableAnrCrashHandler()
+                .setAnrCheckProcessState(true)  // 是否设置anr的状态标志给进程状态
+                .setAnrRethrow(true)            // 是否抛出anr异常。默认为true
+                .setAnrLogCountMax(100)         // anr日志最大保留文件数量
+                .setAnrLogcatSystemLines(100)
+                .setAnrLogcatEventsLines(100)
+                .setLogDir(FileUtils.getCrashPath())
+                .setAnrLogcatMainLines(100)
+                .setAnrDumpFds(true)            // 是否输出app进程的下打开的文件描述符
+                .setAnrCallback(callback));     // 发生anr异常的应用回调
+
     }
 
     private void saveCrash(String log){
