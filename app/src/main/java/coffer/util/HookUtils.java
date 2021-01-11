@@ -1,5 +1,6 @@
 package coffer.util;
 
+import android.app.Application;
 import android.app.Instrumentation;
 
 import java.lang.reflect.Field;
@@ -18,7 +19,7 @@ public class HookUtils {
 
     private static final String TAG = "Hooker";
 
-    public static void hookInstrumentation(){
+    public static void hookInstrumentation(Application application){
         Class<?> activityThread = null;
         try {
             activityThread =Class.forName("android.app.ActivityThread");
@@ -32,7 +33,7 @@ public class HookUtils {
             Field mInstrumentation = activityThread.getDeclaredField("mInstrumentation");
             mInstrumentation.setAccessible(true);
             Instrumentation instrumentation = (Instrumentation) mInstrumentation.get(activityThreadObject);
-            CofferInstrumentation customInstrumentation = new CofferInstrumentation(instrumentation);
+            CofferInstrumentation customInstrumentation = new CofferInstrumentation(instrumentation,application.getPackageManager());
             // 将我们自定义的 Instrumentation 把系统的替换掉
             mInstrumentation.set(activityThreadObject,customInstrumentation);
         }catch (Exception e){

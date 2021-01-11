@@ -72,7 +72,7 @@ public class CofferApplication extends Application {
         initLog();
         VivoAdManager.getInstance().init(this,"619d45fa3d654b5d9222743873eea72d");
         MMKV.initialize(this);
-        HookUtils.hookInstrumentation();
+//        HookUtils.hookInstrumentation(this);
     }
 
     public static CofferApplication getInstance() {
