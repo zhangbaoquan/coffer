@@ -9,6 +9,7 @@ import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dianping.logan.Logan;
 import com.dianping.logan.LoganConfig;
 import com.didichuxing.doraemonkit.DoraemonKit;
@@ -72,6 +73,9 @@ public class CofferApplication extends Application {
         initLog();
         VivoAdManager.getInstance().init(this,"619d45fa3d654b5d9222743873eea72d");
         MMKV.initialize(this);
+
+        // 初始化ARouter
+        ARouter.init(this);
 //        HookUtils.hookInstrumentation(this);
     }
 

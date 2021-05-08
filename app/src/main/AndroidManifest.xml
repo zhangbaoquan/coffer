@@ -90,6 +90,14 @@
             tools:ignore="LockedOrientationActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name="coffer.androidDemo.router.ARouterMainActivity"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="coffer.androidDemo.router.DRouterMainActivity"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name="networkDemo.OkHttpActivity"
             tools:ignore="LockedOrientationActivity"
             android:screenOrientation="portrait"/>

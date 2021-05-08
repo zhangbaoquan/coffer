@@ -8,10 +8,13 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+
 import coffer.BaseDefaultActivity;
 import coffer.androidDemo.customViewDemo.CustomViewMainActivity;
 import coffer.androidDemo.messageDemo.MessageTestActivity;
 import coffer.androidDemo.behaviorDemo.BottomSheetBehaviorDemoActivity;
+import coffer.androidDemo.router.AInterceptor.UseARouterInterceptor;
 import coffer.androidjatpack.R;
 
 /**
@@ -70,6 +73,33 @@ public class AndroidMainActivity extends BaseDefaultActivity {
                 startActivity(intent);
             }
         });
+
+        ARouter.getInstance().inject(this);
+        // ARouter 原理
+        findViewById(R.id.b6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 跳转到 ARouterMainActivity，可以携带参数
+                ARouter.getInstance().build("/coffer/router/ARouterMainActivity")
+                        .setProvider(new UseARouterInterceptor())
+                        .withString("coffer_key","哈哈")
+                        .navigation();
+            }
+        });
+
+        // DRouter 原理
+        findViewById(R.id.b7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+    }
+
+
+    @Override
+    public void initData() {
         String content = "今日剩余"+10+"次机会";
         SpannableString spannableString = new SpannableString(content);
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#5c6273"));
@@ -80,12 +110,6 @@ public class AndroidMainActivity extends BaseDefaultActivity {
         spannableString.setSpan(colorSpan, 4+2,content.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         TextView textView = findViewById(R.id.t1);
         textView.setText(spannableString);
-
-    }
-
-
-    @Override
-    public void initData() {
 
     }
 }
