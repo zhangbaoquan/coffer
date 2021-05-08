@@ -2,12 +2,15 @@ package main.java.coffer;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import com.dianping.logan.Logan;
 import com.tencent.mmkv.MMKV;
+
 import coffer.BaseActivity;
-import coffer.androidDemo.behavior.AndroidMainActivity;
+import coffer.androidDemo.AndroidMainActivity;
 import coffer.androidjatpack.R;
 import coffer.crashDemo.CrashCollectActivity;
 import coffer.javaDemo.JavaMainActivity;
@@ -119,6 +122,7 @@ public class MainActivity extends BaseActivity {
         useMkv();
     }
 
+    Handler handler = new Handler();
     /**
      *  使用MKV 存储小数据，替换SharedPreferences
      */
@@ -127,11 +131,22 @@ public class MainActivity extends BaseActivity {
         // 不用再如SharedPreferences一样调用apply或commit：非常方便
         mmkv.encode("bool",true);
         mmkv.encode("int",1);
+        mmkv.decodeBool("hehe");
         CofferLog.I("lalal","info: "+mmkv.decodeBool("bool"));
         CofferLog.I("lalal","info: "+mmkv.decodeInt("int"));
         // 删除数据
         mmkv.clear();
         // 查询数据是否存在
         boolean hasBool = mmkv.containsKey("bool");
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                CofferLog.D("coffer_tag","嘿嘿");
+            }
+        },500);
+        Message message = Message.obtain();
+        message.what = 1;
+        message.obj = "coffer";
+        handler.sendMessage(message);
     }
 }

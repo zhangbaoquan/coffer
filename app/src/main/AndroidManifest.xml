@@ -135,7 +135,11 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
-        <activity android:name="coffer.androidDemo.behavior.AndroidMainActivity"
+        <activity android:name="coffer.androidDemo.MotionActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity android:name="coffer.androidDemo.AndroidMainActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
