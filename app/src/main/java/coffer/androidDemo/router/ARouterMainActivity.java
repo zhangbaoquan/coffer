@@ -1,18 +1,20 @@
 package coffer.androidDemo.router;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 
 import coffer.BaseDefaultActivity;
+import coffer.androidDemo.router.annotation.HelloAnnotation;
 import coffer.androidjatpack.R;
 import coffer.util.CofferLog;
 
 /**
  * @author：张宝全
  * @date：5/8/21
- * @Description：
+ * @Description：HelloAnnotation 是自定义注解
  * @Reviser：
  * @RevisionTime：
  * @RevisionDescription：
@@ -22,6 +24,7 @@ import coffer.util.CofferLog;
  * 界面路径的注解@Route(path = "/xx/xx") 路径至少要两层
  */
 @Route(path = "/coffer/router/ARouterMainActivity")
+@HelloAnnotation(say = "hello world")
 public class ARouterMainActivity extends BaseDefaultActivity {
 
     private static final String TAG = "ARouterMainActivity";
@@ -47,6 +50,9 @@ public class ARouterMainActivity extends BaseDefaultActivity {
 
     @Override
     public void initData() {
-
+        // 解析自定义注解，获取当前类上的注解对象
+        HelloAnnotation annotation = ARouterMainActivity.class.getAnnotation(HelloAnnotation.class);
+        // 调用注解方法
+        Log.i("hahhoo",annotation.say());
     }
 }
