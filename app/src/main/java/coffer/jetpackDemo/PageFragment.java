@@ -1,5 +1,6 @@
 package coffer.jetpackDemo;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +76,26 @@ public class PageFragment extends Fragment {
         ImageView iv = view.findViewById(R.id.iv);
         container.setBackgroundResource(mColors.get(mPosition));
         tvTitle.setText("Item " + mPosition);
-        Glide.with(this).load(url).into(iv);
+        Glide.with(this)
+                .load(url)
+                .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e,
+                                        Object model, Target<Drawable> target,
+                                        boolean isFirstResource) {
+                            // 图片加载完成
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model,
+                                           Target<Drawable> target, DataSource dataSource,
+                                           boolean isFirstResource) {
+                            // 图片加载失败
+                            return false;
+                        }
+                    })
+                .into(iv);
 //        Glide.with()
     }
 }

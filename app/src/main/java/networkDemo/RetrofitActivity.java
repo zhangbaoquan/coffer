@@ -42,6 +42,8 @@ public class RetrofitActivity extends BaseDefaultActivity {
         // 1、创建Retrofit 的实例。（里面默认的数据解析工具是Gson）
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.douban.com/v2/")
+                // 这里使用gson 数据解析器
+//                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         // 2、创建一个请求接口BookService 里面声明一个请求类型的方法。
