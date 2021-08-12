@@ -72,15 +72,16 @@ public abstract class BaseActivity extends BaseDefaultActivity {
             //权限已经都通过了，可以将程序继续打开了
             Toast.makeText(BaseActivity.this, "申请成功", Toast.LENGTH_SHORT).show();
         }
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (!Settings.canDrawOverlays(this)) {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivityForResult(intent, 1);
-            } else {
-                //TODO do something you need
-            }
-        }
+        // 暂时注释掉去设置界面授予权限
+//        if (Build.VERSION.SDK_INT >= 23) {
+//            if (!Settings.canDrawOverlays(this)) {
+//                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivityForResult(intent, 1);
+//            } else {
+//                //TODO do something you need
+//            }
+//        }
     }
 
     /**

@@ -149,7 +149,17 @@
 
         <activity android:name="coffer.androidDemo.AndroidMainActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity" >
+            <intent-filter>
+                <data
+                    android:host="coffer.androidDemo.AndroidMainActivity"
+                    android:scheme="coffer"
+                    tools:ignore="AppLinkUrlError" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
 
         <activity android:name="coffer.crashDemo.CrashCollectActivity"
             android:screenOrientation="portrait"

@@ -55,6 +55,6 @@ public class JavaMainActivity extends BaseDefaultActivity {
 
     @Override
     public void initData() {
-
+        mTargetIntent = getIntent().getParcelableExtra(PARAM_TARGET_INTENT);
     }
 }

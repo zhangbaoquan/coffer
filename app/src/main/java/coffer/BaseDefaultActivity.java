@@ -28,6 +28,13 @@ import coffer.widget.GrayFrameLayout;
  */
 public abstract class BaseDefaultActivity extends AppCompatActivity {
 
+    public static final String PARAM_TARGET_INTENT = "targetIntent";
+
+    /**
+     * 用于activity跳转的intent
+     */
+    public Intent mTargetIntent;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

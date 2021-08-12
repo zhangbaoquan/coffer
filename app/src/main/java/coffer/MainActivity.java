@@ -10,6 +10,7 @@ import com.dianping.logan.Logan;
 import com.tencent.mmkv.MMKV;
 
 import coffer.BaseActivity;
+import coffer.BaseDefaultActivity;
 import coffer.androidDemo.AndroidMainActivity;
 import coffer.androidjatpack.R;
 import coffer.crashDemo.CrashCollectActivity;
@@ -109,7 +110,9 @@ public class MainActivity extends BaseActivity {
 //                        "Fapp.php%3Fca%3DChannel.Index%26pk%3Dqd%26key%3Dch_feature%26a0%3Dtoufang01s&fromname=浏览器&flags=4&" +
 //                        "from=com.heytap.browser";
 //                String url = "ireaderplugin://com.coloros.browser/readbook?bookid=11006182";
-                String url = "ireaderplugin://com.coloros.browser/maintab?nightmode=100&tabindex=1";
+//                String url = "ireaderplugin://com.coloros.browser/maintab?nightmode=100&tabindex=1";
+//                String url = "dididriver://com.sdu.didi.gsui.DidiMsgActivity";
+                String url = "unidriver://web?url=https://page.didiglobal.com/driver-page/mid-page/";
                 Uri uri = Uri.parse(url);
                 Intent intent = new Intent(ACTION_DEFAULT, uri);
                 try {
@@ -148,5 +151,30 @@ public class MainActivity extends BaseActivity {
         message.what = 1;
         message.obj = "coffer";
         handler.sendMessage(message);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        CofferLog.D("coffer_tagM","onPause");
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        CofferLog.D("coffer_tagM","onAttachedToWindow");
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        CofferLog.D("coffer_tagM","onDetachedFromWindow");
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        // 当前界面在在前后台状态改变时会触发，TRUE表示前台，FALSE是后台
+        CofferLog.D("coffer_tagM","onWindowFocusChanged hasFocus : "+hasFocus);
     }
 }
