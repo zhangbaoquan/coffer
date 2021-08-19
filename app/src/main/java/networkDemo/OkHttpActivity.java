@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import coffer.BaseDefaultActivity;
 import coffer.androidjatpack.R;
+import coffer.util.CofferLog;
 import networkDemo.okhttpDemo.CofferCacheInterceptor;
 import networkDemo.okhttpDemo.OkHttpEventListener;
 import okhttp3.Cache;
@@ -76,7 +77,7 @@ public class OkHttpActivity extends BaseDefaultActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
+                CofferLog.D("coffer_push","response : "+response.body().string());
             }
         });
     }
