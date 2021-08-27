@@ -99,6 +99,16 @@
             android:text="DRouter 原理"
             android:textColor="@color/white" />
 
+        <Button
+            android:id="@+id/b8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dk_dp_10"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_gradient"
+            android:text="登录"
+            android:textColor="@color/white" />
+
 
     </LinearLayout>
 

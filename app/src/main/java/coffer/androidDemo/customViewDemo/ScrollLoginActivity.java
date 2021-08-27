@@ -20,7 +20,7 @@ public class ScrollLoginActivity extends BaseDefaultActivity {
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_login_main);
+        setContentView(R.layout.activity_login);
         TouchPictureCheckView touchPictureCheckView = findViewById(R.id.v1);
         touchPictureCheckView.setViewResultListener(new TouchPictureCheckView.ResultListener() {
             @Override

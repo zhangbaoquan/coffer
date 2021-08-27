@@ -95,6 +95,14 @@ public class AndroidMainActivity extends BaseDefaultActivity {
             }
         });
 
+        findViewById(R.id.b8).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AndroidMainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

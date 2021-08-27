@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.33240740740740743" />
+        <entry key="app/src/main/res/drawable/edit_cursor_drawable.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/drawable/edit_focus_drawable.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/drawable/edit_focus_no_drawable.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/drawable/edittext_bg_selector.xml" value="0.246875" />
+        <entry key="app/src/main/res/drawable/et_underline_selected.xml" value="0.246875" />
+        <entry key="app/src/main/res/drawable/et_underline_unselected.xml" value="0.246875" />
+        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.33240740740740743" />
+        <entry key="app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.33240740740740743" />
+        <entry key="app/src/main/res/drawable/input_edittext.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/activity_android_main.xml" value="0.2572463768115942" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2203125" />
+        <entry key="app/src/main/res/layout/activity_login2.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_login_main.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_login_main2.xml" value="0.2572463768115942" />
+        <entry key="app/src/main/res/layout/text_input_edit_layout.xml" value="0.67" />
+      </map>
+    </option>
+  </component>
   <component name="FindBugsConfigurable">
     <option name="make" value="true" />
     <option name="effort" value="default" />
