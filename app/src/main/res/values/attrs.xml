@@ -8,6 +8,15 @@
         <attr name="pause_duration" format="integer"/>
     </declare-styleable>
 
+    <!-- TextInput的属性-->
+    <declare-styleable name="CofferTextInputLayout">
+        <attr name="hintTextDefaultColor" format="color"/>
+        <attr name="hintSelectTextColor" format="color"/>
+        <attr name="hintTipText" format="string"/>
+        <attr name="useClean" format="boolean"/>
+    </declare-styleable>
+
+
     <declare-styleable name="CircleImageView">
         <attr name="civ_border_width" format="dimension" />
         <attr name="civ_border_color" format="color" />

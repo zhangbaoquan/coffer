@@ -130,6 +130,13 @@ public class PropertyAnimActivity extends BaseDefaultActivity {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mIv,"translationX",
                 mIv.getTranslationX(),Util.dipToPixel(this,100));
         objectAnimator.setDuration(3000);
+        objectAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                CofferLog.D(TAG,"getTranslationX2 ： "+mIv.getTranslationX());
+            }
+        });
         objectAnimator.start();
     }
 

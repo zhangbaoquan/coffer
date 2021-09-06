@@ -1,6 +1,12 @@
 package coffer.widget;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -8,11 +14,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import coffer.androidjatpack.R;
+import coffer.util.Util;
 
 /**
  * author      : coffer
@@ -22,7 +29,7 @@ import coffer.androidjatpack.R;
  *               例如默认提示文案的文字大小、颜色，选中后的颜色，动画的时间等。
  * Reviewer    :
  */
-public class CofferTextInputLayout extends RelativeLayout {
+public class CofferTextInputLayout extends FrameLayout {
 
     private static final String TAG = "C_INPUT";
 
@@ -46,11 +53,10 @@ public class CofferTextInputLayout extends RelativeLayout {
      * 是否使用清空内容
      */
     private boolean mUseClean;
-
     /**
-     * 是否使用显示功能图标
+     * 当前EditText 是否有焦点
      */
-    private boolean mUseFun;
+    private boolean mHasFocus = false;
 
     private EditText mEditText;
     private TextView mTvTip;
@@ -58,21 +64,35 @@ public class CofferTextInputLayout extends RelativeLayout {
     private ImageView mIvFun;
 
     public CofferTextInputLayout(Context context) {
-        super(context);
-        init(context);
+        this(context,null);
     }
 
     public CofferTextInputLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
+        this(context, attrs,0);
     }
 
-    private void init(Context context){
+    public CofferTextInputLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context,attrs);
+    }
+
+    private void init(Context context,AttributeSet attrs){
         LayoutInflater.from(context).inflate(R.layout.text_input_edit_layout, this);
         mEditText = findViewById(R.id.edit);
         mTvTip = findViewById(R.id.tip);
         mIvClose = findViewById(R.id.close);
         mIvFun = findViewById(R.id.fun);
+
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CofferTextInputLayout);
+        String hintText = typedArray.getString(R.styleable.CofferTextInputLayout_hintTipText);
+        mHintTextTipColor = typedArray.getColor(R.styleable.CofferTextInputLayout_hintSelectTextColor,
+                context.getResources().getColor(R.color.blue));
+        mHintTextDefaultColor = typedArray.getColor(R.styleable.CofferTextInputLayout_hintTextDefaultColor,
+                context.getResources().getColor(R.color.text_color_cr_reduce));
+        mUseClean = typedArray.getBoolean(R.styleable.CofferTextInputLayout_useClean,false);
+        mTvTip.setText(hintText);
+        mTvTip.setTextColor(mHintTextDefaultColor);
+        typedArray.recycle();
         // 设定属性，绑定相关的监听
         mEditText.addTextChangedListener(new DefaultTextWatcher());
         mEditText.setOnFocusChangeListener(new DefaultOnFocusChangeListener());
@@ -80,9 +100,11 @@ public class CofferTextInputLayout extends RelativeLayout {
             @Override
             public void onClick(View view) {
                 mEditText.setText("");
+                if (!mHasFocus){
+                    showNoFocusAnim();
+                }
             }
         });
-
     }
 
     public void setHintTextDefaultColor(int defaultColor){
@@ -125,9 +147,12 @@ public class CofferTextInputLayout extends RelativeLayout {
      * @param state TRUE 表示使用
      */
     public void setUseFun(boolean state){
-        mUseFun = state;
+        if (state){
+            mIvFun.setVisibility(VISIBLE);
+        }else {
+            mIvFun.setVisibility(GONE);
+        }
     }
-
 
     /**
      * 给外面自定义设置
@@ -190,34 +215,73 @@ public class CofferTextInputLayout extends RelativeLayout {
             if (TextUtils.isEmpty(content)){
                 if (hasFocus){
                     // 有焦点，给提示文案做右上角缩放动画
-
+                    showFocusAnim();
                 }else {
                     // 没有焦点，上面的动画反过来
+                    showNoFocusAnim();
                 }
             }
+            mHasFocus = hasFocus;
 
             if (mOnFocusChangeListener != null){
                 mOnFocusChangeListener.onFocusChange(view,hasFocus);
             }
         }
+    }
 
-        /**
-         * 动画效果：
-         * 进行：1、View上移，2、View变小。
-         * 结束：1、文字颜色变化，2、文字字体变细（Normal）
-         */
-        private void showFocusAnim(){
+    /**
+     * 给提示文案做动画
+     * 动画效果：
+     * 进行：1、View从左下角上移，2、View变小。变化时间200ms
+     * 结束：1、文字颜色变化为输入框之外的颜色，2、文字字体变细（Normal）
+     */
+    private void showFocusAnim(){
+        PropertyValuesHolder[] focus = new PropertyValuesHolder[]{
+                PropertyValuesHolder.ofFloat("scaleX",1f,0.67f),
+                PropertyValuesHolder.ofFloat("scaleY",1f,0.67f),
+                PropertyValuesHolder.ofFloat("translationY",0,
+                        -Util.dipToPixel(getContext(),19))
+        };
+        ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(mTvTip, focus);
+        objectAnimator.setDuration(200);
+        mTvTip.setPivotX(0);
+        mTvTip.setPivotY(0);
+        objectAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                mTvTip.setTypeface(null,Typeface.NORMAL);
+                mTvTip.setTextColor(mHintTextTipColor);
+            }
+        });
+        objectAnimator.start();
+    }
 
-        }
-
-        /**
-         * 动画效果：
-         * 进行：1、View下移，2、View变大。
-         * 结束：1、文字颜色变化，2、文字字体变粗（Bold）
-         */
-        private void showNoFocusAnim(){
-
-        }
+    /**
+     * 给提示文案做动画
+     * 动画效果：
+     * 进行：1、View从左上角下移，2、View变大。变化时间200ms
+     * 结束：1、文字颜色变化为默认颜色，2、文字字体变粗（Bold）
+     */
+    private void showNoFocusAnim(){
+        PropertyValuesHolder[] noFocus = new PropertyValuesHolder[]{
+                PropertyValuesHolder.ofFloat("scaleX",0.67f,1f),
+                PropertyValuesHolder.ofFloat("scaleY",0.67f,1f),
+                PropertyValuesHolder.ofFloat("translationY",mTvTip.getTranslationY(),0)
+        };
+        ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(mTvTip, noFocus);
+        objectAnimator.setDuration(200);
+        mTvTip.setPivotX(0);
+        mTvTip.setPivotY(0);
+        objectAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                mTvTip.setTypeface(null,Typeface.BOLD);
+                mTvTip.setTextColor(mHintTextDefaultColor);
+            }
+        });
+        objectAnimator.start();
     }
 
 }

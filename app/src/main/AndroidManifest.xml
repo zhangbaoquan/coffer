@@ -216,7 +216,13 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
-        <activity android:name="coffer.androidDemo.LoginActivity"
+        <activity android:name="coffer.androidDemo.Login.LoginActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name="coffer.androidDemo.Login.LoginActivityA"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name="coffer.androidDemo.Login.LoginActivityB"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 

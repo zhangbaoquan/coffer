@@ -62,11 +62,6 @@ public class CofferApplication extends Application {
         DoraemonKit.install(this);
         IreaderPlugApi.initPlugWhenAPPOncreate(this);
         Log.d(COFFER_TAG,"CofferApplication onCreate ");
-//        if (LeakCanary.isInAnalyzerProcess(this)){
-//
-//            return;
-//        }
-//        LeakCanary.install(this);
         // 缓存图片的配置，一般通用的配置
         initImageLoader(getApplicationContext());
         // 初始化美团的Logan 日志系统

@@ -33,6 +33,8 @@ public class AnimTestActivity extends BaseDefaultActivity {
     private TextView tv7;
     private TextView tv8;
     private TextView tv9;
+    private TextView tv10;
+    private TextView tv11;
 
     private LinearLayout mParent;
 
@@ -146,6 +148,30 @@ public class AnimTestActivity extends BaseDefaultActivity {
                 mHandler.sendEmptyMessage(1);
             }
         },10000);
+
+        tv10 = findViewById(R.id.tv10);
+        findViewById(R.id.bt1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AnimUtils.showFocusAnim1(tv10);
+            }
+        });
+
+        tv11 = findViewById(R.id.tv11);
+//        findViewById(R.id.bt2).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AnimUtils.showNoFocusAnim(tv11);
+//            }
+//        });
+
+        findViewById(R.id.bt2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AnimUtils.showNoFocusAnim(tv10);
+            }
+        });
+
     }
 
     @Override

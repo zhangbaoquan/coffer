@@ -112,8 +112,7 @@ dependencies {
 
 //    implementation (name: 'ireader', ext: 'aar')
 
-//    debugApi 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-//    releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
     implementation 'com.dianping.android.sdk:logan:1.2.2'

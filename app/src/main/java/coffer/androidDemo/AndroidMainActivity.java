@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 
 import coffer.BaseDefaultActivity;
+import coffer.androidDemo.Login.LoginActivity;
 import coffer.androidDemo.customViewDemo.CustomViewMainActivity;
 import coffer.androidDemo.messageDemo.MessageTestActivity;
 import coffer.androidDemo.behaviorDemo.BottomSheetBehaviorDemoActivity;

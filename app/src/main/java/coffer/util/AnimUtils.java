@@ -7,10 +7,16 @@ import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -188,31 +194,32 @@ public class AnimUtils {
         // 2、需要放大和缩小，因此就需要View的X、Y方向上同时操作，这就需要将scaleX、scaleY 复合
         // 3、需要放大完成后再缩小，所以需要将放大、缩小两个动画组合
 
-        // 第一阶段，将气泡从小放大
-        PropertyValuesHolder[] enlarge = new PropertyValuesHolder[]{
-                PropertyValuesHolder.ofFloat("scaleX",0f,1f),
-                PropertyValuesHolder.ofFloat("scaleY",0f,1f)
-        };
-
-        // 第二阶段，不变
-        PropertyValuesHolder[] normal = new PropertyValuesHolder[]{
-                PropertyValuesHolder.ofFloat("scaleX",1f,1f),
-                PropertyValuesHolder.ofFloat("scaleY",1f,1f)
-        };
+//        // 第一阶段，将气泡从小放大
+//        PropertyValuesHolder[] enlarge = new PropertyValuesHolder[]{
+//                PropertyValuesHolder.ofFloat("scaleX",0f,1f),
+//                PropertyValuesHolder.ofFloat("scaleY",0f,1f)
+//        };
+//
+//        // 第二阶段，不变
+//        PropertyValuesHolder[] normal = new PropertyValuesHolder[]{
+//                PropertyValuesHolder.ofFloat("scaleX",1f,1f),
+//                PropertyValuesHolder.ofFloat("scaleY",1f,1f)
+//        };
 
         // 第三阶段，将气泡从大变小
         PropertyValuesHolder[] shrink = new PropertyValuesHolder[]{
-                PropertyValuesHolder.ofFloat("scaleX",1f,0f),
-                PropertyValuesHolder.ofFloat("scaleY",1f,0f)
+                PropertyValuesHolder.ofFloat("scaleX",1f,0.3f),
+                PropertyValuesHolder.ofFloat("scaleY",1f,0.3f)
         };
-        ObjectAnimator step1 = ObjectAnimator.ofPropertyValuesHolder(view,enlarge);
-        step1.setDuration(400);
-        ObjectAnimator step2 = ObjectAnimator.ofPropertyValuesHolder(view,normal);
-        step2.setDuration(4000);
+//        ObjectAnimator step1 = ObjectAnimator.ofPropertyValuesHolder(view,enlarge);
+//        step1.setDuration(400);
+//        ObjectAnimator step2 = ObjectAnimator.ofPropertyValuesHolder(view,normal);
+//        step2.setDuration(4000);
         ObjectAnimator step3 = ObjectAnimator.ofPropertyValuesHolder(view,shrink);
-        step3.setDuration(600);
+        step3.setDuration(2000);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playSequentially(step1,step2,step3);
+//        animatorSet.playSequentially(step1,step2,step3);
+        animatorSet.playSequentially(step3);
         animatorSet.start();
 
     }
@@ -301,6 +308,120 @@ public class AnimUtils {
      */
     public static void fadeOut(@NonNull final View view) {
         fadeOut(view, 2000, null);
+    }
+
+    /**
+     * 动画效果：
+     * 进行：1、View上移，2、View变小。
+     * 结束：1、文字颜色变化，2、文字字体变细（Normal）
+     */
+    public static void showFocusAnim(final TextView view){
+//        // 将平移动画、透明动画整合
+//        PropertyValuesHolder[] propertyValuesHolder = new PropertyValuesHolder[]{
+//                PropertyValuesHolder.ofFloat("translationY",0.0f,-15)
+////                ,
+////                PropertyValuesHolder.ofFloat("alpha",0f,1f)
+//        };
+//        ObjectAnimator animator = ObjectAnimator
+//                .ofPropertyValuesHolder(view,propertyValuesHolder)
+//                .setDuration(1000);
+//        AnimatorSet animatorSet = new AnimatorSet();
+//        animatorSet.playSequentially(animator);
+//        animatorSet.start();
+        PropertyValuesHolder[] shrink = new PropertyValuesHolder[]{
+                PropertyValuesHolder.ofFloat("scaleX",1f,0.5f),
+                PropertyValuesHolder.ofFloat("scaleY",1f,0.5f),
+                PropertyValuesHolder.ofFloat("translationY",0.0f,-25)
+        };
+
+        ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(view,shrink);
+        view.setPivotX(0);
+        view.setPivotY(0);
+        objectAnimator.setDuration(3000);
+        objectAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                view.setTypeface(null, Typeface.NORMAL);
+                view.setTextColor(Color.BLUE);
+
+            }
+        });
+        objectAnimator.start();
+    }
+
+    /**
+     * 动画效果：
+     * 进行：1、View上移，2、View变小。
+     * 结束：1、文字颜色变化，2、文字字体变细（Normal）
+     */
+    public static void showFocusAnim1(final TextView view){
+//        // 将平移动画、透明动画整合
+//        PropertyValuesHolder[] propertyValuesHolder = new PropertyValuesHolder[]{
+//                PropertyValuesHolder.ofFloat("translationY",0.0f,-15)
+////                ,
+////                PropertyValuesHolder.ofFloat("alpha",0f,1f)
+//        };
+//        ObjectAnimator animator = ObjectAnimator
+//                .ofPropertyValuesHolder(view,propertyValuesHolder)
+//                .setDuration(1000);
+//        AnimatorSet animatorSet = new AnimatorSet();
+//        animatorSet.playSequentially(animator);
+//        animatorSet.start();
+        PropertyValuesHolder[] shrink = new PropertyValuesHolder[]{
+                PropertyValuesHolder.ofFloat("scaleX",1f,0.67f),
+                PropertyValuesHolder.ofFloat("scaleY",1f,0.67f),
+                PropertyValuesHolder.ofFloat("translationY",0.0f,-30)
+        };
+
+        CofferLog.D(TAG,"getTranslationY ： "+view.getTranslationY());
+
+        ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(view,shrink);
+        view.setPivotX(0);
+        view.setPivotY(0);
+        objectAnimator.setDuration(3000);
+        objectAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                CofferLog.D(TAG,"getTranslationY2 ： "+view.getTranslationY());
+                view.setTypeface(null, Typeface.NORMAL);
+                view.setTextColor(Color.BLUE);
+
+            }
+        });
+
+        objectAnimator.start();
+    }
+
+    /**
+     * 动画效果：
+     * 进行：1、View下移，2、View变大。
+     * 结束：1、文字颜色变化，2、文字字体变粗（Bold）
+     */
+    public static void showNoFocusAnim(final TextView view){
+        PropertyValuesHolder[] shrink = new PropertyValuesHolder[]{
+                PropertyValuesHolder.ofFloat("scaleX",0.67f,1f),
+                PropertyValuesHolder.ofFloat("scaleY",0.67f,1f),
+                PropertyValuesHolder.ofFloat("translationY",view.getTranslationY(),0)
+        };
+
+        CofferLog.D(TAG,"getTranslationY 3 ： "+view.getTranslationY());
+
+        ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(view,shrink);
+        view.setPivotX(0);
+        view.setPivotY(0);
+        objectAnimator.setDuration(3000);
+        objectAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                CofferLog.D(TAG,"getTranslationY 4 ： "+view.getTranslationY());
+                view.setTypeface(null, Typeface.BOLD);
+                view.setTextColor(Color.BLUE);
+            }
+        });
+        objectAnimator.start();
     }
 
 }
