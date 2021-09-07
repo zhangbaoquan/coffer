@@ -56,14 +56,6 @@ public class LoginActivity extends BaseDefaultActivity {
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(LoginActivity.this, "haha", Toast.LENGTH_SHORT).show();
-//                showPopWindow(mInputNumber.getFunIcon());
-                mPop = showTipPopupWindow(mInputNumber.getFunIcon(), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mPop.dismiss();
-                    }
-                });
             }
         });
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
@@ -73,16 +65,6 @@ public class LoginActivity extends BaseDefaultActivity {
                 startActivityForResult(intent, 100);
             }
         });
-//        if (TextUtils.isEmpty(str)){
-//            mBtn.setClickable(false);
-//        }
-//        showPopWindow(mInputNumber.getFunIcon());
-//        mPop = showTipPopupWindow(mInputNumber.getFunIcon(), new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
         mInputNumber.setTextWatcher(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -108,6 +90,18 @@ public class LoginActivity extends BaseDefaultActivity {
     @Override
     public void initData() {
 
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        // PopupWindow的创建和显示必须在Activity完全运行且界面显示了才行，否则会崩溃
+        mPop = showTipPopupWindow(mInputNumber.getFunIcon(), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPop.dismiss();
+            }
+        });
     }
 
     public PopupWindow showTipPopupWindow(final View anchorView, final View.OnClickListener onClickListener) {
