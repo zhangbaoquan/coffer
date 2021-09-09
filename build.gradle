@@ -55,16 +55,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenLocal()
     }
-}
-
-
-allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
-
     afterEvaluate { project,projectState ->
         println" coffer tag Running tests for $project"
     }

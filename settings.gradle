@@ -1,2 +1,3 @@
 include ':Testlibrary'
 include ':app'
+include ':coffer-plugin'

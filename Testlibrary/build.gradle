@@ -32,20 +32,31 @@ dependencies {
 
 }
 
-uploadArchives { //新增 ，因为Android Studio gradle 支持maven插件，所以可以添加此task
-    configuration = configurations.archives
-    repositories {
-        mavenDeployer {
-            repository(url: 'https://maven.columbus.heytapmobi.com/repository/ClientBrowser/') {
-                authentication(userName: 'cbuser', password: '88527e7341a54d89a7e7d4b52796c4aa')
-            }
-            pom.project {
-                version '1.1.0' //版本名称
-                artifactId 'test maven'  //和前面网站上填写的一样
-                groupId 'com.coffer.app'  //和前面网站上填写的一样
-                packaging 'aar' //填写aar
-                description 'Test' //更新描述
-            }
+//uploadArchives { //新增 ，因为Android Studio gradle 支持maven插件，所以可以添加此task
+//    configuration = configurations.archives
+//    repositories {
+//        mavenDeployer {
+//            repository(url: 'https://maven.columbus.heytapmobi.com/repository/ClientBrowser/') {
+//                authentication(userName: 'cbuser', password: '88527e7341a54d89a7e7d4b52796c4aa')
+//            }
+//            pom.project {
+//                version '1.1.0' //版本名称
+//                artifactId 'test maven'  //和前面网站上填写的一样
+//                groupId 'com.coffer.app'  //和前面网站上填写的一样
+//                packaging 'aar' //填写aar
+//                description 'Test' //更新描述
+//            }
+//        }
+//    }
+//}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url:"http://localhost:8082/repository/com.coffer.lib/"){
+            authentication(userName: "coffer",password: "zbq320304")
         }
+        pom.version = "0.0.1"
+        pom.artifactId = "cofferlib"
+        pom.groupId = "com.coffer"
     }
 }

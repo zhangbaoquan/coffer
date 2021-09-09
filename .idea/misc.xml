@@ -1,37 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="../../../../../../layout/custom_preview.xml" value="0.33240740740740743" />
-        <entry key="app/src/main/res/drawable/bg_gradient.xml" value="0.30277777777777776" />
-        <entry key="app/src/main/res/drawable/bg_layer_list.xml" value="0.30277777777777776" />
-        <entry key="app/src/main/res/drawable/down_arrow_drawable.xml" value="0.4203125" />
-        <entry key="app/src/main/res/drawable/edit_cursor_drawable.xml" value="0.2598958333333333" />
-        <entry key="app/src/main/res/drawable/edit_focus_drawable.xml" value="0.24739583333333334" />
-        <entry key="app/src/main/res/drawable/edit_focus_no_drawable.xml" value="0.24739583333333334" />
-        <entry key="app/src/main/res/drawable/edittext_bg_selector.xml" value="0.246875" />
-        <entry key="app/src/main/res/drawable/et_underline_selected.xml" value="0.246875" />
-        <entry key="app/src/main/res/drawable/et_underline_unselected.xml" value="0.246875" />
-        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.33240740740740743" />
-        <entry key="app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.33240740740740743" />
-        <entry key="app/src/main/res/drawable/input_edittext.xml" value="0.24739583333333334" />
-        <entry key="app/src/main/res/layout/activity_android_main.xml" value="0.2572463768115942" />
-        <entry key="app/src/main/res/layout/activity_anim_test_main.xml" value="0.4041666666666667" />
-        <entry key="app/src/main/res/layout/activity_banner_main.xml" value="0.3211050724637681" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2203125" />
-        <entry key="app/src/main/res/layout/activity_login2.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_login_a.xml" value="0.4041666666666667" />
-        <entry key="app/src/main/res/layout/activity_login_b.xml" value="0.4041666666666667" />
-        <entry key="app/src/main/res/layout/activity_login_main.xml" value="0.3914246196403873" />
-        <entry key="app/src/main/res/layout/activity_login_main2.xml" value="0.2572463768115942" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.26132246376811596" />
-        <entry key="app/src/main/res/layout/layout_guide_pop.xml" value="0.4041666666666667" />
-        <entry key="app/src/main/res/layout/popuw_content_top_arrow_layout.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/text_input_edit_layout.xml" value="0.37978560490045943" />
-      </map>
-    </option>
-  </component>
   <component name="FindBugsConfigurable">
     <option name="make" value="true" />
     <option name="effort" value="default" />
@@ -84,7 +52,7 @@
       </value>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
