@@ -1,53 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-
-    // Define versions in a single place
-    ext {
-        // Sdk and tools
-        compileSdkVersion = 28
-        minSdkVersion = 19
-        targetSdkVersion = 28
-
-        // App dependencies
-        coreTestingVersion = '2.0.0'
-        coroutinesVersion = "1.1.1"
-        espressoVersion = '3.1.0'
-        glideVersion = '4.11.0'
-        gradleVersion = '3.4.0'
-        gsonVersion = '2.8.2'
-        guavaVersion = '27.0.1-android'
-        junitVersion = '4.12'
-        kotlinVersion = '1.3.21'
-        ktlintVersion = '0.30.0'
-        ktxVersion = '1.0.1'
-        lifecycleVersion = '2.1.0'
-        materialVersion = '1.0.0'
-        navigationVersion = '2.0.0'
-        recyclerViewVersion = '1.1.0'
-        roomVersion = '2.1.0-alpha06'
-        runnerVersion = '1.0.1'
-        supportLibraryVersion = '1.1.0'
-        uiAutomatorVersion = '2.2.0'
-        workVersion = '2.0.0'
-    }
-
-
     repositories {
         google()
-        jcenter()
-    }
-    repositories.each{
-        println it.getUrl()
+        mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradleVersion"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
-        classpath 'com.didichuxing.doraemonkit:doraemonkit-plugin:3.1.5'
-        classpath 'com.didi.virtualapk:gradle:0.9.8.6'
-        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30"
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.50"
     }
 }
 
@@ -57,49 +20,10 @@ allprojects {
         jcenter()
         mavenLocal()
     }
-    afterEvaluate { project,projectState ->
-        println" coffer tag Running tests for $project"
-    }
 }
-
-// afterProject 执行是早于afterEvaluate ，且afterProject 监听所有项目，而afterEvaluate监听的是当前项目
-gradle.afterProject {project , projectState ->
-    if (project.rootProject == project){
-        def rootPath = project.getProjectDir().getAbsolutePath()
-        // 打印项目的根路径
-        println"coffer tag rootPath of $rootPath"
-        // 在项目中的GradleTest 类中，添加一行代码。【测试】相当于在编译器修改代码配置信息
-        def fileTest = rootPath + "/app/src/main/java/coffer/util/GradleTest.java"
-        println"coffer tag fileTest : $fileTest"
-//        writeFile(new File(fileTest)," // private String lala")
-        readeFile(new File(fileTest))
-        replaceFileContent(new File(fileTest),
-                " int PLUGIN_VERSION = \\d*;",
-                " int PLUGIN_VERSION = " + 55 + ";")
-        if(projectState.failure) {
-            println"coffer tag Evaluation of $project FAILED"
-        } else {
-            println"coffer tag Evaluation of $project succeeded"
-        }
-    }
-
-}
-
-static def readeFile(File file){
-    println file.text
-}
-
-static def writeFile(File file,String content){
-    file.write(content,"utf-8")
-}
-
-// 使用正则表达式将文件里的某一个参数信息更改
-static def replaceFileContent(File file,String regex, String value){
-    file.text = (file.text =~ /${regex}/).replaceAll(value)
-    file.write(file.text,"utf-8")
-}
-
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+println("根目录build.gradle 构建")
