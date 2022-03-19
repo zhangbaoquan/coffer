@@ -1,5 +1,5 @@
 *.iml
-.gradle
+.com.coffer.router.gradle
 /local.properties
 .idea/misc.xml
 /.idea/caches/build_file_checksums.ser
@@ -7,7 +7,7 @@
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
-/.idea/gradle.xml
+/.idea/com.coffer.router.gradle.xml
 .DS_Store
 /build
 /captures

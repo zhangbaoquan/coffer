@@ -1,1 +1,25 @@
 include ':app'
+
+
+println("setting 构建 路径 ：${rootProject.projectDir}")
+
+// 添加构建生命周期的监听
+gradle.addBuildListener(new BuildAdapter(){
+    void settingsEvaluated(Settings settings) {
+        super.settingsEvaluated(settings)
+        println("[初始化阶段完成]")
+    }
+
+    void projectsEvaluated(Gradle gradle) {
+        super.projectsEvaluated(gradle)
+        println("[配置阶段完成]")
+        gradle.rootProject.childProjects.each{name,p->
+            println("子工程名称 $name ,path : ${p.getProjectDir()}")
+        }
+    }
+
+    void buildFinished(BuildResult result) {
+        super.buildFinished(result)
+        println("[构建阶段完成]")
+    }
+})

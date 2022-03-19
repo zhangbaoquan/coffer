@@ -1,9 +1,9 @@
 /build
-.gradle/
+.com.coffer.router.gradle/
 .idea/
 .bat
 *.iml
-.gradle
+.com.coffer.router.gradle
 /local.properties
 /.idea/caches/build_file_checksums.ser
 /.idea/caches/gradle_models.ser

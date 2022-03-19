@@ -1,0 +1,78 @@
+//
+//task printTest{
+//    // 依赖这两个任务
+//    dependsOn t2,t1
+//    println("lala 哈哈")
+//    def array = [1,2,3]
+//    array.add(5)
+//    array.each {
+//        println(it)
+//    }
+//    def map = ["name":"kaka","age":"10"]
+//}
+//
+//// 声明一个闭包
+//def c1 = { it->
+//    println("name : ${it}")
+//}
+//// 使用闭包
+//c1("mm")
+
+println("t1.gradle 构建")
+
+//////////////////// 实现自定义DSL ///////////////////////
+def dd = {
+    compileSdkVersion 1
+    defaultConfig {
+        versionName "lala"
+    }
+}
+
+class DefaultConfig {
+    private String versionName
+
+    def versionName(String versionName) {
+        this.versionName = versionName
+    }
+
+    @Override
+    String toString() {
+        return "Default dc = $versionName"
+    }
+}
+
+class Android {
+    private int compileSdkVersion
+    private DefaultConfig defaultConfig
+
+    Android() {
+        this.defaultConfig = new DefaultConfig()
+    }
+
+    def compileSdkVersion(int compileSdkVersion) {
+        this.compileSdkVersion = compileSdkVersion
+    }
+
+    def defaultConfig(Closure closure) {
+        // 将闭包与具体对象关联
+        closure.setDelegate(defaultConfig)
+        closure.call()
+    }
+
+
+    @Override
+    String toString() {
+        return "compileSdkVersion : $compileSdkVersion , config = $defaultConfig"
+    }
+}
+
+Android a = new Android()
+// 将闭包与具体对象关联
+dd.delegate = a
+// 这样我们自定义的闭包就可以在A1对象中输出（获取到）
+dd.call()
+
+println("dd : $a")
+
+
+//////////////////////////
