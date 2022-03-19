@@ -1,5 +1,5 @@
 include ':app'
-
+include ':router-gradle-plugin'
 
 println("setting 构建 路径 ：${rootProject.projectDir}")
 

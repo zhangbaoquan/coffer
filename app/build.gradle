@@ -1,11 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
-//// 使用自定义Extension 配置
-//router {
-//    // 设置WIKI的路径为当前工程的根目录的绝对路径
-//    wikiDir getRootDir().absolutePath
-//}
+// 引用自定义的路由插件
+apply plugin: 'com.coffer.router'
+// 使用自定义Extension 配置
+router {
+    // 设置WIKI的路径为当前工程的根目录的绝对路径
+    wikiDir getRootDir().absolutePath
+}
+
 
 android {
     compileSdkVersion 28
