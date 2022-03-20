@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 // 引用自定义的路由插件
 apply plugin: 'com.coffer.router'
 // 使用自定义Extension 配置
@@ -55,6 +55,9 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation project(':router-annotation')
+    annotationProcessor project(':router-processor')
 }
 
 apply from: 't1.gradle'
