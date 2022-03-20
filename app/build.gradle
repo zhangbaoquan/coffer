@@ -29,6 +29,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+//    kapt {
+//        arguments {
+//            arg("root_project_dir",rootProject.projectDir.absolutePath)
+//        }
+//    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -57,7 +62,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation project(':router-annotation')
-    annotationProcessor project(':router-processor')
+    kapt project(':router-processor')
 }
 
 apply from: 't1.gradle'

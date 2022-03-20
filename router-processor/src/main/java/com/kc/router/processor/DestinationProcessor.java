@@ -2,8 +2,13 @@ package com.kc.router.processor;
 
 
 import com.google.auto.service.AutoService;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.kc.router.annotation.Destination;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.Writer;
 import java.util.Collections;
 import java.util.Set;
@@ -43,11 +48,17 @@ public class DestinationProcessor extends AbstractProcessor{
      */
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
-        System.out.println(TAG + " >>> process start ...");
         // 避免多次调用 process
         if (roundEnvironment.processingOver()) {
             return false;
         }
+
+        System.out.println(TAG + " >>> process start ...");
+
+        // 获取在app 工程里的build.gradle中设置的kapt参数
+        String rootDir = processingEnv.getOptions().get("root_project_dir");
+        System.out.println(TAG + " >>> rootDir ..." + rootDir);
+
         // 1、获取所有标记了自定义注解@Destination 类的信息
         Set<Element> allDestinationElements = (Set<Element>) roundEnvironment
                 .getElementsAnnotatedWith(Destination.class);
@@ -65,6 +76,8 @@ public class DestinationProcessor extends AbstractProcessor{
         builder.append("    public static Map<String, String> get() {\n\n");
         builder.append("        Map<String, String> mapping = new HashMap<>();\n\n");
 
+        // 将页面配置的注解信息写到json文件中，json最外层是数组
+        final JsonArray destinationJsonArray = new JsonArray();
 
         // 2、遍历所有的@Destination 注解信息
         for (Element element : allDestinationElements){
@@ -90,6 +103,13 @@ public class DestinationProcessor extends AbstractProcessor{
                     .append("\"" + realPath + "\"")
                     .append(");\n");
 
+            // 创建一个json对象，将信息放在对象中
+            JsonObject item = new JsonObject();
+            item.addProperty("url", url);
+            item.addProperty("description",description);
+            item.addProperty("realPath", realPath);
+            destinationJsonArray.add(item);
+
         }
 
         builder.append("        return mapping;\n");
@@ -114,6 +134,31 @@ public class DestinationProcessor extends AbstractProcessor{
             throw new RuntimeException("Error while create file", ex);
         }
 
+        // 写入JSON到本地文件中
+        // 检测父目录是否存在
+        File rootDirFile = new File(rootDir);
+        if (!rootDirFile.exists()) {
+            throw new RuntimeException("root_project_dir not exist!");
+        }
+
+        // 创建 router_mapping 子目录，用于保存生成的json文件
+        File routerFileDir = new File(rootDirFile, "router_mapping");
+        if (!routerFileDir.exists()) {
+            routerFileDir.mkdir();
+        }
+        // 真正写入内容的json
+        File mappingFile = new File(routerFileDir,
+                "mapping_" + System.currentTimeMillis() + ".json");
+        // 写入json内容
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(mappingFile));
+            String jsonStr = destinationJsonArray.toString();
+            out.write(jsonStr);
+            out.flush();
+            out.close();
+        } catch (Throwable throwable) {
+            throw new RuntimeException("Error while writing json", throwable);
+        }
         System.out.println(TAG + " >>> process finish.");
         return false;
     }
