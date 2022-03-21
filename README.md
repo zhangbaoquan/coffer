@@ -59,4 +59,11 @@
 * 收集目标类
 * 生成汇总映射表
 
+十、运行时功能
+* 建立router-runtime工程
+* 实现路由初始化逻辑
+* 实现Url匹配与参数解析
+* 实现打开Activity的逻辑
+* 发布router-runtime工程
+
 

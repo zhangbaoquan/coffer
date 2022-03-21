@@ -3,6 +3,7 @@ include ':biz-reading'
 include ':router-gradle-plugin'
 include ':router-annotation'
 include ':router-processor'
+include ':router-runtime'
 
 println("setting 构建 路径 ：${rootProject.projectDir}")
 
@@ -31,3 +32,4 @@ gradle.addBuildListener(new BuildAdapter(){
         println("[构建阶段完成]")
     }
 })
+
