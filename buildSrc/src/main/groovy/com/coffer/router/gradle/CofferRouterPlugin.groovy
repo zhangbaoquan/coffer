@@ -1,5 +1,8 @@
 package com.coffer.router.gradle
 
+import com.android.build.api.transform.Transform
+import com.android.build.gradle.AppExtension
+import com.android.build.gradle.AppPlugin
 import groovy.json.JsonSlurper
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -12,6 +15,12 @@ class CofferRouterPlugin implements Plugin<Project> {
     // 实现apply方法，注入插件的逻辑
     void apply(Project project) {
         println("my plugin router apply from : ${project.name}")
+        // 注册 自定义Transform
+        if (project.plugins.hasPlugin(AppPlugin)) {
+            AppExtension appExtension = project.extensions.getByType(AppExtension)
+            Transform transform = new RouterMappingTransform()
+            appExtension.registerTransform(transform)
+        }
 
         // 1. 自动帮助用户传递路径参数到注解处理器中
         if (project.extensions.findByName("kapt") != null) {
@@ -28,6 +37,11 @@ class CofferRouterPlugin implements Plugin<Project> {
             if (routerMappingDir.exists()) {
                 routerMappingDir.deleteDir()
             }
+        }
+
+        // 汇总WIKI的逻辑只需要执行一次就行
+        if (!project.plugins.hasPlugin(AppPlugin)) {
+            return
         }
 
         // 注册自定义Extension

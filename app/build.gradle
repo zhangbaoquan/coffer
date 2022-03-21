@@ -63,6 +63,7 @@ dependencies {
 
     implementation project(':router-annotation')
     kapt project(':router-processor')
+    implementation project(':biz-reading')
 }
 
 apply from: 't1.gradle'
