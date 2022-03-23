@@ -82,7 +82,6 @@ object Router {
         }
 
         // 解析URL里的参数，封装成为一个 Bundle
-
         val bundle = Bundle()
         val query = uri.query
         query?.let {
@@ -95,9 +94,7 @@ object Router {
             }
         }
 
-
         // 打开对应的Activity，并传入参数
-
         try {
             val activity = Class.forName(targetActivityClass)
             val intent = Intent(context, activity)
