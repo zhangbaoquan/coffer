@@ -1,0 +1,1 @@
+[{"url":"router://page-home","description":"应用主页","realPath":"com.kc.MainActivity"},{"url":"router://page-Test/tt","description":"测试页","realPath":"com.kc.TTActivity"}]

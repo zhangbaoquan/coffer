@@ -13,6 +13,16 @@ router {
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
+
+    signingConfigs {
+        release {
+            keyAlias 'coffer'
+            keyPassword 'zbq320304'
+            storeFile file('./coffer.key')
+            storePassword 'zbq320304'
+        }
+    }
+
     defaultConfig {
         applicationId "com.coffer.app"
         minSdkVersion 26
@@ -24,8 +34,13 @@ android {
 
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
